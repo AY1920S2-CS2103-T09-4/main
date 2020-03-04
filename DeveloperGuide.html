@@ -720,7 +720,318 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>FitHelper</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-uc01-record-profile" class="discrete">Use case: UC01 - Record Profile</h3>
+<h3 id="use-case-uc01-add-an-entry" class="discrete">Use case: UC01 - Add an Entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User adds an entry specifying a meal or a sport with name, time, location, and calorie.</p>
+</li>
+<li>
+<p>FitHelper stores the entry to the specific date file.</p>
+</li>
+<li>
+<p>FitHelper display successful record and the entry status.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input incomplete values.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. The input time has clashes with previous entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc02-edits-an-entry" class="discrete">Use case: UC02 - Edits an Entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User edits an entry specifying a meal or a sport with name, time, location, and calorie.</p>
+</li>
+<li>
+<p>FitHelper modifies the entry to the specific date file.</p>
+</li>
+<li>
+<p>FitHelper display successful record and the entry status.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input repeated values that are already stored in the entry.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper ignores the edit command.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc03-deletes-an-entry" class="discrete">Use case: UC03 - Deletes an Entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User deletes an entry by using the`delete` command.</p>
+</li>
+<li>
+<p>FitHelper deletes the corresponding entry in the list and in the file.</p>
+</li>
+<li>
+<p>FitHelper display the entry status and the successfully-delete message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The <code>INDEX</code> specified by the user does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc04-display-the-list" class="discrete">Use case: UC04 - Display the List</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to display the list of a day.</p>
+</li>
+<li>
+<p>FitHelper displays the list corresponding to the specified date. If the user does not specify a date, FitHelper will display the list for <code>today</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The date specified by the user does not contain any entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc05-show-reminders" class="discrete">Use case: UC05 - Show Reminders</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to display the undone tasks for a specific day.</p>
+</li>
+<li>
+<p>FitHelper displays the undone task list corresponding to the specified date. If the user does not specify a date, FitHelper will display all the undone tasks in the coming 7 days.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The date specified by the user does not contain any entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc06-clear" class="discrete">Use case: UC06 - Clear</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to clear the entries for a specific day.</p>
+</li>
+<li>
+<p>FitHelper clears the entries in the daily file for the specified day. If the user does not input a <code>DATE</code>, FitHelper will delete all the entries for <code>today</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The date specified by the user does not contain any entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc07-undo" class="discrete">Use case: UC07 - Undo</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to undo the previous command.</p>
+</li>
+<li>
+<p>FitHelper undoes the previous command.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. There is no previous command.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message indicating there is no previous command.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. The previous command is not undoable. e.g. The previous command is a <code>list</code> command where <code>undo</code> does not make sense.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message indicating the previous command is not undoable.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc08-exit" class="discrete">Use case: UC08 - Exit</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to exit the application.</p>
+</li>
+<li>
+<p>FitHelper displayes the <code>goodbye</code> word and terminates the application.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-uc09-record-profile" class="discrete">Use case: UC09 - Record Profile</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -773,7 +1084,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </li>
 </ul>
 </div>
-<h3 id="use-case-uc02-update-profile" class="discrete">Use case: UC02 - Update Profile</h3>
+<h3 id="use-case-uc10-update-profile" class="discrete">Use case: UC10 - Update Profile</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -826,7 +1137,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </li>
 </ul>
 </div>
-<h3 id="use-case-uc03-show-profile" class="discrete">Use case: UC03 - Show Profile</h3>
+<h3 id="use-case-uc11-show-profile" class="discrete">Use case: UC11 - Show Profile</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -863,7 +1174,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </li>
 </ul>
 </div>
-<h3 id="use-case-uc04-show-weight-graph-page-for-certain-period" class="discrete">Use case: UC04 - Show Weight Graph Page (for certain period)</h3>
+<h3 id="use-case-uc12-show-weight-graph-page-for-certain-period" class="discrete">Use case: UC12 - Show Weight Graph Page (for certain period)</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1223,4 +1534,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 11:09:29 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 11:57:03 UTC</div></div></div></body></html>
