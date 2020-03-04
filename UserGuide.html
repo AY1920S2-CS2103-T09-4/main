@@ -89,7 +89,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all logs</p>
 </li>
 <li>
-<p><strong><code>adds</code></strong><code>en/running et/Wednesday 6 pm el/utown gym ec/500kcal es/False</code> : adds an entry named <code>swimming</code> to the fitness log book.</p>
+<p><strong><code>adds</code></strong><code>n/running t/Wednesday 6 pm l/utown gym c/500kcal es/False</code> : adds an entry named <code>swimming</code> to the fitness log book.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd entry shown in the current list</p>
@@ -113,16 +113,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong>en/</strong> entry name</p>
+<p><strong>n/</strong> entry name</p>
 </li>
 <li>
-<p><strong>et/</strong> entry time</p>
+<p><strong>t/</strong> entry time</p>
 </li>
 <li>
-<p><strong>el/</strong> entry location</p>
+<p><strong>l/</strong> entry location</p>
 </li>
 <li>
-<p><strong>ec/</strong> entry calorie</p>
+<p><strong>c/</strong> entry calorie</p>
 </li>
 <li>
 <p><strong>r/</strong> remark</p>
@@ -151,16 +151,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add en/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add en/running</code>.</p>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/running</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>en/NAME [r/REMARK]</code> can be used as <code>en/swimming r/energy consuming but fun</code> or as <code>en/running</code>.</p>
+<p>Items in square brackets are optional e.g <code>n/NAME [r/REMARK]</code> can be used as <code>n/swimming r/energy consuming but fun</code> or as <code>n/running</code>.</p>
 </li>
 <li>
 <p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[r/remark]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>r/really fun</code>, <code>r/really fun r/helps me lose weight</code> etc.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>en/NAME et/Wednesday 6 pm</code>, <code>et/Wednesday 6 pm en/NAME</code> is also acceptable.</p>
+<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME t/Wednesday 6 pm</code>, <code>t/Wednesday 6 pm n/NAME</code> is also acceptable.</p>
 </li>
 <li>
 <p><code>X</code> in this document refers to f/s, representing two types of entries: food and sports. e.g. <code>addX</code> represents either <code>addf</code> or <code>adds</code>; <code>add[X]</code> means the field <code>X</code> is optional.</p>
@@ -185,7 +185,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="adding-an-entry-code-add-code"><a class="link" href="#adding-an-entry-code-add-code">4.2. Adding an entry: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds an entry to the fitness log book<br>
-Format: <code>addX en/NAME et/DATETIME el/LOCATION ec/CALORIE es/False r/REMARK&#8230;&#8203;</code></p>
+Format: <code>addX n/NAME t/DATETIME l/LOCATION c/CALORIE es/False r/REMARK&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -205,10 +205,10 @@ An entry in the log book can have any number of remarks (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>adds en/running et/Wednesday 6 pm el/utown gym ec/500kcal es/True r/relly fun</code></p>
+<p><code>adds n/running t/Wednesday 6 pm l/utown gym c/500kcal es/True r/relly fun</code></p>
 </li>
 <li>
-<p><code>addf en/chicken rice et/Sunday 11 am el/Super Snacks ec/460kcal es/False r/cheap and yummy</code></p>
+<p><code>addf n/chicken rice t/Sunday 11 am l/Super Snacks c/460kcal es/False r/cheap and yummy</code></p>
 </li>
 </ul>
 </div>
@@ -260,7 +260,7 @@ Format: <code>reminders (optional)DATE</code></p>
 <h3 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">4.5. Editing an entry : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing entry in the fitness log book.<br>
-Format: <code>edit DATE INDEX [en/NAME] [et/TIME] [el/LOCATION] [ec/CALORIE] [r/REMARK]&#8230;&#8203;</code></p>
+Format: <code>edit DATE INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -291,11 +291,11 @@ Format: <code>edit DATE INDEX [en/NAME] [et/TIME] [el/LOCATION] [ec/CALORIE] [r/
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 2020-03-02 1 et/Friday 4pm el/PGP gym</code><br>
+<p><code>edit 2020-03-02 1 t/Friday 4pm l/PGP gym</code><br>
 Edits the time and email location of the 1st entry to be <code>Friday 4pm</code> and <code>PGP gym</code> respectively.</p>
 </li>
 <li>
-<p><code>edit 2020-04-18 2 en/Fries r/</code><br>
+<p><code>edit 2020-04-18 2 n/Fries r/</code><br>
 Edits the name of the 2nd entry to be <code>Fries</code> and clears all existing remarks.</p>
 </li>
 </ul>
@@ -742,7 +742,7 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add en/NAME et/TIME el/LOCATION ec/CALORIE [r/remark]&#8230;&#8203;</code><br></p>
+<p><strong>Add</strong> <code>add n/NAME t/TIME l/LOCATION c/CALORIE [r/remark]&#8230;&#8203;</code><br></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -751,7 +751,7 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 <p><strong>Delete</strong> : <code>delete INDEX</code><br></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [en/NAME] [et/TIME] [el/LOCATION] [ec/CALORIE] [r/remark]&#8230;&#8203;</code><br></p>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/remark]&#8230;&#8203;</code><br></p>
 </li>
 <li>
 <p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br></p>
@@ -765,4 +765,4 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 13:01:52 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 13:35:40 UTC</div></div></div></body></html>
