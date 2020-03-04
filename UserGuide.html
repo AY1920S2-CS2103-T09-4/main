@@ -28,15 +28,16 @@
 <li><a href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">4.13. Saving the data</a></li>
 <li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
-<li><a href="#check-calorie-table">4.15. Check Calorie Table</a></li>
-<li><a href="#record-profile">4.16. Record Profile</a></li>
-<li><a href="#update-profile-data">4.17. Update Profile Data</a></li>
-<li><a href="#weight-graph-page">4.18. Weight Graph Page</a></li>
-<li><a href="#profile-page">4.19. Profile Page</a></li>
-<li><a href="#calendar-view">4.20. Calendar View</a></li>
-<li><a href="#today-page">4.21. Today Page</a></li>
-<li><a href="#weekly-report">4.22. Weekly Report</a></li>
-<li><a href="#help-page">4.23. Help Page</a></li>
+<li><a href="#check-calorie-intake-consumption-reference-values">4.15. Check calorie intake/consumption reference values</a></li>
+<li><a href="#show-calorie-table">4.16. Show calorie table</a></li>
+<li><a href="#record-profile">4.17. Record Profile</a></li>
+<li><a href="#update-profile-data">4.18. Update Profile Data</a></li>
+<li><a href="#weight-graph-page">4.19. Weight Graph Page</a></li>
+<li><a href="#profile-page">4.20. Profile Page</a></li>
+<li><a href="#calendar-view">4.21. Calendar View</a></li>
+<li><a href="#today-page">4.22. Today Page</a></li>
+<li><a href="#weekly-report">4.23. Weekly Report</a></li>
+<li><a href="#sort-food-consumption-or-exercise-record">4.24. Sort food consumption or exercise record</a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -177,6 +178,11 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 <div class="sect2">
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></h3>
+<div class="paragraph">
+<p>Asks the application to display a condensed list of available
+functions with correct format of input. A link to the full
+User Guide is also provided after the list.</p>
+</div>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
@@ -451,16 +457,53 @@ There is no need to save manually.</p>
 </div>
 <div class="sect2">
 <h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></h3>
-<div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="check-calorie-table"><a class="link" href="#check-calorie-table">4.15. Check Calorie Table</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="record-profile"><a class="link" href="#record-profile">4.16. Record Profile</a></h3>
+<h3 id="check-calorie-intake-consumption-reference-values"><a class="link" href="#check-calorie-intake-consumption-reference-values">4.15. Check calorie intake/consumption reference values</a></h3>
+<div class="paragraph">
+<p>Asks the application to show records of calorie intake of some common food (unit: kcal per serving)
+or calorie consumption of some common sports (unit: kcal per hour),
+whose description contains the keyword specified by the user.
+The recorded are searched within the application&#8217;s pre-installed data.
+format: <code>checkX KEYWORDS</code></p>
+</div>
+<div class="paragraph">
+<p>example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>checkf apple</code></p>
+</li>
+<li>
+<p><code>checks swimming</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="show-calorie-table"><a class="link" href="#show-calorie-table">4.16. Show calorie table</a></h3>
+<div class="paragraph">
+<p>Asks the application to display a table that shows calorie intake from food consumption
+or calorie consumption from exercise in a particular day specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>format: <code>tableX DATE</code></p>
+</div>
+<div class="paragraph">
+<p>example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tableX 2020-02-02</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="record-profile"><a class="link" href="#record-profile">4.17. Record Profile</a></h3>
 <div class="paragraph">
 <p>Adds new user basic personal data to profile.<br>
 Format: <code>recordprofile addr/ADDRESS n/NAME g/GENDER h/HEIGHT cw/CURRENTWEIGHT tw/TARGETWEIGHT</code></p>
@@ -513,7 +556,7 @@ Format: <code>recordprofile addr/ADDRESS n/NAME g/GENDER h/HEIGHT cw/CURRENTWEIG
 </div>
 </div>
 <div class="sect2">
-<h3 id="update-profile-data"><a class="link" href="#update-profile-data">4.17. Update Profile Data</a></h3>
+<h3 id="update-profile-data"><a class="link" href="#update-profile-data">4.18. Update Profile Data</a></h3>
 <div class="paragraph">
 <p>Update user data in the profile by attributes.<br>
 Format: <code>update attr/ATTRIBUTE v/VALUE</code></p>
@@ -547,7 +590,7 @@ Format: <code>update attr/ATTRIBUTE v/VALUE</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="weight-graph-page"><a class="link" href="#weight-graph-page">4.18. Weight Graph Page</a></h3>
+<h3 id="weight-graph-page"><a class="link" href="#weight-graph-page">4.19. Weight Graph Page</a></h3>
 <div class="paragraph">
 <p>Weight graph page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
 It shows user data in graph for easy understanding. By default, it will generate graph from all history data. User can also set a duration to generate graph for that specific time range.<br>
@@ -590,7 +633,7 @@ Display a progress graph using coloring to indicate the gap between current Weig
 </div>
 </div>
 <div class="sect2">
-<h3 id="profile-page"><a class="link" href="#profile-page">4.19. Profile Page</a></h3>
+<h3 id="profile-page"><a class="link" href="#profile-page">4.20. Profile Page</a></h3>
 <div class="paragraph">
 <p>Profile page serves to be a summary for basic user data.<br>
 It shows information includes: address, name, gender, height, current weight, target weight and current BMI.<br>
@@ -598,7 +641,7 @@ Format: <code>profile</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-view"><a class="link" href="#calendar-view">4.20. Calendar View</a></h3>
+<h3 id="calendar-view"><a class="link" href="#calendar-view">4.21. Calendar View</a></h3>
 <div class="paragraph">
 <p>Calendar view will display all the exercises and meals for each day of the current month. For past dates, signs of different colors will be highlighted to show whether the calories intake exceeds or is below the target.<br>
 For female users, the monthly period will be highlighted<br>
@@ -607,7 +650,7 @@ Format for entering calendar view: <code>calendar</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="today-page"><a class="link" href="#today-page">4.21. Today Page</a></h3>
+<h3 id="today-page"><a class="link" href="#today-page">4.22. Today Page</a></h3>
 <div class="paragraph">
 <p>Today page serves to be a summary for the daily arrangements.<br>
 It shows the daily schedule for the user. Users can see the entries for the day, a recommended lunch place, and their performances. They can also see their diary for the day as well as the rewarding point.<br>
@@ -639,7 +682,7 @@ Daily diary log will be displayed if the user has types in comments for the day.
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-day-page"><a class="link" href="#some-day-page">4.21.1. Some Day Page</a></h4>
+<h4 id="some-day-page"><a class="link" href="#some-day-page">4.22.1. Some Day Page</a></h4>
 <div class="paragraph">
 <p>The <code>Today Page</code> for some day in the history can be displayed.
 Format: <code>today DATE</code></p>
@@ -651,7 +694,7 @@ Format: <code>today DATE</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring a <code>Today Page</code> for a future date will generate a blank page if that particular day does not have any entries.
+The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring a <code>Today Page</code> for a future <mark>date</mark> will generate a blank page if that particular day does not have any entries.
 </td>
 </tr>
 </table>
@@ -672,7 +715,7 @@ The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring 
 </div>
 </div>
 <div class="sect2">
-<h3 id="weekly-report"><a class="link" href="#weekly-report">4.22. Weekly Report</a></h3>
+<h3 id="weekly-report"><a class="link" href="#weekly-report">4.23. Weekly Report</a></h3>
 <div class="paragraph">
 <p>A weekly report serves as a summary for the past week. The user can see his performance in the past week. The weekly report also contains his rewarding points, diary logs, and preferred sports and food from the previous week.<br>
 Format: <code>weekreport</code></p>
@@ -694,7 +737,7 @@ Users can see his preferred food and sports, based on his entries for the past w
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-week-report"><a class="link" href="#some-week-report">4.22.1. Some Week Report</a></h4>
+<h4 id="some-week-report"><a class="link" href="#some-week-report">4.23.1. Some Week Report</a></h4>
 <div class="paragraph">
 <p>The <code>Week Report</code> for some week in the history can be displayed.<br>
 Format: <code>weekreport DATE</code> where <code>DATE</code> specifies the week it is in</p>
@@ -727,8 +770,10 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </div>
 </div>
 <div class="sect2">
-<h3 id="help-page"><a class="link" href="#help-page">4.23. Help Page</a></h3>
-
+<h3 id="sort-food-consumption-or-exercise-record"><a class="link" href="#sort-food-consumption-or-exercise-record">4.24. Sort food consumption or exercise record</a></h3>
+<div class="paragraph">
+<p>format: <code>sort -c -a OR sort -c -d</code></p>
+</div>
 </div>
 </div>
 </div>
@@ -773,4 +818,4 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 14:25:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 14:47:51 UTC</div></div></div></body></html>
