@@ -1211,8 +1211,259 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </li>
 </ul>
 </div>
+<h3 id="use-case-uc13-keep-a-diary" class="discrete">Use case: UC13 - Keep a Diary</h3>
 <div class="paragraph">
-<p><em>{More to be added}</em></p>
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User adds comments as today&#8217;s diary</p>
+</li>
+<li>
+<p>FitHelper adds the diary log to <code>today</code> file.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input is incomplete.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User specifies a <code>DATE</code> after the <code>diary</code> keyword.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper will take the <code>date</code> as part of the comments as <code>diary</code> is only for <code>today</code> .</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc14-view-the-reward" class="discrete">Use case: UC14 - View the Reward</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view the rewarding points and current fitness level</p>
+</li>
+<li>
+<p>FitHelper displays the users rewarding points together with the current fitness level.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-uc15-view-today-page" class="discrete">Use case: UC15 - View Today Page</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view <code>Today Page</code> with an optional <code>DATE</code> input</p>
+</li>
+<li>
+<p>FitHelper displays <code>Today Page</code> for <code>today</code> if the <code>DATE</code> field is null and the <code>Today Page</code> for the specified date if there is a valid date.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User specifies an invalid date.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
+</li>
+<li>
+<p>1a2. FitHelper displays <code>Today Page</code> for <code>today</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User specifies a date in the future.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message indicating the date should be at least today or prior to today.</p>
+</li>
+<li>
+<p>1b2. FitHelper shows the <code>Today Page</code> for <code>today</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc16-view-weekly-report" class="discrete">Use case: UC16 - View Weekly Report</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view <code>Weekly Report</code> with an optional <code>DATE</code> input</p>
+</li>
+<li>
+<p>FitHelper displays <code>Weekly Report</code> for the current week if the <code>DATE</code> field is null and the <code>Weekly Report</code> for the week containing the specified date if there is a valid date.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User specifies an invalid date.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
+</li>
+<li>
+<p>1a2. FitHelper displays <code>Weekly Report</code> for the current week.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User specifies a date in the future.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message indicating the date should be at least today or prior to today.</p>
+</li>
+<li>
+<p>1b2. FitHelper shows the <code>Weekly Report</code> for the current week.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc17-get-reminders" class="discrete">Use case: UC17 - Get Reminders</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to be reminded about undone tasks.</p>
+</li>
+<li>
+<p>FitHelper displays all the undone tasks for the coming 7 days if the <code>DATE</code> field is null and for the specified date if there is a valid date.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User specifies an invalid date.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc18-find-entries-containing-the-keyword" class="discrete">Use case: UC18 - Find Entries Containing the Keyword</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to find entries containing a specific keyword.</p>
+</li>
+<li>
+<p>FitHelper displays all the entries containing the keyword.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User inputs a keyword that does not show in any entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating no entry matches the keyword.</p>
+<div class="paragraph">
+<p>Use case ends.
+<em>{More to be added}</em></p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1534,4 +1785,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 12:40:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 12:46:43 UTC</div></div></div></body></html>
