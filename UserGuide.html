@@ -17,25 +17,26 @@
 <li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-an-entry-code-add-code">4.2. Adding an entry: <code>add</code></a></li>
 <li><a href="#listing-all-entries-code-list-code">4.3. Listing all entries : <code>list</code></a></li>
-<li><a href="#editing-an-entry-code-edit-code">4.4. Editing an entry : <code>edit</code></a></li>
-<li><a href="#locating-entries-by-name-code-find-code">4.5. Locating entries by name: <code>find</code></a></li>
-<li><a href="#deleting-an-entry-code-delete-code">4.6. Deleting an entry : <code>delete</code></a></li>
-<li><a href="#sort-the-entries">4.7. Sort the entries</a></li>
-<li><a href="#keep-a-diary">4.8. Keep a diary</a></li>
-<li><a href="#reward">4.9. Reward</a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.10. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.11. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.12. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.13. Encrypting data files <code>[coming in v2.0]</code></a></li>
-<li><a href="#check-calorie-table">4.14. Check Calorie Table</a></li>
-<li><a href="#record-profile">4.15. Record Profile</a></li>
-<li><a href="#update-profile-data">4.16. Update Profile Data</a></li>
-<li><a href="#weight-graph-page">4.17. Weight Graph Page</a></li>
-<li><a href="#profile-page">4.18. Profile Page</a></li>
-<li><a href="#calendar-view">4.19. Calendar View</a></li>
-<li><a href="#today-page">4.20. Today Page</a></li>
-<li><a href="#weekly-report">4.21. Weekly Report</a></li>
-<li><a href="#help-page">4.22. Help Page</a></li>
+<li><a href="#view-reminders-code-reminders-optional-date-code">4.4. View Reminders : <code>reminders (optional)DATE</code></a></li>
+<li><a href="#editing-an-entry-code-edit-code">4.5. Editing an entry : <code>edit</code></a></li>
+<li><a href="#locating-entries-by-name-code-find-code">4.6. Locating entries by name: <code>find</code></a></li>
+<li><a href="#deleting-an-entry-code-delete-code">4.7. Deleting an entry : <code>delete</code></a></li>
+<li><a href="#sort-the-entries">4.8. Sort the entries</a></li>
+<li><a href="#keep-a-diary">4.9. Keep a diary</a></li>
+<li><a href="#reward">4.10. Reward</a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.13. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#check-calorie-table">4.15. Check Calorie Table</a></li>
+<li><a href="#record-profile">4.16. Record Profile</a></li>
+<li><a href="#update-profile-data">4.17. Update Profile Data</a></li>
+<li><a href="#weight-graph-page">4.18. Weight Graph Page</a></li>
+<li><a href="#profile-page">4.19. Profile Page</a></li>
+<li><a href="#calendar-view">4.20. Calendar View</a></li>
+<li><a href="#today-page">4.21. Today Page</a></li>
+<li><a href="#weekly-report">4.22. Weekly Report</a></li>
+<li><a href="#help-page">4.23. Help Page</a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -112,28 +113,28 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong>en/</strong></p>
+<p><strong>en/</strong> entry name</p>
 </li>
 <li>
-<p><strong>et/</strong></p>
+<p><strong>et/</strong> entry time</p>
 </li>
 <li>
-<p><strong>el/</strong></p>
+<p><strong>el/</strong> entry location</p>
 </li>
 <li>
-<p><strong>ec/</strong></p>
+<p><strong>ec/</strong> entry calorie</p>
 </li>
 <li>
-<p><strong>r/</strong></p>
+<p><strong>r/</strong> remark</p>
 </li>
 <li>
-<p><strong>[DATE]</strong></p>
+<p><strong>[DATE]</strong> a date in the fixed format of yyyy-mm-dd</p>
 </li>
 <li>
-<p><strong>[TIME]</strong></p>
+<p><strong>[TIME]</strong> a time in the fixed format of yyyy-mm-dd-hh-mm</p>
 </li>
 <li>
-<p><strong>[INDEX]</strong></p>
+<p><strong>[INDEX]</strong> a positive integer indicating the position of an entry in the list</p>
 </li>
 </ul>
 </div>
@@ -233,7 +234,30 @@ Format: <code>list[X]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">4.4. Editing an entry : <code>edit</code></a></h3>
+<h3 id="view-reminders-code-reminders-optional-date-code"><a class="link" href="#view-reminders-code-reminders-optional-date-code">4.4. View Reminders : <code>reminders (optional)DATE</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all undone tasks in the fitness log book.<br>
+Format: <code>reminders (optional)DATE</code></p>
+</div>
+<div class="paragraph">
+<p>If the field <code>DATE</code> is null, FitHelper will displays the undone tasks for the coming 7 days, otherwise, undone tasks for the specified date will be displayed.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>reminders</code></p>
+</li>
+<li>
+<p><code>reminders 2019-11-28</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">4.5. Editing an entry : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing entry in the fitness log book.<br>
 Format: <code>edit DATE INDEX [en/NAME] [et/TIME] [el/LOCATION] [ec/CALORIE] [r/REMARK]&#8230;&#8203;</code></p>
@@ -277,14 +301,14 @@ Edits the name of the 2nd entry to be <code>Fries</code> and clears all existing
 </ul>
 </div>
 <div class="sect3">
-<h4 id="mark-an-entry-as-done"><a class="link" href="#mark-an-entry-as-done">4.4.1. Mark an entry as done</a></h4>
+<h4 id="mark-an-entry-as-done"><a class="link" href="#mark-an-entry-as-done">4.5.1. Mark an entry as done</a></h4>
 <div class="paragraph">
 <p>Users can mark an entry as done, either a meal or sports, where the calories intake and consumption will be taken in to consideration.
 Format: <code>edit DATE INDEX es/TRUE</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mark-an-entry-as-undone"><a class="link" href="#mark-an-entry-as-undone">4.4.2. Mark an entry as undone</a></h4>
+<h4 id="mark-an-entry-as-undone"><a class="link" href="#mark-an-entry-as-undone">4.5.2. Mark an entry as undone</a></h4>
 <div class="paragraph">
 <p>Similar to the previous command, marking an entry as undone edits the <code>es/</code> field and modify it as <code>False</code>.
 Format: <code>edit DATE INDEX es/False</code></p>
@@ -292,7 +316,7 @@ Format: <code>edit DATE INDEX es/False</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">4.5. Locating entries by name: <code>find</code></a></h3>
+<h3 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">4.6. Locating entries by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds entries whose names contain any of the given keywords.<br>
 Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
@@ -337,7 +361,7 @@ Returns any entry having names <code>Juice</code>,  or <code>Apple</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">4.6. Deleting an entry : <code>delete</code></a></h3>
+<h3 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">4.7. Deleting an entry : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified entry from the fitness log book.<br>
 Format: <code>deleteX INDEX</code></p>
@@ -372,11 +396,11 @@ Deletes the 2nd sports entry in the <code>2020-03-02</code> daily file in the fi
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-the-entries"><a class="link" href="#sort-the-entries">4.7. Sort the entries</a></h3>
+<h3 id="sort-the-entries"><a class="link" href="#sort-the-entries">4.8. Sort the entries</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="keep-a-diary"><a class="link" href="#keep-a-diary">4.8. Keep a diary</a></h3>
+<h3 id="keep-a-diary"><a class="link" href="#keep-a-diary">4.9. Keep a diary</a></h3>
 <div class="paragraph">
 <p>Users can keep a diary by type in the <code>diary</code> keyword and the content of the diary. If the <code>DATE</code> is null, the content will be appended to today&#8217;s diary.
 Format: <code>diary (Optional)DATE CONTENT</code></p>
@@ -394,7 +418,7 @@ Adds the comment <code>I feel good about myself after running.</code> to the dia
 </div>
 </div>
 <div class="sect2">
-<h3 id="reward"><a class="link" href="#reward">4.9. Reward</a></h3>
+<h3 id="reward"><a class="link" href="#reward">4.10. Reward</a></h3>
 <div class="paragraph">
 <p>Users get rewarding points after doing exercises or controlling their calorie intake to a certain amount.
 They can also be promoted to higher <code>fitness level</code> based on their rewading points.</p>
@@ -405,38 +429,38 @@ The user&#8217;s current 'fitness level` and total rewarding points will be disp
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.10. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the fitness log book.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.11. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.12. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.13. Saving the data</a></h3>
 <div class="paragraph">
 <p>fitness log book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.13. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="check-calorie-table"><a class="link" href="#check-calorie-table">4.14. Check Calorie Table</a></h3>
+<h3 id="check-calorie-table"><a class="link" href="#check-calorie-table">4.15. Check Calorie Table</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="record-profile"><a class="link" href="#record-profile">4.15. Record Profile</a></h3>
+<h3 id="record-profile"><a class="link" href="#record-profile">4.16. Record Profile</a></h3>
 <div class="paragraph">
 <p>Adds new user basic personal data to profile.<br>
 Format: <code>recordprofile addr/ADDRESS n/NAME g/GENDER h/HEIGHT cw/CURRENTWEIGHT tw/TARGETWEIGHT</code></p>
@@ -489,7 +513,7 @@ Format: <code>recordprofile addr/ADDRESS n/NAME g/GENDER h/HEIGHT cw/CURRENTWEIG
 </div>
 </div>
 <div class="sect2">
-<h3 id="update-profile-data"><a class="link" href="#update-profile-data">4.16. Update Profile Data</a></h3>
+<h3 id="update-profile-data"><a class="link" href="#update-profile-data">4.17. Update Profile Data</a></h3>
 <div class="paragraph">
 <p>Update user data in the profile by attributes.<br>
 Format: <code>update attr/ATTRIBUTE v/VALUE</code></p>
@@ -523,7 +547,7 @@ Format: <code>update attr/ATTRIBUTE v/VALUE</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="weight-graph-page"><a class="link" href="#weight-graph-page">4.17. Weight Graph Page</a></h3>
+<h3 id="weight-graph-page"><a class="link" href="#weight-graph-page">4.18. Weight Graph Page</a></h3>
 <div class="paragraph">
 <p>Weight graph page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
 It shows user data in graph for easy understanding. By default, it will generate graph from all history data. User can also set a duration to generate graph for that specific time range.<br>
@@ -566,7 +590,7 @@ Display a progress graph using coloring to indicate the gap between current Weig
 </div>
 </div>
 <div class="sect2">
-<h3 id="profile-page"><a class="link" href="#profile-page">4.18. Profile Page</a></h3>
+<h3 id="profile-page"><a class="link" href="#profile-page">4.19. Profile Page</a></h3>
 <div class="paragraph">
 <p>Profile page serves to be a summary for basic user data.<br>
 It shows information includes: address, name, gender, height, current weight, target weight and current BMI.<br>
@@ -574,11 +598,11 @@ Format: <code>profile</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-view"><a class="link" href="#calendar-view">4.19. Calendar View</a></h3>
+<h3 id="calendar-view"><a class="link" href="#calendar-view">4.20. Calendar View</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="today-page"><a class="link" href="#today-page">4.20. Today Page</a></h3>
+<h3 id="today-page"><a class="link" href="#today-page">4.21. Today Page</a></h3>
 <div class="paragraph">
 <p>Today page serves to be a summary for the daily arrangements.<br>
 It shows the daily schedule for the user. Users can see the entries for the day, a recommended lunch place, and their performances. They can also see their diary for the day as well as the rewarding point.<br>
@@ -610,7 +634,7 @@ Daily diary log will be displayed if the user has types in comments for the day.
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-day-page"><a class="link" href="#some-day-page">4.20.1. Some Day Page</a></h4>
+<h4 id="some-day-page"><a class="link" href="#some-day-page">4.21.1. Some Day Page</a></h4>
 <div class="paragraph">
 <p>The <code>Today Page</code> for some day in the history can be displayed.
 Format: <code>today DATE</code></p>
@@ -627,10 +651,23 @@ The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring 
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>today</code></p>
+</li>
+<li>
+<p><code>today 2020-02-14</code></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="weekly-report"><a class="link" href="#weekly-report">4.21. Weekly Report</a></h3>
+<h3 id="weekly-report"><a class="link" href="#weekly-report">4.22. Weekly Report</a></h3>
 <div class="paragraph">
 <p>A weekly report serves as a summary for the past week. The user can see his performance in the past week. The weekly report also contains his rewarding points, diary logs, and preferred sports and food from the previous week.<br>
 Format: <code>weekreport</code></p>
@@ -652,7 +689,7 @@ Users can see his preferred food and sports, based on his entries for the past w
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-week-report"><a class="link" href="#some-week-report">4.21.1. Some Week Report</a></h4>
+<h4 id="some-week-report"><a class="link" href="#some-week-report">4.22.1. Some Week Report</a></h4>
 <div class="paragraph">
 <p>The <code>Week Report</code> for some week in the history can be displayed.<br>
 Format: <code>weekreport DATE</code> where <code>DATE</code> specifies the week it is in</p>
@@ -669,10 +706,23 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>weekreport</code></p>
+</li>
+<li>
+<p><code>weekreport 2020-02-14</code></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="help-page"><a class="link" href="#help-page">4.22. Help Page</a></h3>
+<h3 id="help-page"><a class="link" href="#help-page">4.23. Help Page</a></h3>
 
 </div>
 </div>
@@ -715,4 +765,4 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 12:46:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 13:01:52 UTC</div></div></div></body></html>
