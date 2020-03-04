@@ -28,13 +28,14 @@
 <li><a href="#saving-the-data">4.12. Saving the data</a></li>
 <li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.13. Encrypting data files <code>[coming in v2.0]</code></a></li>
 <li><a href="#check-calorie-table">4.14. Check Calorie Table</a></li>
-<li><a href="#update-personal-data">4.15. Update Personal Data</a></li>
-<li><a href="#weight-graph">4.16. Weight Graph</a></li>
-<li><a href="#profile-page">4.17. Profile Page</a></li>
-<li><a href="#calendar-view">4.18. Calendar View</a></li>
-<li><a href="#today-page">4.19. Today Page</a></li>
-<li><a href="#weekly-report">4.20. Weekly Report</a></li>
-<li><a href="#help-page">4.21. Help Page</a></li>
+<li><a href="#record-profile">4.15. Record Profile</a></li>
+<li><a href="#update-profile-data">4.16. Update Profile Data</a></li>
+<li><a href="#weight-graph-page">4.17. Weight Graph Page</a></li>
+<li><a href="#profile-page">4.18. Profile Page</a></li>
+<li><a href="#calendar-view">4.19. Calendar View</a></li>
+<li><a href="#today-page">4.20. Today Page</a></li>
+<li><a href="#weekly-report">4.21. Weekly Report</a></li>
+<li><a href="#help-page">4.22. Help Page</a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -435,26 +436,152 @@ There is no need to save manually.</p>
 
 </div>
 <div class="sect2">
-<h3 id="update-personal-data"><a class="link" href="#update-personal-data">4.15. Update Personal Data</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="weight-graph"><a class="link" href="#weight-graph">4.16. Weight Graph</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="profile-page"><a class="link" href="#profile-page">4.17. Profile Page</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="calendar-view"><a class="link" href="#calendar-view">4.18. Calendar View</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="today-page"><a class="link" href="#today-page">4.19. Today Page</a></h3>
+<h3 id="record-profile"><a class="link" href="#record-profile">4.15. Record Profile</a></h3>
 <div class="paragraph">
-<p>Today page serves to be a summary for the daily arrangements.
-It shows the daily schedule for the user. Users can see the entries for the day, a recommended lunch place, and their performances. They can also see their diary for the day as well as the rewarding point.
+<p>Adds new user basic personal data to profile.<br>
+Format: <code>recordprofile addr/ADDRESS n/NAME g/GENDER h/HEIGHT cw/CURRENTWEIGHT tw/TARGETWEIGHT</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>New user should record basic profile first data before using other commands.</p>
+</li>
+<li>
+<p>One user can ony <strong>initiate profile data once</strong>.</p>
+</li>
+<li>
+<p>The value of each attribute need to in correct data type:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>addr/n: string of address/name</p>
+</li>
+<li>
+<p>g: <strong>male/female</strong></p>
+</li>
+<li>
+<p>h: number in <strong>meter</strong></p>
+</li>
+<li>
+<p>cw/tw: number in <strong>kilogram</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>recordprofile addr/utown n/Alice g/female h/1.68 cw/50 tw/45</code></p>
+</li>
+<li>
+<p><code>recordprofile addr/rvrc n/Bob g/male h/1.8 cw/70 tw/65.5</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="update-profile-data"><a class="link" href="#update-profile-data">4.16. Update Profile Data</a></h3>
+<div class="paragraph">
+<p>Update user data in the profile by attributes.<br>
+Format: <code>update attr/ATTRIBUTE v/VALUE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The updated attribute must have original value.</p>
+</li>
+<li>
+<p>Any updated value should follow its original data type.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>update attr/h v/1.7</code></p>
+</li>
+<li>
+<p><code>update attr/name v/Alice Wang</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="weight-graph-page"><a class="link" href="#weight-graph-page">4.17. Weight Graph Page</a></h3>
+<div class="paragraph">
+<p>Weight graph page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
+It shows user data in graph for easy understanding. By default, it will generate graph from all history data. User can also set a duration to generate graph for that specific time range.<br>
+Format: <code>weightgraph (dr/yyyy-mm-dd yyyy-mm-dd)</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current Data Table</strong><br>
+The table of user&#8217;s latest data of weight and computed BMI. BMI value is computed based on latest weight and height.<br>
+Weight value can be: below/ above/ equals to target wieght value.<br>
+BMI value can be: too low/ moderate / too high.</p>
+</li>
+<li>
+<p><strong>Trend Graph - Weight</strong><br>
+Display a trend graph of user&#8217;s weight. Target weight line and the gap between target and current weight will be highlighted in the graph.</p>
+</li>
+<li>
+<p><strong>Trend Graph - BMI</strong><br>
+Display a trend graph of user&#8217;s BMI. Lowest and highest healthy BMI lines will be highlighted in the graph to specify a healthy range.</p>
+</li>
+<li>
+<p><strong>Progress Graph</strong><br>
+Display a progress graph using coloring to indicate the gap between current Weight and Target weight. A percentage number will be shown explicitly in the graph.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>weightgraph</code></p>
+</li>
+<li>
+<p><code>weightgraph dr/2020-01-01 2020-02-14</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="profile-page"><a class="link" href="#profile-page">4.18. Profile Page</a></h3>
+<div class="paragraph">
+<p>Profile page serves to be a summary for basic user data.<br>
+It shows information includes: address, name, gender, height, current weight, target weight and current BMI.<br>
+Format: <code>profile</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calendar-view"><a class="link" href="#calendar-view">4.19. Calendar View</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="today-page"><a class="link" href="#today-page">4.20. Today Page</a></h3>
+<div class="paragraph">
+<p>Today page serves to be a summary for the daily arrangements.<br>
+It shows the daily schedule for the user. Users can see the entries for the day, a recommended lunch place, and their performances. They can also see their diary for the day as well as the rewarding point.<br>
 Format: <code>today</code></p>
 </div>
 <div class="ulist">
@@ -483,7 +610,7 @@ Daily diary log will be displayed if the user has types in comments for the day.
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-day-page"><a class="link" href="#some-day-page">4.19.1. Some Day Page</a></h4>
+<h4 id="some-day-page"><a class="link" href="#some-day-page">4.20.1. Some Day Page</a></h4>
 <div class="paragraph">
 <p>The <code>Today Page</code> for some day in the history can be displayed.
 Format: <code>today DATE</code></p>
@@ -503,9 +630,9 @@ The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring 
 </div>
 </div>
 <div class="sect2">
-<h3 id="weekly-report"><a class="link" href="#weekly-report">4.20. Weekly Report</a></h3>
+<h3 id="weekly-report"><a class="link" href="#weekly-report">4.21. Weekly Report</a></h3>
 <div class="paragraph">
-<p>A weekly report serves as a summary for the past week. The user can see his performance in the past week. The weekly report also contains his rewarding points, diary logs, and preferred sports and food from the previous week.
+<p>A weekly report serves as a summary for the past week. The user can see his performance in the past week. The weekly report also contains his rewarding points, diary logs, and preferred sports and food from the previous week.<br>
 Format: <code>weekreport</code></p>
 </div>
 <div class="ulist">
@@ -525,9 +652,9 @@ Users can see his preferred food and sports, based on his entries for the past w
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-week-report"><a class="link" href="#some-week-report">4.20.1. Some Week Report</a></h4>
+<h4 id="some-week-report"><a class="link" href="#some-week-report">4.21.1. Some Week Report</a></h4>
 <div class="paragraph">
-<p>The <code>Week Report</code> for some week in the history can be displayed.
+<p>The <code>Week Report</code> for some week in the history can be displayed.<br>
 Format: <code>weekreport DATE</code> where <code>DATE</code> specifies the week it is in</p>
 </div>
 <div class="admonitionblock tip">
@@ -545,7 +672,7 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </div>
 </div>
 <div class="sect2">
-<h3 id="help-page"><a class="link" href="#help-page">4.21. Help Page</a></h3>
+<h3 id="help-page"><a class="link" href="#help-page">4.22. Help Page</a></h3>
 
 </div>
 </div>
@@ -588,4 +715,4 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 11:57:03 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 12:40:26 UTC</div></div></div></body></html>
