@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>FitHelper - Developer Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>AY1920S2-CS2103-T09-4</code>      Since: <code>Feb 2020</code>      Licence: <code>MIT</code></p>
+<p>By: <code>AY1920S2-CS2103-T09-4</code>      Since: <code>Feb 2020</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -33,6 +33,17 @@
 <li><a href="#dev-ops">6. Dev Ops</a></li>
 <li><a href="#product-scope">Appendix A: Product Scope</a></li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
+<li><a href="#use-cases">Appendix C: Use Cases</a></li>
+<li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
+<li><a href="#glossary">Appendix E: Glossary</a></li>
+<li><a href="#product-survey">Appendix F: Product Survey</a></li>
+<li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
+<ul class="sectlevel2">
+<li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
+<li><a href="#deleting-a-person">G.2. Deleting a person</a></li>
+<li><a href="#saving-data">G.3. Saving data</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -702,373 +713,877 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <td class="tableblock halign-left valign-top"><p class="tableblock">view pending tasks and status of daily calories goals in a calendar</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have cleaner display of data</p></td>
 </tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>{More to be added}</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(For all use cases below, the <strong>System</strong> is the <code>FitHelper</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+</div>
+<h3 id="use-case-uc01-add-an-entry" class="discrete">Use case: UC01 - Add an Entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User adds an entry specifying a meal or a sport with name, time, location, and calorie.</p>
+</li>
+<li>
+<p>FitHelper stores the entry to the specific date file.</p>
+</li>
+<li>
+<p>FitHelper display successful record and the entry status.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input incomplete values.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. The input time has clashes with previous entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc02-edits-an-entry" class="discrete">Use case: UC02 - Edits an Entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User edits an entry specifying a meal or a sport with name, time, location, and calorie.</p>
+</li>
+<li>
+<p>FitHelper modifies the entry to the specific date file.</p>
+</li>
+<li>
+<p>FitHelper display successful record and the entry status.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input repeated values that are already stored in the entry.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper ignores the edit command.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc03-deletes-an-entry" class="discrete">Use case: UC03 - Deletes an Entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User deletes an entry by using the`delete` command.</p>
+</li>
+<li>
+<p>FitHelper deletes the corresponding entry in the list and in the file.</p>
+</li>
+<li>
+<p>FitHelper display the entry status and the successfully-delete message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The <code>INDEX</code> specified by the user does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc04-display-the-list" class="discrete">Use case: UC04 - Display the List</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to display the list of a day.</p>
+</li>
+<li>
+<p>FitHelper displays the list corresponding to the specified date. If the user does not specify a date, FitHelper will display the list for <code>today</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The date specified by the user does not contain any entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc05-show-reminders" class="discrete">Use case: UC05 - Show Reminders</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to display the undone tasks for a specific day.</p>
+</li>
+<li>
+<p>FitHelper displays the undone task list corresponding to the specified date. If the user does not specify a date, FitHelper will display all the undone tasks in the coming 7 days.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The date specified by the user does not contain any entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc06-clear" class="discrete">Use case: UC06 - Clear</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to clear the entries for a specific day.</p>
+</li>
+<li>
+<p>FitHelper clears the entries in the daily file for the specified day. If the user does not input a <code>DATE</code>, FitHelper will delete all the entries for <code>today</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The date specified by the user does not contain any entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc07-undo" class="discrete">Use case: UC07 - Undo</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to undo the previous command.</p>
+</li>
+<li>
+<p>FitHelper undoes the previous command.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. There is no previous command.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message indicating there is no previous command.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. The previous command is not undoable. e.g. The previous command is a <code>list</code> command where <code>undo</code> does not make sense.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message indicating the previous command is not undoable.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc08-exit" class="discrete">Use case: UC08 - Exit</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to exit the application.</p>
+</li>
+<li>
+<p>FitHelper displayes the <code>goodbye</code> word and terminates the application.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-uc09-record-profile" class="discrete">Use case: UC09 - Record Profile</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to record profile and input values</p>
+</li>
+<li>
+<p>FitHelper store user profile data.</p>
+</li>
+<li>
+<p>FitHelper display successful record and show profile page.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input incomplete values.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User has recorded basic data before.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc10-update-profile" class="discrete">Use case: UC10 - Update Profile</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to update profile attribute values.</p>
+</li>
+<li>
+<p>FitHelper update data accordingly.</p>
+</li>
+<li>
+<p>FitHelper display successful update and show profile page.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input unknown attribute.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User input wrong type for values.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc11-show-profile" class="discrete">Use case: UC11 - Show Profile</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to show profile page.</p>
+</li>
+<li>
+<p>FitHelper display profile page.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User has not record profile data yet.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message and reminder user to record.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc12-show-weight-graph-page-for-certain-period" class="discrete">Use case: UC12 - Show Weight Graph Page (for certain period)</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to show Weight Graph page (for certain period)</p>
+</li>
+<li>
+<p>FitHelper display Weight page with information.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input invalid time.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc13-keep-a-diary" class="discrete">Use case: UC13 - Keep a Diary</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User adds comments as today&#8217;s diary</p>
+</li>
+<li>
+<p>FitHelper adds the diary log to <code>today</code> file.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User input is incomplete.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User specifies a <code>DATE</code> after the <code>diary</code> keyword.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper will take the <code>date</code> as part of the comments as <code>diary</code> is only for <code>today</code> .</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc14-view-the-reward" class="discrete">Use case: UC14 - View the Reward</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view the rewarding points and current fitness level</p>
+</li>
+<li>
+<p>FitHelper displays the users rewarding points together with the current fitness level.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-uc15-view-today-page" class="discrete">Use case: UC15 - View Today Page</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view <code>Today Page</code> with an optional <code>DATE</code> input</p>
+</li>
+<li>
+<p>FitHelper displays <code>Today Page</code> for <code>today</code> if the <code>DATE</code> field is null and the <code>Today Page</code> for the specified date if there is a valid date.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User specifies an invalid date.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
+</li>
+<li>
+<p>1a2. FitHelper displays <code>Today Page</code> for <code>today</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User specifies a date in the future.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message indicating the date should be at least today or prior to today.</p>
+</li>
+<li>
+<p>1b2. FitHelper shows the <code>Today Page</code> for <code>today</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc16-view-weekly-report" class="discrete">Use case: UC16 - View Weekly Report</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view <code>Weekly Report</code> with an optional <code>DATE</code> input</p>
+</li>
+<li>
+<p>FitHelper displays <code>Weekly Report</code> for the current week if the <code>DATE</code> field is null and the <code>Weekly Report</code> for the week containing the specified date if there is a valid date.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User specifies an invalid date.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
+</li>
+<li>
+<p>1a2. FitHelper displays <code>Weekly Report</code> for the current week.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User specifies a date in the future.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. FitHelper shows an error message indicating the date should be at least today or prior to today.</p>
+</li>
+<li>
+<p>1b2. FitHelper shows the <code>Weekly Report</code> for the current week.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc17-get-reminders" class="discrete">Use case: UC17 - Get Reminders</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to be reminded about undone tasks.</p>
+</li>
+<li>
+<p>FitHelper displays all the undone tasks for the coming 7 days if the <code>DATE</code> field is null and for the specified date if there is a valid date.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User specifies an invalid date.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc18-find-entries-containing-the-keyword" class="discrete">Use case: UC18 - Find Entries Containing the Keyword</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to find entries containing a specific keyword.</p>
+</li>
+<li>
+<p>FitHelper displays all the entries containing the keyword.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User inputs a keyword that does not show in any entries.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating no entry matches the keyword.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+<h3 id="use-case-uc19-calendar-view" class="discrete">Use case: UC19 - Calendar View</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to display tasks in calendar view.</p>
+</li>
+<li>
+<p>FitHelper displays all tasks of the current months with colored indication of whether the daily target is achieved or not.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User specifies an invalid command.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. FitHelper shows shows an error message indicating the command is invalid.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>{More to be added}</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.</p>
+</li>
+<li>
+<p>Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage</p>
+</li>
+<li>
+<p>Should be able to function normally without internet access.</p>
+</li>
+<li>
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li>
+<p>A user can get response from the system within 5 seconds after command input.</p>
+</li>
+<li>
+<p>A user can be familiar with the system commands and interface within half an hour usage.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{More to be added}</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
+<dd>
+<p>Windows, Linux, Unix, OS-X</p>
+</dd>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Command Prefix</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view records of food consumption or exercise workout in ascending/descending order of calorie</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know which days I took in more/less calorie and which days I burned more/less calorie</p>
-<p class="tableblock">==============================================================================</p>
-<p class="tableblock"><em>{More to be added}</em></p>
-<p class="tableblock">[appendix]
-== Use Cases</p>
-<p class="tableblock">(For all use cases below, the <strong>System</strong> is the <code>FitHelper</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
-<p class="tableblock">[discrete]
-=== Use case: UC01 - Add an Entry</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User adds an entry specifying a meal or a sport with name, time, location, and calorie.
-2.  FitHelper stores the entry to the specific date file.
-3.  FitHelper display successful record and the entry status.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User input incomplete values.
-+
-[none]
-<strong> 1a1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">* 1b. The input time has clashes with previous entries.
-+
-[none]
-</strong> 1b1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC02 - Edits an Entry</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User edits an entry specifying a meal or a sport with name, time, location, and calorie.
-2.  FitHelper modifies the entry to the specific date file.
-3.  FitHelper display successful record and the entry status.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User input repeated values that are already stored in the entry.
-+
-[none]
-<strong> 1a1. FitHelper ignores the edit command.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC03 - Deletes an Entry</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User deletes an entry by using the`delete` command.
-2.  FitHelper deletes the corresponding entry in the list and in the file.
-3.  FitHelper display the entry status and the successfully-delete message.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. The <code>INDEX</code> specified by the user does not exist.
-+
-[none]
-</strong> 1a1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC04 - Display the List</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to display the list of a day.
-2.  FitHelper displays the list corresponding to the specified date. If the user does not specify a date, FitHelper will display the list for <code>today</code>.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. The date specified by the user does not contain any entries.
-+
-[none]
-<strong> 1a1. FitHelper shows the message reminding the user that that specific day is empty.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC05 - Show Reminders</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to display the undone tasks for a specific day.
-2.  FitHelper displays the undone task list corresponding to the specified date. If the user does not specify a date, FitHelper will display all the undone tasks in the coming 7 days.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. The date specified by the user does not contain any entries.
-+
-[none]
-</strong> 1a1. FitHelper shows the message reminding the user that that specific day is empty.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC06 - Clear</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to clear the entries for a specific day.
-2.  FitHelper clears the entries in the daily file for the specified day. If the user does not input a <code>DATE</code>, FitHelper will delete all the entries for <code>today</code>.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. The date specified by the user does not contain any entries.
-+
-[none]
-<strong> 1a1. FitHelper shows the message reminding the user that that specific day is empty.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC07 - Undo</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to undo the previous command.
-2.  FitHelper undoes the previous command.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. There is no previous command.
-+
-[none]
-</strong> 1a1. FitHelper shows an error message indicating there is no previous command.
-+
-Use case ends.</p>
-<p class="tableblock">* 1b. The previous command is not undoable. e.g. The previous command is a <code>list</code> command where <code>undo</code> does not make sense.
-+
-[none]
-<strong> 1b1. FitHelper shows an error message indicating the previous command is not undoable.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC08 - Exit</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to exit the application.
-2.  FitHelper displayes the <code>goodbye</code> word and terminates the application.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC09 - Record Profile</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to record profile and input values
-2.  FitHelper store user profile data.
-3.  FitHelper display successful record and show profile page.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User input incomplete values.
-+
-[none]
-</strong> 1a1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">* 1b. User has recorded basic data before.
-+
-[none]
-<strong> 1b1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC10 - Update Profile</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to update profile attribute values.
-2.  FitHelper update data accordingly.
-3.  FitHelper display successful update and show profile page.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User input unknown attribute.
-+
-[none]
-</strong> 1a1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">* 1b. User input wrong type for values.
-+
-[none]
-<strong> 1b1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC11 - Show Profile</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to show profile page.
-2.  FitHelper display profile page.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User has not record profile data yet.
-+
-[none]
-</strong> 1a1. FitHelper shows an error message and reminder user to record.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC12 - Show Weight Graph Page (for certain period)</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to show Weight Graph page (for certain period)
-2.  FitHelper display Weight page with information.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User input invalid time.
-+
-[none]
-<strong> 1a1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC13 - Keep a Diary</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User adds comments as today&#8217;s diary
-2.  FitHelper adds the diary log to <code>today</code> file.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User input is incomplete.
-+
-[none]
-</strong> 1a1. FitHelper shows an error message.
-+
-Use case ends.</p>
-<p class="tableblock">* 1b. User specifies a <code>DATE</code> after the <code>diary</code> keyword.
-+
-[none]
-<strong> 1b1. FitHelper will take the <code>date</code> as part of the comments as <code>diary</code> is only for <code>today</code> .
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC14 - View the Reward</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to view the rewarding points and current fitness level
-2.  FitHelper displays the users rewarding points together with the current fitness level.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC15 - View Today Page</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to view <code>Today Page</code> with an optional <code>DATE</code> input
-2.  FitHelper displays <code>Today Page</code> for <code>today</code> if the <code>DATE</code> field is null and the <code>Today Page</code> for the specified date if there is a valid date.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User specifies an invalid date.
-+
-[none]
-</strong> 1a1. FitHelper shows shows an error message indicating the date is invalid.
-<strong> 1a2. FitHelper displays <code>Today Page</code> for <code>today</code>.
-+
-Use case ends.</p>
-<p class="tableblock">* 1b. User specifies a date in the future.
-+
-[none]
-</strong> 1b1. FitHelper shows an error message indicating the date should be at least today or prior to today.
-<strong> 1b2. FitHelper shows the <code>Today Page</code> for <code>today</code>.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC16 - View Weekly Report</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to view <code>Weekly Report</code> with an optional <code>DATE</code> input
-2.  FitHelper displays <code>Weekly Report</code> for the current week if the <code>DATE</code> field is null and the <code>Weekly Report</code> for the week containing the specified date if there is a valid date.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User specifies an invalid date.
-+
-[none]
-</strong> 1a1. FitHelper shows shows an error message indicating the date is invalid.
-<strong> 1a2. FitHelper displays <code>Weekly Report</code> for the current week.
-+
-Use case ends.</p>
-<p class="tableblock">* 1b. User specifies a date in the future.
-+
-[none]
-</strong> 1b1. FitHelper shows an error message indicating the date should be at least today or prior to today.
-<strong> 1b2. FitHelper shows the <code>Weekly Report</code> for the current week.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC17 - Get Reminders</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to be reminded about undone tasks.
-2.  FitHelper displays all the undone tasks for the coming 7 days if the <code>DATE</code> field is null and for the specified date if there is a valid date.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User specifies an invalid date.
-+
-[none]
-</strong> 1a1. FitHelper shows shows an error message indicating the date is invalid.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-=== Use case: UC18 - Find Entries Containing the Keyword</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to find entries containing a specific keyword.
-2.  FitHelper displays all the entries containing the keyword.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User inputs a keyword that does not show in any entries.
-+
-[none]
-<strong> 1a1. FitHelper shows shows an error message indicating no entry matches the keyword.
-+</p>
-<p class="tableblock">Use case ends.
-[discrete]
-=== Use case: UC19 - Calendar View</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to display tasks in calendar view.
-2.  FitHelper displays all tasks of the current months with colored indication of whether the daily target is achieved or not.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">[none]
-* 1a. User specifies an invalid command.
-+
-[none]
-</strong> 1a1. FitHelper shows shows an error message indicating the command is invalid.
-+
-Use case ends.</p>
-<p class="tableblock">[discrete]
-<em>{More to be added}</em></p>
-<p class="tableblock">[appendix]
-== Non Functional Requirements</p>
-<p class="tableblock">.  Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.
-.  Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage
-.  Should be able to function normally without internet access.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-.  A user can get response from the system within 5 seconds after command input.
-.  A user can be familiar with the system commands and interface within half an hour usage.</p>
-<p class="tableblock"><em>{More to be added}</em></p>
-<p class="tableblock">[appendix]
-== Glossary</p>
-<p class="tableblock"><a id="mainstream-os"></a> Mainstream OS::
-Windows, Linux, Unix, OS-X</p>
-<p class="tableblock">.Command Prefix</p></td>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+<th class="tableblock halign-left valign-top">Used in the following Command(s)</th>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">===</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Prefix</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Used in the following Command(s)</p></td>
-</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">n/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">addX, editX, recordprofile</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">t/</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Time in format of <strong>yyyy-mm-dd-24-60</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">addX, editX</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">l/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Location</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">l/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">addX, editX</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">c/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Calories</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">addX, editX</p></td>
@@ -1077,16 +1592,18 @@ Windows, Linux, Unix, OS-X</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">s/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">addX, edit, editX</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Date in format of <strong>yyyy-mm-dd</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">list, listX, reminder, reminderX, edit, editX, deleteX, periodstart, periodend</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">dr/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Duration in format of <strong>yyyy-mm-dd yyyy-mm-dd</strong></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dr/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duration in format of <strong>yyyy-mm-dd yyyy-mm-dd</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">list, listX, reminder, reminderX, weightgraph</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">r/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Remark</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">editX</p></td>
@@ -1095,16 +1612,18 @@ Windows, Linux, Unix, OS-X</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">addr/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Address</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">g/</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">g/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gender</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">h/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Height</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">h/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Height</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">cw/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Current Weight</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
@@ -1113,29 +1632,40 @@ Windows, Linux, Unix, OS-X</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tw/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Target Weight</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">attr/</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attr/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Attribute</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">update</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">v/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Attribute Value</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">update</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">===</p>
-<p class="tableblock">.Possible Command Flags</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">===</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Command</p></td>
 </tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Possible Command Flags</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Flag</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Flag</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-a</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort in <strong>ascending</strong> order</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sort in <strong>ascending</strong> order</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-d</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort in <strong>descending</strong> order</p></td>
@@ -1144,9 +1674,160 @@ Windows, Linux, Unix, OS-X</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-t</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort according to <strong>time</strong></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-c</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort according to <strong>calorie intake</strong></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 16:11:05 UTC</div></div></div></body></html>
+</div>
+<div class="sect1">
+<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Product Name</strong></p>
+</div>
+<div class="paragraph">
+<p>Author: &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Given below are instructions to test the app manually.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">G.1. Launch and Shutdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Initial launch</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Download the jar file and copy into an empty folder</p>
+</li>
+<li>
+<p>Double-click the jar file<br>
+Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Saving window preferences</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
+</li>
+<li>
+<p>Re-launch the app by double-clicking the jar file.<br>
+Expected: The most recent window size and location is retained.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">G.2. Deleting a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a person while all persons are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>delete 0</code><br>
+Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">G.3. Saving data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dealing with missing/corrupted data files</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-05 01:48:38 UTC</div></div></div></body></html>
