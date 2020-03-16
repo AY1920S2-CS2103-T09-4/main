@@ -17,7 +17,7 @@
 <li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-an-entry-code-add-code">4.2. Adding an entry: <code>add</code></a></li>
 <li><a href="#listing-all-entries-code-list-code">4.3. Listing all entries : <code>list</code></a></li>
-<li><a href="#view-reminders-code-reminders-optional-date-code">4.4. View Reminders : <code>reminders (optional)DATE</code></a></li>
+<li><a href="#view-reminder-code-reminder-optional-date-code">4.4. View Reminder : <code>reminder (optional)DATE</code></a></li>
 <li><a href="#editing-an-entry-code-edit-code">4.5. Editing an entry : <code>edit</code></a></li>
 <li><a href="#locating-entries-by-name-code-find-code">4.6. Locating entries by name: <code>find</code></a></li>
 <li><a href="#deleting-an-entry-code-delete-code">4.7. Deleting an entry : <code>delete</code></a></li>
@@ -117,6 +117,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong>n/</strong> entry name</p>
 </li>
 <li>
+<p><strong>x/</strong> entry type</p>
+</li>
+<li>
 <p><strong>t/</strong> entry time</p>
 </li>
 <li>
@@ -127,6 +130,12 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p><strong>r/</strong> remark</p>
+</li>
+<li>
+<p><strong>i/</strong> index</p>
+</li>
+<li>
+<p><strong>k/</strong> keyword (in <code>find</code>)</p>
 </li>
 <li>
 <p><strong>[DATE]</strong> a date in the fixed format of yyyy-mm-dd</p>
@@ -240,7 +249,7 @@ Format: <code>list[X]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-reminders-code-reminders-optional-date-code"><a class="link" href="#view-reminders-code-reminders-optional-date-code">4.4. View Reminders : <code>reminders (optional)DATE</code></a></h3>
+<h3 id="view-reminder-code-reminder-optional-date-code"><a class="link" href="#view-reminder-code-reminder-optional-date-code">4.4. View Reminder : <code>reminder (optional)DATE</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all undone tasks in the fitness log book.<br>
 Format: <code>reminders (optional)DATE</code></p>
@@ -254,10 +263,10 @@ Format: <code>reminders (optional)DATE</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>reminders</code></p>
+<p><code>reminder</code></p>
 </li>
 <li>
-<p><code>reminders 2019-11-28</code></p>
+<p><code>reminder 2019-11-28</code></p>
 </li>
 </ul>
 </div>
@@ -266,7 +275,7 @@ Format: <code>reminders (optional)DATE</code></p>
 <h3 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">4.5. Editing an entry : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing entry in the fitness log book.<br>
-Format: <code>edit DATE INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK]&#8230;&#8203;</code></p>
+Format: <code>edit DATE [i/INDEX] [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -297,11 +306,11 @@ Format: <code>edit DATE INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMA
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 2020-03-02 1 t/Friday 4pm l/PGP gym</code><br>
+<p><code>edit 2020-03-02 i/1 t/Friday 4pm l/PGP gym</code><br>
 Edits the time and email location of the 1st entry to be <code>Friday 4pm</code> and <code>PGP gym</code> respectively.</p>
 </li>
 <li>
-<p><code>edit 2020-04-18 2 n/Fries r/</code><br>
+<p><code>edit 2020-04-18 i/2 n/Fries r/</code><br>
 Edits the name of the 2nd entry to be <code>Fries</code> and clears all existing remarks.</p>
 </li>
 </ul>
@@ -310,14 +319,14 @@ Edits the name of the 2nd entry to be <code>Fries</code> and clears all existing
 <h4 id="mark-an-entry-as-done"><a class="link" href="#mark-an-entry-as-done">4.5.1. Mark an entry as done</a></h4>
 <div class="paragraph">
 <p>Users can mark an entry as done, either a meal or sports, where the calories intake and consumption will be taken in to consideration.
-Format: <code>edit DATE INDEX es/TRUE</code></p>
+Format: <code>edit DATE [i/INDEX] es/TRUE</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="mark-an-entry-as-undone"><a class="link" href="#mark-an-entry-as-undone">4.5.2. Mark an entry as undone</a></h4>
 <div class="paragraph">
 <p>Similar to the previous command, marking an entry as undone edits the <code>es/</code> field and modify it as <code>False</code>.
-Format: <code>edit DATE INDEX es/False</code></p>
+Format: <code>edit DATE [i/INDEX] es/False</code></p>
 </div>
 </div>
 </div>
@@ -325,7 +334,7 @@ Format: <code>edit DATE INDEX es/False</code></p>
 <h3 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">4.6. Locating entries by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds entries whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+Format: <code>find (optional) [x/TYPE] [k/ONE OR MOREKEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -360,7 +369,7 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 Returns <code>running</code> and <code>slow running</code></p>
 </li>
 <li>
-<p><code>find Juice Apple</code><br>
+<p><code>find x/food Juice Apple</code><br>
 Returns any entry having names <code>Juice</code>,  or <code>Apple</code></p>
 </li>
 </ul>
@@ -370,7 +379,7 @@ Returns any entry having names <code>Juice</code>,  or <code>Apple</code></p>
 <h3 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">4.7. Deleting an entry : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified entry from the fitness log book.<br>
-Format: <code>deleteX INDEX</code></p>
+Format: <code>delete [x/type] [i/INDEX]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -395,7 +404,7 @@ Format: <code>deleteX INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>deletes 2020-03-02 2</code>
+<p><code>delete [x/sports] 2020-03-02 [index/2]</code>
 Deletes the 2nd sports entry in the <code>2020-03-02</code> daily file in the fitness log book.</p>
 </li>
 </ul>
@@ -837,4 +846,4 @@ in either ascending or descending order.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-14 18:58:53 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-16 13:01:23 UTC</div></div></div></body></html>
