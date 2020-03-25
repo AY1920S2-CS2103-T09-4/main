@@ -23,10 +23,11 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#today-feature">3.1. Today Feature</a></li>
-<li><a href="#calendar">3.2. Calendar</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Update User Profile</a></li>
-<li><a href="#check-calorie-intake-consumption-of-some-common-food-sports">3.5. Check calorie intake/consumption of some common food/sports</a></li>
+<li><a href="#diary-feature">3.2. Diary Feature</a></li>
+<li><a href="#calendar">3.3. Calendar</a></li>
+<li><a href="#logging">3.4. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.5. Update User Profile</a></li>
+<li><a href="#check-calorie-intake-consumption-of-some-common-food-sports">3.6. Check calorie intake/consumption of some common food/sports</a></li>
 </ul>
 </li>
 <li><a href="#testing">4. Testing</a></li>
@@ -381,7 +382,7 @@ In particular <code>PREDICATE_SHOW_TODAY_ENTRIES</code> is as follows</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>An example usage scenario and how the filter mechanism behaves at each step is shown below.</p>
+<p>An example usage scenario and how the today mechanism behaves at each step is shown below.</p>
 </div>
 <div class="paragraph">
 <p><strong>Step 1.</strong> The user launches the application for the first time.
@@ -401,7 +402,7 @@ It then creates a
 <div class="paragraph">
 <p><strong>Step 4.</strong> <code>Logic</code> finally gets the <code>TodayCommand</code> and execute it.
 The execution firstly calls
-<code>Model#updateFilteredEntryList(Predicate&lt;Product&gt; predicate)</code> to update the Predicate in
+<code>Model#updateFilteredEntryList(Predicate&lt;Entry&gt; predicate)</code> to update the Predicate in
 <code>filteredEntries</code> in <code>Model</code>.
 This execution then returns a <code>CommandResult</code> to <code>UI</code>, containing the response to the user.</p>
 </div>
@@ -414,63 +415,104 @@ In addition, UI will change to display today entries after model updates <code>f
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/FilterProductSD.png" alt="FilterProductSD">
+<img src="images/TodaySequenceDiagram.png" alt="TodaySequenceDiagram">
 </div>
-<div class="title">Figure 9. Sequence Diagram for Today Mechanism</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design considerations</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Alternative 1 (current choice): Save all products in an <code>ObservableList</code> in <code>BakingHome</code>, and keep a
-<code>FilteredList</code> in the <code>ModelManager</code>. <code>ProductCommandParser</code> parses the user input and gets the Predicate to update the <code>FilteredList</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Advantages: Implementation is clearer and code is more human-readable.</p>
-</li>
-<li>
-<p>Disadvantages: More difficult to write a Predicate.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Alternative 2: Keep two separate product lists, one for archived products and one for active products.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Advantages: Fast access to products of both status.</p>
-</li>
-<li>
-<p>Disadvantages: Implementation will become complicated.
-It also makes it very expensive when adding features like sorting all products according to name, price or cost.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Alternative 2: Keep only one list of products.
-Loop through the list to get the products with the desired status.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Advantages: Simplicity in storing data.</p>
-</li>
-<li>
-<p>Disadvantages: Time complexity is very high, resulting in a slow response of the application when the product list gets long.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="title">Figure 9. Sequence Diagram for Today Feature</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar"><a class="link" href="#calendar">3.2. Calendar</a></h3>
+<h3 id="diary-feature"><a class="link" href="#diary-feature">3.2. Diary Feature</a></h3>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.2.1. Implementation</a></h4>
+<div class="paragraph">
+<p>FitHelper also allows the user to keep a diary with a <code>Date</code> in the format of <code>yyyy-mm-dd</code> and the <code>content</code> with no more than 200 characters.
+The diaries are represented as model <code>Diary</code> with the attributes of <code>DiaryId</code>, <code>DiaryDate</code>, and <code>Content</code>.
+This feature allows the user to view their diaries.
+It fetches the <code>filteredDiaryList</code> stored in FitHelper storage.</p>
+</div>
+<div class="paragraph">
+<p>The diary feature is facilitated by
+<a href="https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/FilteredList.html">FilteredList</a>
+which wraps a ObservableList and
+filters using the provided Predicate.
+A <code>FilteredList&lt;Diary&gt; filteredDiaries</code> is stored in the <code>ModelManager</code>.
+In <code>FitHelper</code>, there is an
+<code>ObservableList&lt;Diary&gt; diaries</code> which contains all diaries, regardless of its <code>DiaryDate</code>. <code>filteredDiaries</code>
+in the ModelManager is initialized with this ObservableList.</p>
+</div>
+<div class="paragraph">
+<p>Since a FilteredList needs a Predicate, which matches the elements in the source list that should be visible, the filter mechanism implements the following operation to support filtering:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#updateFilteredDiaryList(Predicate&lt;Diary&gt; predicate)</code>&#8201;&#8212;&#8201;Sets the value of the property Predicate in the <code>filteredDiaries</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The predicate is declared statically in the <code>Model</code> interface, namely
+<code>PREDICATE_SHOW_ALL_DIARIES</code>.
+In particular <code>PREDICATE_SHOW_ALL_DIARIES</code> is as follows</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="predefined-type">Predicate</span>&lt;Diary&gt; PREDICATE_SHOW_ALL_DIARIES = unused -&gt; <span class="predefined-constant">true</span>;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>DiaryCommand</code> will call this method to change the visibility of diaries with different status by passing in the corresponding predicate.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An example usage scenario and how the diary mechanism behaves at each step is shown below.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user launches the application for the first time.
+<code>UniqueDiaryList</code> contains no default diaries before the user adds any.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user inputs <code>diary</code> to list all diaries. <code>UI</code> passes the input to <code>Logic</code>.
+Logic then uses a few <code>Parser</code> classes to extract layers of information out as seen from steps 3 to 5.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> Logic passes the user input to <code>FitHelperParser</code>. <code>FitHelperParser</code> identifies that this is a <code>DiaryCommand</code>
+through the word "diary".
+It then creates a
+<code>DiaryCommandParser</code> to parse the it into a <code>DiaryCommand</code> and return.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>Logic</code> finally gets the <code>DiaryCommand</code> and execute it.
+The execution firstly calls
+<code>Model#updateFilteredDiaryList(Predicate&lt;Diary&gt; predicate)</code> to update the Predicate in
+<code>filteredDiaries</code> in <code>Model</code>.
+This execution then returns a <code>CommandResult</code> to <code>UI</code>, containing the response to the user.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>UI</code> displays the response in the <code>CommandResult</code>.
+In addition, UI will change to display diaries after model updates <code>filteredDiaries</code>, since <code>UI</code> is constantly listening for the change in <code>Model</code>.</p>
+</div>
+<div class="paragraph">
+<p>The Sequence Diagram below shows how the components interact with each other for the above mentioned scenario.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DiarySequenceDiagram.png" alt="DiarySequenceDiagram">
+</div>
+<div class="title">Figure 10. Sequence Diagram for Diary Feature</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calendar"><a class="link" href="#calendar">3.3. Calendar</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -494,14 +536,14 @@ The following sequence diagram shows how the update operation works to change ca
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Update User Profile&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Update User Profile&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -532,16 +574,16 @@ The following sequence diagram shows how the update operation works to change ca
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Update User Profile</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Update User Profile</a></h3>
 <div class="paragraph">
 <p>The following sequence diagram shows how the update operation works to change user profile in model:
 <span class="image"><img src="images/UpdateSequenceDiagram.png" alt="UpdateSequenceDiagram"></span></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">3.5. Check calorie intake/consumption of some common food/sports</a></h3>
+<h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">3.6. Check calorie intake/consumption of some common food/sports</a></h3>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.5.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The check function is achieved by calling the <code>FitHelper</code> inside the <code>ModelManager</code> to search
 through either <code>FoodCalorieTable</code> or <code>SportsCalorieTable</code> for <code>CalorieEntry</code> that contain the
@@ -557,7 +599,7 @@ which is a list of one type of <code>CalorieEntry</code> (either <code>FoodCalor
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/InitializationOfCalorieTables.png" alt="InitializationOfCalorieTables">
+<img src="images/InitializationOfCalorieTables.png" alt="test" width="50%">
 </div>
 </div>
 <div class="paragraph">
@@ -578,12 +620,12 @@ a failure message followed by the string representation of the keyword.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/SequenceDiagramForCheckCommand.png" alt="SequenceDiagramForCheckCommand">
+<img src="images/SequenceDiagramForCheckCommand.png" alt="test" width="150%">
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.6.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Aspect: Data structure to store entries</p>
 </div>
@@ -767,6 +809,19 @@ regardless of how many entries are in the HashMap.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">get reminders for tasks not done</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">I can focused on these tasks and complete them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who do not know very well about dieting and exercising</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check calorie intake/consumption of common food and sports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can input calorie intake/consumption without
+having to search about these information online.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">first-time user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view help page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can know the functions of the application quickly</p></td>
 </tr>
 </tbody>
 </table>
@@ -1237,4 +1292,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-25 13:50:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-25 14:33:45 UTC</div></div></div></body></html>
