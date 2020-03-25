@@ -135,6 +135,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong>i/</strong> index</p>
 </li>
 <li>
+<p><strong>dr/</strong> duration a double number representing time in hours</p>
+</li>
+<li>
 <p><strong>k/</strong> keyword (in <code>find</code>)</p>
 </li>
 <li>
@@ -176,7 +179,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><code>X</code> in this document refers to f/s, representing two types of entries: food and sports. e.g. <code>addX</code> represents either <code>addf</code> or <code>adds</code>; <code>add[X]</code> means the field <code>X</code> is optional.</p>
 </li>
 <li>
-<p>The field <code>TIME</code> should be entered in the fixed format of <code>yyyy-mm-dd[-hh-mm]</code> where the <code>hours</code> and <code>minutes</code> can be omitted.</p>
+<p>The field <code>TIME</code> should be entered in the fixed format of <code>yyyy-mm-dd[ hh:mm]</code> where the <code>hours</code> and <code>minutes</code> can be omitted.</p>
 </li>
 <li>
 <p>The field <code>DATE</code> should be entered in the fixed format of <code>yyyy-mm-dd</code> in order to trace the corresponding daily file.</p>
@@ -200,7 +203,7 @@ User Guide is also provided after the list.</p>
 <h3 id="adding-an-entry-code-add-code"><a class="link" href="#adding-an-entry-code-add-code">4.2. Adding an entry: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds an entry to the fitness log book<br>
-Format: <code>addX n/NAME t/DATETIME l/LOCATION c/CALORIE es/False r/REMARK&#8230;&#8203;</code></p>
+Format: <code>addX n/NAME t/DATETIME l/LOCATION c/CALORIE es/False dr/DURATION r/REMARK&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -275,7 +278,7 @@ Format: <code>reminders (optional)DATE</code></p>
 <h3 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">4.5. Editing an entry : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing entry in the fitness log book.<br>
-Format: <code>edit DATE [i/INDEX] [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK]&#8230;&#8203;</code></p>
+Format: <code>edit DATE [i/INDEX] [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK] [dr/DURATION]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -846,4 +849,4 @@ in either ascending or descending order.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-20 15:46:02 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-25 13:43:19 UTC</div></div></div></body></html>

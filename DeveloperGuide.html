@@ -22,10 +22,10 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#proposed-undo-redo-feature">3.1. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
+<li><a href="#today-feature">3.1. Today Feature</a></li>
+<li><a href="#calendar">3.2. Calendar</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
+<li><a href="#Implementation-Configuration">3.4. Update User Profile</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -318,7 +318,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>fithelper.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -330,223 +330,167 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.1. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="today-feature"><a class="link" href="#today-feature">3.1. Today Feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.1.1. Proposed Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.1.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>FitHelper&#8217;s entries have a <code>Time</code> attribute including a <code>Date</code> and a specific <code>Time</code> in the format of <code>yyyy-mm-dd HH:mm</code>.
+This feature allows the user to view entries with the <code>Date</code> of today, i.e. shows only entries in today.
+It fetches the <code>filteredFoodEntryList</code> and <code>FilteredSportsEntryList</code> stored in FitHelper storage.</p>
+</div>
+<div class="paragraph">
+<p>The today mechanism is facilitated by
+<a href="https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/FilteredList.html">FilteredList</a>
+which wraps a ObservableList and
+filters using the provided Predicate.
+A <code>FilteredList&lt;Entry&gt; filteredEntries</code> is stored in the <code>ModelManager</code>.
+In <code>FitHelper</code>, there is an
+<code>ObservableList&lt;Entry&gt; entries</code> which contains all entries, regardless of its <code>Type</code> and <code>Date</code>. <code>filteredEntries</code>
+in the ModelManager is initialized with this ObservableList.</p>
+</div>
+<div class="paragraph">
+<p>Since a FilteredList needs a Predicate, which matches the elements in the source list that should be visible, the filter mechanism implements the following operation to support filtering:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
-</li>
+<p><code>Model#updateFilteredEntryList(Predicate&lt;Entry&gt; predicate)</code>&#8201;&#8212;&#8201;Sets the value of the property Predicate in the <code>filteredEntries</code>.</p>
+<div class="ulist">
+<ul>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p>Predicates are declared statically in the <code>Model</code> interface, namely
+<code>PREDICATE_SHOW_ALL_ENTRIES</code>, <code>PREDICATE_SHOW_UNDONE_ENTRIES</code>, and <code>PREDICATE_SHOW_TODAY_ENTRIES</code>.
+In particular <code>PREDICATE_SHOW_TODAY_ENTRIES</code> is as follows</p>
 </li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="predefined-type">Predicate</span>&lt;Entry&gt; PREDICATE_SHOW_TODAY_ENTRIES = entry -&gt;
+            entry.getTime().getDateStr().equals(<span class="keyword">new</span> Today().getTodayDateStr());</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p>The <code>TodayCommand</code> will call this method to change the visibility of entries with different status by passing in the corresponding predicate.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
+<p>An example usage scenario and how the filter mechanism behaves at each step is shown below.</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+<p><strong>Step 1.</strong> The user launches the application for the first time.
+<code>UniqueEntryList</code> will be initialized with a list of default entries in FitHelper.
+This list contains a few entries with various dates.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p><strong>Step 2.</strong> The user inputs <code>today</code> to list all today entries. <code>UI</code> passes the input to <code>Logic</code>.
+Logic then uses a few <code>Parser</code> classes to extract layers of information out as seen from steps 3 to 5.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> Logic passes the user input to <code>FitHelperParser</code>. <code>FitHelperParser</code> identifies that this is a <code>TodayCommand</code>
+through the word "today".
+It then creates a
+<code>TodayCommandParser</code> to parse the it into a <code>TodayCommand</code> and return.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>Logic</code> finally gets the <code>TodayCommand</code> and execute it.
+The execution firstly calls
+<code>Model#updateFilteredEntryList(Predicate&lt;Product&gt; predicate)</code> to update the Predicate in
+<code>filteredEntries</code> in <code>Model</code>.
+This execution then returns a <code>CommandResult</code> to <code>UI</code>, containing the response to the user.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>UI</code> displays the response in the <code>CommandResult</code>.
+In addition, UI will change to display today entries after model updates <code>filteredEntries</code>, since <code>UI</code> is constantly listening for the change in <code>Model</code>.</p>
+</div>
+<div class="paragraph">
+<p>The Sequence Diagram below shows how the components interact with each other for the above mentioned scenario.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState0.png" alt="UndoRedoState0">
+<img src="images/FilterProductSD.png" alt="FilterProductSD">
 </div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState1.png" alt="UndoRedoState1">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState2.png" alt="UndoRedoState2">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState3.png" alt="UndoRedoState3">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState4.png" alt="UndoRedoState4">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState5.png" alt="UndoRedoState5">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
-</div>
+<div class="title">Figure 9. Sequence Diagram for Today Mechanism</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design considerations</a></h4>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p>Alternative 1 (current choice): Save all products in an <code>ObservableList</code> in <code>BakingHome</code>, and keep a
+<code>FilteredList</code> in the <code>ModelManager</code>. <code>ProductCommandParser</code> parses the user input and gets the Predicate to update the <code>FilteredList</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Advantages: Implementation is clearer and code is more human-readable.</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
+<p>Disadvantages: More difficult to write a Predicate.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<p>Alternative 2: Keep two separate product lists, one for archived products and one for active products.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+<p>Advantages: Fast access to products of both status.</p>
 </li>
 <li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
+<p>Disadvantages: Implementation will become complicated.
+It also makes it very expensive when adding features like sorting all products according to name, price or cost.</p>
 </li>
 </ul>
 </div>
 </li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
+<li>
+<p>Alternative 2: Keep only one list of products.
+Loop through the list to get the products with the desired status.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+<p>Advantages: Simplicity in storing data.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+<p>Disadvantages: Time complexity is very high, resulting in a slow response of the application when the product list gets long.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
-<div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<h3 id="calendar"><a class="link" href="#calendar">3.2. Calendar</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user enters a view command in the <code>calendar d/tmr</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> parses the user input, constructs and executes the <code>CalendarCommand</code>.</p>
+</li>
+<li>
+<p>The <code>CalendarCommand</code> reaches <code>setCalendarDate</code> in the <code>Model</code> and returns the <code>CommandResult</code> to the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The <code>LogicManager</code> returns the <code>CommandResult</code> to the <code>Ui</code>.</p>
+</li>
+<li>
+<p>The <code>Ui</code> gets the <code>date</code> from <code>LogicManager</code> and updates the Ui to display the module.
+The following sequence diagram shows how the update operation works to change calendar page in model:
+<span class="image"><img src="images/CalendarSequenceDiagram.png" alt="CalendarSequenceDiagram"></span></p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
@@ -557,7 +501,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Update User Profile&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -588,9 +532,10 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Update User Profile</a></h3>
 <div class="paragraph">
-<p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
+<p>The following sequence diagram shows how the update operation works to change user profile in model:
+<span class="image"><img src="images/UpdateSequenceDiagram.png" alt="UpdateSequenceDiagram"></span></p>
 </div>
 </div>
 </div>
@@ -712,6 +657,36 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view pending tasks and status of daily calories goals in a calendar</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have cleaner display of data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to have a clean user interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clear entries regularly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">do not need to see irrelevant information</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who types wrongly sometimes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">undo my previous command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I do not need to delete explicitly using a long command</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">leave the application when I need</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It does not occupy additional space in my computer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list all entries by certain criteria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can filter the tasks by what I am looking for</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get reminders for tasks not done</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can focused on these tasks and complete them</p></td>
 </tr>
 </tbody>
 </table>
@@ -859,654 +834,6 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </li>
 </ul>
 </div>
-<h3 id="use-case-uc04-display-the-list" class="discrete">Use case: UC04 - Display the List</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to display the list of a day.</p>
-</li>
-<li>
-<p>FitHelper displays the list corresponding to the specified date. If the user does not specify a date, FitHelper will display the list for <code>today</code>.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. The date specified by the user does not contain any entries.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc05-show-reminders" class="discrete">Use case: UC05 - Show Reminders</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to display the undone tasks for a specific day.</p>
-</li>
-<li>
-<p>FitHelper displays the undone task list corresponding to the specified date. If the user does not specify a date, FitHelper will display all the undone tasks in the coming 7 days.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. The date specified by the user does not contain any entries.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc06-clear" class="discrete">Use case: UC06 - Clear</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to clear the entries for a specific day.</p>
-</li>
-<li>
-<p>FitHelper clears the entries in the daily file for the specified day. If the user does not input a <code>DATE</code>, FitHelper will delete all the entries for <code>today</code>.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. The date specified by the user does not contain any entries.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows the message reminding the user that that specific day is empty.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc07-undo" class="discrete">Use case: UC07 - Undo</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to undo the previous command.</p>
-</li>
-<li>
-<p>FitHelper undoes the previous command.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. There is no previous command.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows an error message indicating there is no previous command.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1b. The previous command is not undoable. e.g. The previous command is a <code>list</code> command where <code>undo</code> does not make sense.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. FitHelper shows an error message indicating the previous command is not undoable.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc08-exit" class="discrete">Use case: UC08 - Exit</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to exit the application.</p>
-</li>
-<li>
-<p>FitHelper displayes the <code>goodbye</code> word and terminates the application.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<h3 id="use-case-uc09-record-profile" class="discrete">Use case: UC09 - Record Profile</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to record profile and input values</p>
-</li>
-<li>
-<p>FitHelper store user profile data.</p>
-</li>
-<li>
-<p>FitHelper display successful record and show profile page.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User input incomplete values.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1b. User has recorded basic data before.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. FitHelper shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc10-update-profile" class="discrete">Use case: UC10 - Update Profile</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to update profile attribute values.</p>
-</li>
-<li>
-<p>FitHelper update data accordingly.</p>
-</li>
-<li>
-<p>FitHelper display successful update and show profile page.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User input unknown attribute.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1b. User input wrong type for values.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. FitHelper shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc11-show-profile" class="discrete">Use case: UC11 - Show Profile</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to show profile page.</p>
-</li>
-<li>
-<p>FitHelper display profile page.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User has not record profile data yet.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows an error message and reminder user to record.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc12-show-weight-graph-page-for-certain-period" class="discrete">Use case: UC12 - Show Weight Graph Page (for certain period)</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to show Weight Graph page (for certain period)</p>
-</li>
-<li>
-<p>FitHelper display Weight page with information.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User input invalid time.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc13-keep-a-diary" class="discrete">Use case: UC13 - Keep a Diary</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User adds comments as today&#8217;s diary</p>
-</li>
-<li>
-<p>FitHelper adds the diary log to <code>today</code> file.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User input is incomplete.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1b. User specifies a <code>DATE</code> after the <code>diary</code> keyword.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. FitHelper will take the <code>date</code> as part of the comments as <code>diary</code> is only for <code>today</code> .</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc14-view-the-reward" class="discrete">Use case: UC14 - View the Reward</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to view the rewarding points and current fitness level</p>
-</li>
-<li>
-<p>FitHelper displays the users rewarding points together with the current fitness level.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<h3 id="use-case-uc15-view-today-page" class="discrete">Use case: UC15 - View Today Page</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to view <code>Today Page</code> with an optional <code>DATE</code> input</p>
-</li>
-<li>
-<p>FitHelper displays <code>Today Page</code> for <code>today</code> if the <code>DATE</code> field is null and the <code>Today Page</code> for the specified date if there is a valid date.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User specifies an invalid date.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
-</li>
-<li>
-<p>1a2. FitHelper displays <code>Today Page</code> for <code>today</code>.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1b. User specifies a date in the future.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. FitHelper shows an error message indicating the date should be at least today or prior to today.</p>
-</li>
-<li>
-<p>1b2. FitHelper shows the <code>Today Page</code> for <code>today</code>.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc16-view-weekly-report" class="discrete">Use case: UC16 - View Weekly Report</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to view <code>Weekly Report</code> with an optional <code>DATE</code> input</p>
-</li>
-<li>
-<p>FitHelper displays <code>Weekly Report</code> for the current week if the <code>DATE</code> field is null and the <code>Weekly Report</code> for the week containing the specified date if there is a valid date.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User specifies an invalid date.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
-</li>
-<li>
-<p>1a2. FitHelper displays <code>Weekly Report</code> for the current week.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1b. User specifies a date in the future.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. FitHelper shows an error message indicating the date should be at least today or prior to today.</p>
-</li>
-<li>
-<p>1b2. FitHelper shows the <code>Weekly Report</code> for the current week.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc17-get-reminders" class="discrete">Use case: UC17 - Get Reminders</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to be reminded about undone tasks.</p>
-</li>
-<li>
-<p>FitHelper displays all the undone tasks for the coming 7 days if the <code>DATE</code> field is null and for the specified date if there is a valid date.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User specifies an invalid date.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows shows an error message indicating the date is invalid.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-uc18-find-entries-containing-the-keyword" class="discrete">Use case: UC18 - Find Entries Containing the Keyword</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to find entries containing a specific keyword.</p>
-</li>
-<li>
-<p>FitHelper displays all the entries containing the keyword.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User inputs a keyword that does not show in any entries.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows shows an error message indicating no entry matches the keyword.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-<h3 id="use-case-uc19-calendar-view" class="discrete">Use case: UC19 - Calendar View</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to display tasks in calendar view.</p>
-</li>
-<li>
-<p>FitHelper displays all tasks of the current months with colored indication of whether the daily target is achieved or not.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. User specifies an invalid command.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. FitHelper shows shows an error message indicating the command is invalid.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
 </div>
@@ -1569,78 +896,73 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, check, delete, edit, find</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Index of entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit, delete, edit</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">n/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addX, editX, recordprofile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">t/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Time in format of <strong>yyyy-mm-dd-24-60</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addX, editX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time in format of "date hour minute"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">l/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Location</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addX, editX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">c/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Calories</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addX, editX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calorie</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">s/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addX, edit, editX</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Date in format of <strong>yyyy-mm-dd</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">list, listX, reminder, reminderX, edit, editX, deleteX, periodstart, periodend</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">dr/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Duration in format of <strong>yyyy-mm-dd yyyy-mm-dd</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">list, listX, reminder, reminderX, weightgraph</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">r/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Remark</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">editX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addr/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Address</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date in format of <strong>date hh:mm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">calendar</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">g/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gender</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dr/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duration in format of <strong>yyyy-mm-dd yyyy-mm-dd</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">h/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Height</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dc/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dairy contents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dairy</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cw/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Current Weight</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">tw/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Target Weight</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recordprofile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">k/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check, find</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attr/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute in user profile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">update</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">v/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute Value in user profile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">update</p></td>
 </tr>
 </tbody>
@@ -1679,6 +1001,11 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-c</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort according to <strong>calorie intake</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-f</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Force update</strong> even with existing value</p></td>
 </tr>
 </tbody>
 </table>
@@ -1830,4 +1157,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-20 15:46:02 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-25 13:43:19 UTC</div></div></div></body></html>
