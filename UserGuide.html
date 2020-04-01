@@ -23,21 +23,22 @@
 <li><a href="#deleting-an-entry-code-delete-code">4.7. Deleting an entry : <code>delete</code></a></li>
 <li><a href="#sort-the-entries">4.8. Sort the entries</a></li>
 <li><a href="#keep-a-diary">4.9. Keep a diary</a></li>
-<li><a href="#reward">4.10. Reward</a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.13. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
-<li><a href="#check-calorie-intake-consumption-reference-values">4.15. Check calorie intake/consumption reference values</a></li>
-<li><a href="#show-calorie-table">4.16. Show calorie table</a></li>
-<li><a href="#profile-page-code-profile-code">4.17. Profile Page: <code>profile</code></a></li>
-<li><a href="#update-profile-data-code-update-code">4.18. Update Profile Data : <code>update</code></a></li>
-<li><a href="#weight-page-code-weight-code">4.19. Weight Page: <code>weight</code></a></li>
-<li><a href="#add-weight-records-code-addweight-code">4.20. Add Weight Records : <code>addWeight</code></a></li>
-<li><a href="#calendar-view">4.21. Calendar View</a></li>
-<li><a href="#today-page">4.22. Today Page</a></li>
-<li><a href="#weekly-report">4.23. Weekly Report</a></li>
-<li><a href="#sort-food-consumption-or-exercise-record">4.24. Sort food consumption or exercise record</a></li>
+<li><a href="#clearing-all-data-in-fithelper-code-clear-code">4.10. Clearing all data in FitHelper : <code>clear</code></a></li>
+<li><a href="#undo-code-undo-code">4.11. Undo : <code>undo</code></a></li>
+<li><a href="#redo-code-redo-code">4.12. Redo : <code>redo</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.13. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.14. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.15. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#check-calorie-intake-consumption-reference-values">4.16. Check calorie intake/consumption reference values</a></li>
+<li><a href="#show-calorie-table">4.17. Show calorie table</a></li>
+<li><a href="#profile-page-code-profile-code">4.18. Profile Page: <code>profile</code></a></li>
+<li><a href="#update-profile-data-code-update-code">4.19. Update Profile Data : <code>update</code></a></li>
+<li><a href="#weight-page-code-weight-code">4.20. Weight Page: <code>weight</code></a></li>
+<li><a href="#add-weight-records-code-addweight-code">4.21. Add Weight Records : <code>addWeight</code></a></li>
+<li><a href="#calendar-view">4.22. Calendar View</a></li>
+<li><a href="#today-page">4.23. Today Page</a></li>
+<li><a href="#proposed-weekly-report">4.24. [proposed] Weekly Report</a></li>
+<li><a href="#sort-food-consumption-or-exercise-record">4.25. Sort food consumption or exercise record</a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -432,8 +433,27 @@ Deletes the 2nd sports entry in the <code>2020-03-02</code> daily file in the fi
 <div class="sect2">
 <h3 id="keep-a-diary"><a class="link" href="#keep-a-diary">4.9. Keep a diary</a></h3>
 <div class="paragraph">
-<p>Users can keep a diary by type in the <code>diary</code> keyword and the content of the diary. If the <code>DATE</code> is null, the content will be appended to today&#8217;s diary.
-Format: <code>diary (Optional)DATE CONTENT</code></p>
+<p>The user can keep a diary in FitHelper, and command for adding/editing/deleting/searching/clearing diary logs.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>diary</code> switches to the <code>Diary Page</code> where all diary logs are displayed in chronological order</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="add-a-new-diary"><a class="link" href="#add-a-new-diary">4.9.1. Add a new diary</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addDiary d/DATE dc/DIARYCONTENT</code><br>
+adds a new diary on the specified <code>DATE</code> with the specified <code>CONTENT</code><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If there is previously added diary on the specified <code>DATE</code>, calling <code>addDiary</code> will rewrite the content.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -441,25 +461,174 @@ Format: <code>diary (Optional)DATE CONTENT</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>diary 2020-03-02 I feel good about myself after running.</code><br>
-Adds the comment <code>I feel good about myself after running.</code> to the diary on <code>2020-03-02</code>.</p>
+<p><code>addDiary d/2020-03-31 dc/Happy birthday Alice!</code>
+Adds a diary log on the date <code>2020-03-31</code> with the content <code>Happy birthday Alice!</code>.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="reward"><a class="link" href="#reward">4.10. Reward</a></h3>
-<div class="paragraph">
-<p>Users get rewarding points after doing exercises or controlling their calorie intake to a certain amount.
-They can also be promoted to higher <code>fitness level</code> based on their rewading points.</p>
+<div class="sect3">
+<h4 id="append-new-content-to-an-existing-diary"><a class="link" href="#append-new-content-to-an-existing-diary">4.9.2. Append new content to an existing diary</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>appendDiary d/DATE dc/APPENDED CONTENT</code><br>
+appends new content to the existing diary on the specified <code>DATE</code>.<br></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Format: <code>reward</code>
-The user&#8217;s current 'fitness level` and total rewarding points will be displayed.</p>
+<p>If the specified <code>DATE</code> does not have previously added diary log, this command will be discarded with a <code>DIARY_NOT_FOUND</code>
+reminder.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>appendDiary d/2020-03-31 dc/You are one year older now:)</code> (after <code>addDiary d/2020-03-31 dc/Happy birthday Alice!</code>)+
+This command appends the new diary content to the existing the diary log on the date <code>2020-03-31</code>.
+The new diary content after this command will be "Happy birthday Alice! You are one year older now:)".</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="edit-a-diary"><a class="link" href="#edit-a-diary">4.9.3. Edit a diary</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editDiary d/DATE dc/NEW DIARYCONTENT</code><br>
+edits the diary on the specified <code>DATE</code> with the new <code>DIARYCONTENT</code>.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If the specified <code>DATE</code> does not have previously added diary log, this command will be discarded with a <code>DIARY_NOT_FOUND</code>
+reminder.
+If the existing diary with the specified <code>DATE</code> has the same content as the specified content, this command will be discarded with a <code>DUPLICATE_DIARY</code>
+reminder.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editDiary d/2020-03-31 dc/Happy birthday Alice!</code><br>
+This command edits the content of the diary log on the date <code>2020-03-31</code> with the content <code>Happy birthday Alice!</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-a-diary"><a class="link" href="#delete-a-diary">4.9.4. Delete a diary</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteDiary d/DATE</code><br>
+deletes the diary on the specified <code>DATE</code>.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If there is no diary under the specified <code>DATE</code>, this command will be discarded with the reminder of
+<code>DIARY_NOT_FOUND</code>.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteDiary d/2020-03-31</code><br>
+This command deletes the diary log on the date <code>2020-03-3</code>, if the diary on this date exists, and discards the command
+if no diary was added previously on this date.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="find-a-diary"><a class="link" href="#find-a-diary">4.9.5. Find a diary</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findDiary [d/DATE] [k/ONE OR MORE KEYWORDS]</code><br>
+finds diaries either on the specified <code>DATE</code> or contains the specified <code>KEYWORDS</code>.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If there is no diary under the specified <code>DATE</code>, this command will be discarded with the reminder of
+<code>DIARY_NOT_FOUND</code>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The field <code>DATE</code> has higher priority than <code>KEYWORDS</code> in the search.
+i.e. If the <code>DATE</code> field is non-empty, regardless of the presence and the content of the <code>KEYWORDS</code> field,
+the diary under that date will be displayed. If the specified <code>DATE</code> contains no previous diary logs,
+no diary will be listed.</p>
+</li>
+<li>
+<p>If the field <code>DATE</code> is left empty, only the <code>KEYWORDS</code> field is considered in the search,
+similar to the case of <code>find</code> command for food/sport entries.</p>
+</li>
+<li>
+<p>The search is case insensitive. e.g <code>apples</code> will match <code>Apples</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Apple Pie</code> will match <code>Pie Apple</code></p>
+</li>
+<li>
+<p>Only the name is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Straw</code> will not match <code>Strawberries</code></p>
+</li>
+<li>
+<p>Entries matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Apple Banana</code> will return <code>Apple Pie</code>, <code>Banana Milkshake</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findDiary k/running</code><br>
+Displays diaries with their content containing the keyword <code>running</code>, ignoring the letter capitalization.</p>
+</li>
+<li>
+<p><code>find d/2020-03-31 k/cake</code><br>
+Returns the diary on the date of <code>2020-03-31</code> regardless of the <code>KEYWORDS</code> field.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clear-the-diary"><a class="link" href="#clear-the-diary">4.9.6. Clear the diary</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>clearDiary</code>＋
+clears all diary logs in this FitHelper.</p>
+<div class="paragraph">
+<p>The user can always revoke the clearing command by calling <code>undo</code>, which will be explained in a later section.</p>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-data-in-fithelper-code-clear-code"><a class="link" href="#clearing-all-data-in-fithelper-code-clear-code">4.10. Clearing all data in FitHelper : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the fitness log book.<br></p>
 </div>
@@ -468,7 +637,55 @@ The user&#8217;s current 'fitness level` and total rewarding points will be disp
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="undo-code-undo-code"><a class="link" href="#undo-code-undo-code">4.11. Undo : <code>undo</code></a></h3>
+<div class="paragraph">
+<p><code>undo</code> revokes the last undoable command.<br>
+This command back-roll FitHelper to the previous status before the last undoable command was executed.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>undo</code> (after <code>addDiary d/2020-03-31 dc/I am happy.</code>)<br>
+This <code>undo</code> commands remove the added diary log from FitHelper.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redo-code-redo-code"><a class="link" href="#redo-code-redo-code">4.12. Redo : <code>redo</code></a></h3>
+<div class="paragraph">
+<p><code>redo</code> is the reverse of <code>undo</code>.<br>
+This command re-execute the last undoable command that has been undone.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<code>redo</code> can only be executed after an <code>undo</code> has been previously performed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>redo</code> (after <code>undo</code>-ing the previous <code>addDiary d/2020-03-31 dc/I am happy.</code>)<br>
+This <code>undo</code> commands adds the diary log back to FitHelper.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.13. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br></p>
 </div>
@@ -477,7 +694,7 @@ The user&#8217;s current 'fitness level` and total rewarding points will be disp
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.13. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.14. Saving the data</a></h3>
 <div class="paragraph">
 <p>fitness log book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.<br></p>
@@ -504,11 +721,11 @@ There is no need to save manually.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.15. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="check-calorie-intake-consumption-reference-values"><a class="link" href="#check-calorie-intake-consumption-reference-values">4.15. Check calorie intake/consumption reference values</a></h3>
+<h3 id="check-calorie-intake-consumption-reference-values"><a class="link" href="#check-calorie-intake-consumption-reference-values">4.16. Check calorie intake/consumption reference values</a></h3>
 <div class="paragraph">
 <p>Asks the application to show records of calorie intake of some common food (unit: kcal per serving)
 or calorie consumption of some common sports (unit: kcal per hour),
@@ -533,7 +750,7 @@ The recorded are searched within the application&#8217;s pre-installed data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="show-calorie-table"><a class="link" href="#show-calorie-table">4.16. Show calorie table</a></h3>
+<h3 id="show-calorie-table"><a class="link" href="#show-calorie-table">4.17. Show calorie table</a></h3>
 <div class="paragraph">
 <p>Asks the application to display a table that shows calorie intake from food consumption
 or calorie consumption from exercise in a particular day specified by the user.</p>
@@ -553,7 +770,7 @@ or calorie consumption from exercise in a particular day specified by the user.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="profile-page-code-profile-code"><a class="link" href="#profile-page-code-profile-code">4.17. Profile Page: <code>profile</code></a></h3>
+<h3 id="profile-page-code-profile-code"><a class="link" href="#profile-page-code-profile-code">4.18. Profile Page: <code>profile</code></a></h3>
 <div class="paragraph">
 <p>Profile page serves to be a summary for basic user data.<br>
 The profile information includes: Name, Age, Gender, Address, Height, Target Weight, Current Weight and Current BMI.<br></p>
@@ -563,7 +780,7 @@ The profile information includes: Name, Age, Gender, Address, Height, Target Wei
 </div>
 </div>
 <div class="sect2">
-<h3 id="update-profile-data-code-update-code"><a class="link" href="#update-profile-data-code-update-code">4.18. Update Profile Data : <code>update</code></a></h3>
+<h3 id="update-profile-data-code-update-code"><a class="link" href="#update-profile-data-code-update-code">4.19. Update Profile Data : <code>update</code></a></h3>
 <div class="paragraph">
 <p>Update user data in the profile by attributes. Profile attributes include: Name, Age, Address, Gender, Height and Target Weight.<br>
 Every <code>update</code> command will lead to the profile page.<br></p>
@@ -609,7 +826,7 @@ Every <code>update</code> command will lead to the profile page.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="weight-page-code-weight-code"><a class="link" href="#weight-page-code-weight-code">4.19. Weight Page: <code>weight</code></a></h3>
+<h3 id="weight-page-code-weight-code"><a class="link" href="#weight-page-code-weight-code">4.20. Weight Page: <code>weight</code></a></h3>
 <div class="paragraph">
 <p>Weight page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
 It shows user data in graph for easy understanding. By default, it will generate graph from all history data chronologically.</p>
@@ -645,7 +862,7 @@ Display a trend graph of user&#8217;s BMI according to time. The BMI value is ca
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-weight-records-code-addweight-code"><a class="link" href="#add-weight-records-code-addweight-code">4.20. Add Weight Records : <code>addWeight</code></a></h3>
+<h3 id="add-weight-records-code-addweight-code"><a class="link" href="#add-weight-records-code-addweight-code">4.21. Add Weight Records : <code>addWeight</code></a></h3>
 <div class="paragraph">
 <p>Add a new weight record into the weight records database. A weight record is related to date and weight value, and a auto-computed BMI value will be stored as well.<br>
 Every <code>addWeight</code> command will lead to the weight page. If the new weight record is added successfully, explicit changes of new points in the two trend graph can be found.<br></p>
@@ -688,7 +905,7 @@ Every <code>addWeight</code> command will lead to the weight page. If the new we
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-view"><a class="link" href="#calendar-view">4.21. Calendar View</a></h3>
+<h3 id="calendar-view"><a class="link" href="#calendar-view">4.22. Calendar View</a></h3>
 <div class="paragraph">
 <p>Calendar view will display all the exercises and meals for each day of the current month. For past dates, signs of different colors will be highlighted to show whether the calories intake exceeds or is below the target.<br>
 For female users, the monthly period will be highlighted<br>
@@ -697,7 +914,7 @@ Format for entering calendar view: <code>calendar</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="today-page"><a class="link" href="#today-page">4.22. Today Page</a></h3>
+<h3 id="today-page"><a class="link" href="#today-page">4.23. Today Page</a></h3>
 <div class="paragraph">
 <p>Today page serves to be a summary for the daily arrangements.<br>
 It shows the daily schedule for the user. Users can see the entries for the day, a recommended lunch place, and their performances. They can also see their diary for the day as well as the rewarding point.<br>
@@ -706,30 +923,32 @@ Format: <code>today</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Daily Schedule</strong><br>
-The list of food and sports for "today" is displayed, with the status and comments.</p>
+<p><strong>Daily Plans</strong><br>
+The lists of food and sports for "today" are displayed.</p>
 </li>
 <li>
-<p><strong>Recommended Dining Places</strong><br>
-Recommended dining places for lunch are displayed, based on their distances to the location of entries at noon.<br>
-By default, the recommended dining place are ones nearest to the user address.</p>
+<p><strong>Plan Counter</strong><br>
+The counters keep track of the number of done/undone food/sports plans on Today.</p>
 </li>
 <li>
-<p><strong>Daily Routine</strong><br>
-An line-dot graph of daily routine is displayed following the chronological order of the daily arrangements.</p>
+<p><strong>Calorie Report</strong><br>
+Calorie report contains the data of daily calorie intake/consumption from done food/sports entries correspondingly.
+The food calorie pie chart displays the component of calorie intake, so the user can view which food entry contributes
+to how much calorie intake, so he/she can adjust the diet plan.</p>
 </li>
 <li>
-<p><strong>Daily Performance</strong><br>
-User perfoamance for the current day can be seen from the today page, based on the ratio of done and undone entries and calorie consumption.</p>
+<p><strong>Task Completion</strong><br>
+The user&#8217;s daily task completion is shown in percentage.</p>
 </li>
 <li>
-<p><strong>Diary Corner</strong><br>
-Daily diary log will be displayed if the user has types in comments for the day.</p>
+<p><strong>FitHelper Feedback</strong><br>
+Based on the user&#8217;s intake food calorie and sport task completion, FitHelper provides suggestions and reminders
+in the <code>FitHelper Feedback</code> area.</p>
 </li>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-day-page"><a class="link" href="#some-day-page">4.22.1. Some Day Page</a></h4>
+<h4 id="proposed-some-day-page"><a class="link" href="#proposed-some-day-page">4.23.1. [proposed] Some Day Page</a></h4>
 <div class="paragraph">
 <p>The <code>Today Page</code> for some day in the history can be displayed.
 Format: <code>today DATE</code></p>
@@ -762,7 +981,7 @@ The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring 
 </div>
 </div>
 <div class="sect2">
-<h3 id="weekly-report"><a class="link" href="#weekly-report">4.23. Weekly Report</a></h3>
+<h3 id="proposed-weekly-report"><a class="link" href="#proposed-weekly-report">4.24. [proposed] Weekly Report</a></h3>
 <div class="paragraph">
 <p>A weekly report serves as a summary for the past week. The user can see his performance in the past week. The weekly report also contains his rewarding points, diary logs, and preferred sports and food from the previous week.<br>
 Format: <code>weekreport</code></p>
@@ -784,7 +1003,7 @@ Users can see his preferred food and sports, based on his entries for the past w
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-week-report"><a class="link" href="#some-week-report">4.23.1. Some Week Report</a></h4>
+<h4 id="some-week-report"><a class="link" href="#some-week-report">4.24.1. Some Week Report</a></h4>
 <div class="paragraph">
 <p>The <code>Week Report</code> for some week in the history can be displayed.<br>
 Format: <code>weekreport DATE</code> where <code>DATE</code> specifies the week it is in</p>
@@ -817,7 +1036,7 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-food-consumption-or-exercise-record"><a class="link" href="#sort-food-consumption-or-exercise-record">4.24. Sort food consumption or exercise record</a></h3>
+<h3 id="sort-food-consumption-or-exercise-record"><a class="link" href="#sort-food-consumption-or-exercise-record">4.25. Sort food consumption or exercise record</a></h3>
 <div class="paragraph">
 <p>Sorts the records of food consumption or exercise workout based on time of record or calorie,
 in either ascending or descending order.</p>
@@ -877,6 +1096,33 @@ in either ascending or descending order.</p>
 <p><strong>Help</strong> : <code>help</code></p>
 </li>
 <li>
+<p><strong>DashBoard</strong> : <code>home</code></p>
+</li>
+<li>
+<p><strong>Reminders</strong> : <code>reminder</code></p>
+</li>
+<li>
+<p><strong>Today</strong> : <code>today</code></p>
+</li>
+<li>
+<p><strong>Diary</strong> : <code>diary</code></p>
+</li>
+<li>
+<p><strong>Diary - add</strong> : <code>addDiary d/DATE dc/DIARYCONTENT</code></p>
+</li>
+<li>
+<p><strong>Diary - edit</strong> : <code>editDiary d/DATE dc/DIARYCONTENT</code></p>
+</li>
+<li>
+<p><strong>Diary - delete</strong> : <code>deleteDiary d/DATE</code></p>
+</li>
+<li>
+<p><strong>Diary - find</strong> : <code>findDiary [d/DATE] [dc/DIARYCONTENT]</code></p>
+</li>
+<li>
+<p><strong>Diary - clear</strong> : <code>clearDiary</code></p>
+</li>
+<li>
 <p><strong>Calendar</strong> : <code>calendar</code></p>
 </li>
 <li>
@@ -891,7 +1137,13 @@ in either ascending or descending order.</p>
 <li>
 <p><strong>AddWeight</strong> <code>addWeight v/VALUE [d/DATE]</code></p>
 </li>
+<li>
+<p><strong>Undo</strong> : <code>undo</code></p>
+</li>
+<li>
+<p><strong>Redo</strong> : <code>redo</code></p>
+</li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-01 09:56:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-01 09:59:13 UTC</div></div></div></body></html>
