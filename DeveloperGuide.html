@@ -26,7 +26,7 @@
 <li><a href="#diary-feature">3.2. Diary Feature</a></li>
 <li><a href="#calendar">3.3. Calendar</a></li>
 <li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Update User Profile</a></li>
+<li><a href="#Implementation-Configuration">3.5. Add Weight Records</a></li>
 <li><a href="#check-calorie-intake-consumption-of-some-common-food-sports">3.6. Check calorie intake/consumption of some common food/sports</a></li>
 </ul>
 </li>
@@ -41,7 +41,7 @@
 <li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">G.2. Deleting a person</a></li>
+<li><a href="#adding-a-new-weight-record">G.2. Adding A New Weight Record</a></li>
 <li><a href="#saving-data">G.3. Saving data</a></li>
 </ul>
 </li>
@@ -543,7 +543,7 @@ The following sequence diagram shows how the update operation works to change ca
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Update User Profile&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Add Weight Records&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -574,16 +574,196 @@ The following sequence diagram shows how the update operation works to change ca
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Update User Profile</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Add Weight Records</a></h3>
 <div class="paragraph">
-<p>The following sequence diagram shows how the update operation works to change user profile in model:
-<span class="image"><img src="images/UpdateSequenceDiagram.png" alt="UpdateSequenceDiagram"></span></p>
+<p>FitHelper allows the user to track with their weight change easily by allowing user to add their current weight and previous weight.</p>
+</div>
+<div class="sect3">
+<h4 id="sample"><a class="link" href="#sample">3.5.1. Sample</a></h4>
+<div class="paragraph">
+<p>An example usage scenario and how the <code>addWeight</code> command behaves at each step is shown below.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 1.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user launches the application for the first time.</p>
+</li>
+<li>
+<p><code>UniqueWeightList</code> in Model contains no default weights before the user adds any.</p>
+</li>
+<li>
+<p><code>weightrecords.json</code> in local Storage contains no weight records as well.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user inputs <code>addWeight</code> command word, followed by <code>v/WEIGHT_VALUE</code> and an optional <code>d/DATE</code>.</p>
+</li>
+<li>
+<p><code>UI</code> passes the input to <code>Logic</code>.</p>
+</li>
+<li>
+<p><code>Logic</code> then uses a few <code>Parser</code> classes to extract layers of information out as seen from steps 3 to 5.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Logic</code> passes the user input to <code>FitHelperParser</code>.</p>
+</li>
+<li>
+<p><code>FitHelperParser</code> identifies that this is a <code>AddWeightCommand</code> through the command word "addWeight".</p>
+</li>
+<li>
+<p>It then creates a <code>AddWeightCommandParser</code> to parse the input into a <code>AddWeightCommand</code> and return back.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Logic</code> gets the <code>AddWeightCommand</code> and execute it.</p>
+</li>
+<li>
+<p>The execution firstly check is the new weight date is after today&#8217;s date and if there is already a existing weight in the UniqueList.</p>
+</li>
+<li>
+<p>Both of these two cases will throw corresponding <code>CommandException</code>.</p>
+</li>
+<li>
+<p>Then the execution add the new <code>Weight</code> into model.</p>
+</li>
+<li>
+<p>Finally, it returns a <code>CommandResult</code> to <code>UI</code>, containing the response to the user and the displayPage, which equals to <code>WEIGHT</code> page.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UI</code> displays the response in the <code>CommandResult</code>.</p>
+</li>
+<li>
+<p>In addition, UI will change to display Weight Page after updating Profile Page and Weight Page.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.5.2. Implementation</a></h4>
+<div class="sect4">
+<h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
+<div class="paragraph">
+<p>A weight is stored with three attributes in the <code>weightrecords.json</code> database:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>date</code> : the date of the weight record in format of <code>yyyy-MM-dd</code>, if no date is provided by the user, the <strong>default value</strong> is the date of today</p>
+</li>
+<li>
+<p><code>weightValue</code> : a double value with two decimal places.</p>
+</li>
+<li>
+<p><code>bmi</code> : the BMI value is also a double value with two decimal places.
+It is auto-computed and stored, using the formula : <code>BMI = Weight Value(kg) / Height(m)^2</code>.
+The Height value gets from user profile in <code>userprofile.json</code> database.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="model"><a class="link" href="#model">Model</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>A single weight is represented as model <code>Weight</code> with the attributes of <code>Date</code>, <code>WeightValue</code>, and <code>Bmi</code>.<br></p>
+</li>
+<li>
+<p>In <code>ModelManager</code>, all weights are represented by <code>WeightRecords weightRecords</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>WeightRecords</code> class implements <code>ReadOnlyWeightRecords</code> interface, and therefore can return an <strong>unmodifiable</strong> version of a <strong>unique</strong> list of weights.</p>
+</li>
+<li>
+<p>The <code>WeightRecords</code> wraps a <code>UniqueWeightList</code> which allows adding and iterating. <strong>Unique</strong> here refers to the constraint that no two weight with the same date can exist in the list/database.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>In <code>ModelManager</code>, a <code>FilteredList&lt;Weight&gt; filteredWeight</code> object is used to store and update a filtered version of all weights.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The
+<a href="https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/FilteredList.html">FilteredList</a>
+wraps a <code>ObservableList</code> and filters using a provided <code>Predicate</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ui"><a class="link" href="#ui">UI</a></h5>
+<div class="paragraph">
+<p>When user input <code>addWeight</code> command to <code>UI</code>, the input is passed to <code>Logic</code> part as a <code>String</code>.</p>
+</div>
+<div class="paragraph">
+<p>After <code>addWeight</code> command is executed, a <code>CommandResult</code> with <code>DisplayPage</code> equals <code>WEIGHT</code> will be passed back to <code>MainWindow</code> in <code>UI</code> part. Then:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Firstly, it will call <code>updateProfilePage()</code>, since if the newly added weight has the lasted date, Current Weight and Current BMI in uer profile will need to be updated.</p>
+</li>
+<li>
+<p>Secondly, it will call <code>updateWeightPage()</code>, since if a new weight is added successfully, new points should be added on to Weight Line Chart and BMI Line Chart.
+The text content of top notification will also be updated if the gap between Current Weight and Target Weight is changed.</p>
+</li>
+<li>
+<p>Lastly, it will call <code>showWeightPage()</code>. This allows the Main Window auto-switch to Weight Page after each <code>addWeight</code> command by user.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="logic"><a class="link" href="#logic">Logic</a></h5>
+<div class="paragraph">
+<p>The Sequence Diagram below shows how the components interact with each other for the mentioned scenario in sample.</p>
+</div>
+<div class="paragraph">
+<div class="title">Sequence Diagram for Add Weight Feature</div>
+<p><span class="image"><img src="images/AddWeightSequenceDiagram.png" alt="AddWeightSequenceDiagram"></span></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">3.6. Check calorie intake/consumption of some common food/sports</a></h3>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.6.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The check function is achieved by calling the <code>FitHelper</code> inside the <code>ModelManager</code> to search
 through either <code>FoodCalorieTable</code> or <code>SportsCalorieTable</code> for <code>CalorieEntry</code> that contain the
@@ -722,11 +902,11 @@ regardless of how many entries are in the HashMap.</p>
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 59%;">
+<table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 22%;">
-<col style="width: 23%;">
-<col style="width: 25%;">
+<col style="width: 10%;">
+<col style="width: 30%;">
+<col style="width: 30%;">
 <col style="width: 30%;">
 </colgroup>
 <thead>
@@ -1168,12 +1348,12 @@ having to search about these information online.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Date in format of <strong>date hh:mm</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">calendar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date in format of <strong>yyyy-MM-dd</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">calendar, addWeight</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">dr/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Duration in format of <strong>yyyy-mm-dd yyyy-mm-dd</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duration in format of <strong>yyyy-MM-dd yyyy-MM-dd</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
 </tr>
 <tr>
@@ -1194,7 +1374,7 @@ having to search about these information online.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">v/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Attribute Value in user profile</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update, addWeight</p></td>
 </tr>
 </tbody>
 </table>
@@ -1246,7 +1426,7 @@ having to search about these information online.</p></td>
 <h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Product Name</strong></p>
+<p><strong>Product Name</strong> : FitHelper</p>
 </div>
 <div class="paragraph">
 <p>Author: &#8230;&#8203;</p>
@@ -1310,61 +1490,126 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the welcome page of FitHelper. On the left hand side, the user can see a list of page name. Users are able to click on the button or using corresponding command to direct to that page.</p>
+</li>
+<li>
+<p>The window size is fixed.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Saving window preferences</p>
+<p>Shutdown</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
+<p>Users are able to shutdown the application using CLI with following commands:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>exit</code></p>
 </li>
 <li>
-<p>Re-launch the app by double-clicking the jar file.<br>
-Expected: The most recent window size and location is retained.</p>
+<p><code>quit</code></p>
 </li>
-</ol>
+<li>
+<p><code>bye</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Users can also choose to shutdown the application by clicking on X button on the right top side if the window.</p>
+</li>
+<li>
+<p>User data will be auto-saved if user choose to shutdown the application. Three local data file in json format can be find:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fithelper.json</code> : containg data related to entries and diaries.</p>
+</li>
+<li>
+<p><code>userprofile.json</code> : containing data related to user profile.</p>
+</li>
+<li>
+<p><code>weightrecords.json</code> : containing data related to all weight records.</p>
+</li>
+</ul>
 </div>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">G.2. Deleting a person</a></h3>
+<h3 id="adding-a-new-weight-record"><a class="link" href="#adding-a-new-weight-record">G.2. Adding A New Weight Record</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>Add <strong>first weight record</strong> while there is no previous weight record in the database.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Prerequisites: None. Users are able to use <code>addWeight</code> command at any page.</p>
 </li>
 <li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+<p>Test case: <code>addWeight v/50.0</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A new <code>Weight</code> is added into <code>weightrecords</code> database, with <code>WeightValue</code> equals 50.0, <code>Date</code> with default value(today&#8217;s date) and <code>BMI</code> calculated by <code>Height</code>.</p>
 </li>
 <li>
-<p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+<p>The window is automatically directed to weight page. A new point is shown on both Weight Line Graph and BMI Line Graph. The top notification is also updated.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
-Expected: Similar to previous.</p>
+<p>In profile page, Current Weight and Current BMI change from "Not Available Now" to the newest value.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test case: <code>addWeight v/49.0 d/2050-01-01</code><br>
+Expected: No new weight record is added since the date is after current date. An error message is shown in the command result box.</p>
 </li>
 </ol>
 </div>
 </li>
+<li>
+<p>Add new weight record when there is already <strong>some previous weight records existing</strong> in the database.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: None. Users are able to use <code>addWeight</code> command at any page.</p>
+</li>
+<li>
+<p>Test case: <code>addWeight v/48.0</code><br>
+Expected: No new weight record is added since there is existing weight record with the same date (by default is today&#8217;s date) in the data base. An error message is shown in the command result box.</p>
+</li>
+<li>
+<p>Test case : <code>addWeight v/47.0 d/2020-03-01</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A new <code>Weight</code> is added into <code>weightrecords</code> database, with <code>WeightValue</code> equals 47.0, <code>Date</code> with 2020-03-01 and <code>BMI</code> calculated by <code>Height</code>.</p>
+</li>
+<li>
+<p>The window is automatically directed to weight page. A new point is shown on both Weight Line Graph and BMI Line Graph, and form a new trend line with previous data points. The top notification is also updated.</p>
+</li>
+<li>
+<p>In profile page, Current Weight and Current BMI remain the same, since the newly added weight record is not the most recent record in the database.</p>
+</li>
+</ul>
+</div>
+</li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
@@ -1376,16 +1621,22 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>If the application is launched and shut down at least once, there will be three local database in json format.</p>
+</li>
+<li>
+<p>Delete <code>fithelper.json</code>, and launch FitHelper again. All user manipulation on entries and diaries will be cleared. <code>Dashboard</code>, <code>Today</code>, <code>Calendar</code> and <code>Diary</code> Page will restart with sample data.</p>
+</li>
+<li>
+<p>Delete <code>userprofile.json</code>, and launch FitHelper again. All user manipulation on user profile will be clear. <code>Profile</code> page will restart with sample user data.</p>
+</li>
+<li>
+<p>Delete <code>weightrecords.json</code>, and launch FitHelper again. All user manipulation on weight records will be clear. <code>Profile</code> page will show Current Weight and Current BMI as "Not Available Now", and <code>Weight</code> Page will have no data point on the trend line graph.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-01 13:45:03 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-01 14:59:11 UTC</div></div></div></body></html>
