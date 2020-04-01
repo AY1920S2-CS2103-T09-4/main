@@ -30,10 +30,10 @@
 <li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
 <li><a href="#check-calorie-intake-consumption-reference-values">4.15. Check calorie intake/consumption reference values</a></li>
 <li><a href="#show-calorie-table">4.16. Show calorie table</a></li>
-<li><a href="#record-profile">4.17. Record Profile</a></li>
-<li><a href="#update-profile-data">4.18. Update Profile Data</a></li>
-<li><a href="#weight-graph-page">4.19. Weight Graph Page</a></li>
-<li><a href="#profile-page">4.20. Profile Page</a></li>
+<li><a href="#profile-page-code-profile-code">4.17. Profile Page: <code>profile</code></a></li>
+<li><a href="#update-profile-data-code-update-code">4.18. Update Profile Data : <code>update</code></a></li>
+<li><a href="#weight-page-code-weight-code">4.19. Weight Page: <code>weight</code></a></li>
+<li><a href="#add-weight-records-code-addweight-code">4.20. Add Weight Records : <code>addWeight</code></a></li>
 <li><a href="#calendar-view">4.21. Calendar View</a></li>
 <li><a href="#today-page">4.22. Today Page</a></li>
 <li><a href="#weekly-report">4.23. Weekly Report</a></li>
@@ -65,7 +65,7 @@
 <p>Ensure you have Java <code>11</code> or above installed in your Computer.</p>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/AY1920S2-CS2103-T09-4/main/releases">here</a>.</p>
+<p>Download the latest <code>FitHelper.jar</code> <a href="https://github.com/AY1920S2-CS2103-T09-4/main/releases">here</a>.</p>
 </li>
 <li>
 <p>Copy the file to the folder you want to use as the home folder for your Fitness Helper.</p>
@@ -90,7 +90,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all logs</p>
 </li>
 <li>
-<p><strong><code>adds</code></strong><code>n/running t/Wednesday 6 pm l/utown gym c/500kcal es/False</code> : adds an entry named <code>swimming</code> to the fitness log book.</p>
+<p><strong><code>adds</code></strong><code>n/running t/Wednesday 6 pm l/utown gym c/500kcal es/False</code> : adds an entry named <code>swimming</code> to the dashboard page.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd entry shown in the current list</p>
@@ -114,10 +114,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong>n/</strong> entry name</p>
+<p><strong>x/</strong> entry type</p>
 </li>
 <li>
-<p><strong>x/</strong> entry type</p>
+<p><strong>n/</strong> entry name</p>
 </li>
 <li>
 <p><strong>t/</strong> entry time</p>
@@ -129,25 +129,37 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong>c/</strong> entry calorie</p>
 </li>
 <li>
-<p><strong>r/</strong> remark</p>
+<p><strong>s/</strong> entry status</p>
 </li>
 <li>
-<p><strong>i/</strong> index</p>
+<p><strong>r/</strong> entry remark</p>
 </li>
 <li>
-<p><strong>dr/</strong> duration a double number representing time in hours</p>
+<p><strong>i/</strong> entry index</p>
 </li>
 <li>
 <p><strong>k/</strong> keyword (in <code>find</code>)</p>
 </li>
 <li>
-<p><strong>[DATE]</strong> txt containing relevant date information</p>
+<p><strong>d/</strong> date in format yyyy-MM-dd</p>
 </li>
 <li>
-<p><strong>[TIME]</strong> a time in the fixed format of txt hh:mm</p>
+<p><strong>m/</strong> mode</p>
 </li>
 <li>
-<p><strong>[INDEX]</strong> a positive integer indicating the position of an entry in the list</p>
+<p><strong>dc/</strong> diary content</p>
+</li>
+<li>
+<p><strong>dr/</strong> duration</p>
+</li>
+<li>
+<p><strong>attr/</strong> profile attribute name</p>
+</li>
+<li>
+<p><strong>v/</strong> profile attribute value</p>
+</li>
+<li>
+<p><strong>-f</strong> force change</p>
 </li>
 </ul>
 </div>
@@ -176,10 +188,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Parameters can be in any order e.g. if the command specifies <code>n/NAME t/Wednesday 6 pm</code>, <code>t/Wednesday 6 pm n/NAME</code> is also acceptable.</p>
 </li>
 <li>
-<p><code>X</code> in this document refers to f/s, representing two types of entries: food and sports. e.g. <code>addX</code> represents either <code>addf</code> or <code>adds</code>; <code>add[X]</code> means the field <code>X</code> is optional.</p>
+<p><code>x/</code> in this document refers to type of entries: food/sport, it can also be write in short form: f/s.</p>
 </li>
 <li>
-<p>The field <code>TIME</code> should be entered in the fixed format of <code>yyyy-mm-dd[ hh:mm]</code> where the <code>hours</code> and <code>minutes</code> can be omitted.</p>
+<p>The field <code>TIME</code> can entered with natural language, e.g. <code>t/tomorrow 3pm</code></p>
 </li>
 <li>
 <p>The field <code>DATE</code> should be entered in the fixed format of <code>yyyy-mm-dd</code> in order to trace the corresponding daily file.</p>
@@ -449,22 +461,46 @@ The user&#8217;s current 'fitness level` and total rewarding points will be disp
 <div class="sect2">
 <h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the fitness log book.<br>
-Format: <code>clear</code></p>
+<p>Clears all entries from the fitness log book.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
-<p>Exits the program.<br>
-Format: <code>exit</code></p>
+<p>Exits the program.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.13. Saving the data</a></h3>
 <div class="paragraph">
 <p>fitness log book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.</p>
+There is no need to save manually.<br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Three local database in Json format will exist after running FitHelper:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>fithelper.json</strong> : data related to entries and diaries.</p>
+</li>
+<li>
+<p><strong>userprofile.json</strong> : data related to user profile.</p>
+</li>
+<li>
+<p><strong>weightrecords.json</strong> : data related to weight records.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -503,7 +539,7 @@ The recorded are searched within the application&#8217;s pre-installed data.</p>
 or calorie consumption from exercise in a particular day specified by the user.</p>
 </div>
 <div class="paragraph">
-<p>format: <code>tableX DATE</code></p>
+<p>Format: <code>tableX DATE</code></p>
 </div>
 <div class="paragraph">
 <p>example:</p>
@@ -517,74 +553,43 @@ or calorie consumption from exercise in a particular day specified by the user.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="record-profile"><a class="link" href="#record-profile">4.17. Record Profile</a></h3>
+<h3 id="profile-page-code-profile-code"><a class="link" href="#profile-page-code-profile-code">4.17. Profile Page: <code>profile</code></a></h3>
 <div class="paragraph">
-<p>Adds new user basic personal data to profile.<br>
-Format: <code>recordprofile addr/ADDRESS n/NAME g/GENDER h/HEIGHT cw/CURRENTWEIGHT tw/TARGETWEIGHT</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>New user should record basic profile first data before using other commands.</p>
-</li>
-<li>
-<p>One user can ony <strong>initiate profile data once</strong>.</p>
-</li>
-<li>
-<p>The value of each attribute need to in correct data type:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>addr/n: string of address/name</p>
-</li>
-<li>
-<p>g: <strong>male/female</strong></p>
-</li>
-<li>
-<p>h: number in <strong>meter</strong></p>
-</li>
-<li>
-<p>cw/tw: number in <strong>kilogram</strong>.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
+<p>Profile page serves to be a summary for basic user data.<br>
+The profile information includes: Name, Age, Gender, Address, Height, Target Weight, Current Weight and Current BMI.<br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>recordprofile addr/utown n/Alice g/female h/1.68 cw/50 tw/45</code></p>
-</li>
-<li>
-<p><code>recordprofile addr/rvrc n/Bob g/male h/1.8 cw/70 tw/65.5</code></p>
-</li>
-</ul>
+<p>Format: <code>profile</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="update-profile-data"><a class="link" href="#update-profile-data">4.18. Update Profile Data</a></h3>
+<h3 id="update-profile-data-code-update-code"><a class="link" href="#update-profile-data-code-update-code">4.18. Update Profile Data : <code>update</code></a></h3>
 <div class="paragraph">
-<p>Update user data in the profile by attributes.<br>
-Format: <code>update attr/ATTRIBUTE v/VALUE</code></p>
+<p>Update user data in the profile by attributes. Profile attributes include: Name, Age, Address, Gender, Height and Target Weight.<br>
+Every <code>update</code> command will lead to the profile page.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>update [-f] attr/ATTRIBUTE v/VALUE</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The updated attribute must have original value.</p>
+<p>If no user profile data is provided by the user, FitHelper will initialize with the sample profile data.</p>
+</li>
+<li>
+<p>The updated attribute name is <strong>not</strong> case-sensitive and can include spaces, but the name must match some fields in user profile.</p>
+</li>
+<li>
+<p>e.g. Both <code>attr/target weight</code> and <code>attr/TARGETWEIGHT</code> are acceptable.</p>
 </li>
 <li>
 <p>Any updated value should follow its original data type.</p>
 </li>
+<li>
+<p>If the chosen updated attribute has already had original value, <strong>flag <code>-f</code></strong> need to be used to enable <strong>force overwrite</strong>.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -595,42 +600,78 @@ Format: <code>update attr/ATTRIBUTE v/VALUE</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>update attr/h v/1.7</code></p>
+<p><code>update attr/height v/160</code></p>
 </li>
 <li>
-<p><code>update attr/name v/Alice Wang</code></p>
+<p><code>update -f attr/name v/Alice Wang</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="weight-graph-page"><a class="link" href="#weight-graph-page">4.19. Weight Graph Page</a></h3>
+<h3 id="weight-page-code-weight-code"><a class="link" href="#weight-page-code-weight-code">4.19. Weight Page: <code>weight</code></a></h3>
 <div class="paragraph">
-<p>Weight graph page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
-It shows user data in graph for easy understanding. By default, it will generate graph from all history data. User can also set a duration to generate graph for that specific time range.<br>
-Format: <code>weightgraph (dr/yyyy-mm-dd yyyy-mm-dd)</code></p>
+<p>Weight page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
+It shows user data in graph for easy understanding. By default, it will generate graph from all history data chronologically.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Current Data Table</strong><br>
-The table of user&#8217;s latest data of weight and computed BMI. BMI value is computed based on latest weight and height.<br>
-Weight value can be: below/ above/ equals to target wieght value.<br>
-BMI value can be: too low/ moderate / too high.</p>
+<p><strong>Gap notification</strong><br>
+The top notification shows the comparison between user current weight and target weight.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>If current weight is <strong>larger</strong> than target, the gap between the two will be highlighted.</p>
+</li>
+<li>
+<p>If current weight is <strong>the same or less</strong> than the target, a succeed notification will be generated.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Trend Graph - Weight</strong><br>
-Display a trend graph of user&#8217;s weight. Target weight line and the gap between target and current weight will be highlighted in the graph.</p>
+Display a trend graph of user&#8217;s weight according to time.</p>
 </li>
 <li>
 <p><strong>Trend Graph - BMI</strong><br>
-Display a trend graph of user&#8217;s BMI. Lowest and highest healthy BMI lines will be highlighted in the graph to specify a healthy range.</p>
-</li>
-<li>
-<p><strong>Progress Graph</strong><br>
-Display a progress graph using coloring to indicate the gap between current Weight and Target weight. A percentage number will be shown explicitly in the graph.</p>
+Display a trend graph of user&#8217;s BMI according to time. The BMI value is calculated by weight and height value at that date.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>weight</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-weight-records-code-addweight-code"><a class="link" href="#add-weight-records-code-addweight-code">4.20. Add Weight Records : <code>addWeight</code></a></h3>
+<div class="paragraph">
+<p>Add a new weight record into the weight records database. A weight record is related to date and weight value, and a auto-computed BMI value will be stored as well.<br>
+Every <code>addWeight</code> command will lead to the weight page. If the new weight record is added successfully, explicit changes of new points in the two trend graph can be found.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addWeight v/WEIGHT_VALUE [d/DATE]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If no weight record exists in the database, "Not Available Now" will be shown in profile page&#8217;s Current Weight and Current BMI fields.</p>
+</li>
+<li>
+<p>The date of the new weighe record can be <strong>omitted</strong>. By default, it will refer to the date of today.</p>
+</li>
+<li>
+<p>The date should be in format of <code>yyyy-MM-dd</code>.</p>
+</li>
+<li>
+<p><strong>No two weight records should have the same date.</strong> If adding a weight record with the same date as an existing weight, a warning will be generated, and thus fail to add.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -638,20 +679,12 @@ Display a progress graph using coloring to indicate the gap between current Weig
 <div class="ulist">
 <ul>
 <li>
-<p><code>weightgraph</code></p>
+<p><code>addWeight v/50.0 d/2020-02-01</code></p>
 </li>
 <li>
-<p><code>weightgraph dr/2020-01-01 2020-02-14</code></p>
+<p><code>addWeight v/52.30</code></p>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="profile-page"><a class="link" href="#profile-page">4.20. Profile Page</a></h3>
-<div class="paragraph">
-<p>Profile page serves to be a summary for basic user data.<br>
-It shows information includes: address, name, gender, height, current weight, target weight and current BMI.<br>
-Format: <code>profile</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -846,7 +879,19 @@ in either ascending or descending order.</p>
 <li>
 <p><strong>Calendar</strong> : <code>calendar</code></p>
 </li>
+<li>
+<p><strong>Profile</strong>: <code>profile</code></p>
+</li>
+<li>
+<p><strong>Update</strong>: <code>update [-f] attr/ATTRIBUTE V/VALUE</code></p>
+</li>
+<li>
+<p><strong>Weight</strong>: <code>weight</code></p>
+</li>
+<li>
+<p><strong>AddWeight</strong> <code>addWeight v/VALUE [d/DATE]</code></p>
+</li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-31 14:15:04 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-01 03:43:47 UTC</div></div></div></body></html>
