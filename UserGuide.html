@@ -21,24 +21,24 @@
 <li><a href="#editing-an-entry-code-edit-code">4.5. Editing an entry : <code>edit</code></a></li>
 <li><a href="#locating-entries-by-name-code-find-code">4.6. Locating entries by name: <code>find</code></a></li>
 <li><a href="#deleting-an-entry-code-delete-code">4.7. Deleting an entry : <code>delete</code></a></li>
-<li><a href="#sort-the-entries">4.8. Sort the entries</a></li>
-<li><a href="#keep-a-diary">4.9. Keep a diary</a></li>
-<li><a href="#clearing-all-data-in-fithelper-code-clear-code">4.10. Clearing all data in FitHelper : <code>clear</code></a></li>
-<li><a href="#undo-code-undo-code">4.11. Undo : <code>undo</code></a></li>
-<li><a href="#redo-code-redo-code">4.12. Redo : <code>redo</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.13. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.14. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.15. Encrypting data files <code>[coming in v2.0]</code></a></li>
-<li><a href="#check-calorie-intake-consumption-reference-values">4.16. Check calorie intake/consumption reference values</a></li>
-<li><a href="#show-calorie-table">4.17. Show calorie table</a></li>
-<li><a href="#profile-page-code-profile-code">4.18. Profile Page: <code>profile</code></a></li>
-<li><a href="#update-profile-data-code-update-code">4.19. Update Profile Data : <code>update</code></a></li>
-<li><a href="#weight-page-code-weight-code">4.20. Weight Page: <code>weight</code></a></li>
-<li><a href="#add-weight-records-code-addweight-code">4.21. Add Weight Records : <code>addWeight</code></a></li>
-<li><a href="#calendar-view">4.22. Calendar View</a></li>
-<li><a href="#today-page">4.23. Today Page</a></li>
-<li><a href="#proposed-weekly-report">4.24. [proposed] Weekly Report</a></li>
-<li><a href="#sort-food-consumption-or-exercise-record">4.25. Sort food consumption or exercise record</a></li>
+<li><a href="#keep-a-diary">4.8. Keep a diary</a></li>
+<li><a href="#clearing-all-data-in-fithelper-code-clear-code">4.9. Clearing all data in FitHelper : <code>clear</code></a></li>
+<li><a href="#undo-code-undo-code">4.10. Undo : <code>undo</code></a></li>
+<li><a href="#redo-code-redo-code">4.11. Redo : <code>redo</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.13. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#check-calorie-intake-consumption-reference-values">4.15. Check calorie intake/consumption reference values</a></li>
+<li><a href="#show-calorie-table">4.16. Show calorie table</a></li>
+<li><a href="#profile-page-code-profile-code">4.17. Profile Page: <code>profile</code></a></li>
+<li><a href="#update-profile-data-code-update-code">4.18. Update Profile Data : <code>update</code></a></li>
+<li><a href="#weight-page-code-weight-code">4.19. Weight Page: <code>weight</code></a></li>
+<li><a href="#add-weight-records-code-addweight-code">4.20. Add Weight Records : <code>addWeight</code></a></li>
+<li><a href="#calendar-view">4.21. Calendar View</a></li>
+<li><a href="#today-page">4.22. Today Page</a></li>
+<li><a href="#proposed-weekly-report">4.23. [proposed] Weekly Report</a></li>
+<li><a href="#sort-food-sports-entry-list">4.24. Sort food/sports entry list</a></li>
+<li><a href="#check-calorie-intake-consumption-of-common-food-sports">4.25. Check calorie intake/consumption of common food/sports</a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -139,9 +139,6 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong>i/</strong> entry index</p>
 </li>
 <li>
-<p><strong>k/</strong> keyword (in <code>find</code>)</p>
-</li>
-<li>
 <p><strong>d/</strong> date in format yyyy-MM-dd</p>
 </li>
 <li>
@@ -161,6 +158,15 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p><strong>-f</strong> force change</p>
+</li>
+<li>
+<p><strong>by/</strong> sorting criterion</p>
+</li>
+<li>
+<p><strong>o/</strong> sorting order</p>
+</li>
+<li>
+<p><strong>k/</strong> keywords for searching/checking</p>
 </li>
 </ul>
 </div>
@@ -204,9 +210,13 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect2">
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
-<p>Asks the application to display a condensed list of available
-functions with correct format of input. A link to the full
-User Guide is also provided after the list.</p>
+<p>Asks the application to go to Help page, which displays a condensed list of available
+functions with correct format of input. A link to the User Guide
+is also provided after the list. The user can also go to the Help page by
+clicking the <strong>Help</strong> button on the left hand side of the application.
+Note that once the user types <code>help</code> or click the <strong>Help</strong> button,
+the url of the User Guide is copied to the clipboard, so the user
+can directly access the Guide by pasting the url into the browser.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
@@ -215,8 +225,14 @@ User Guide is also provided after the list.</p>
 <div class="sect2">
 <h3 id="adding-an-entry-code-add-code"><a class="link" href="#adding-an-entry-code-add-code">4.2. Adding an entry: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds an entry to the fitness log book<br>
-Format: <code>addX n/NAME t/DATETIME l/LOCATION c/CALORIE es/False dr/DURATION r/REMARK&#8230;&#8203;</code></p>
+<p>Adds an entry to the fitness log book. The entry added will be displayed in DashBoard, Calendar
+and possibly Today Page (if its date is today) immediately after the command is executed.
+Note that due to space constraint, entry card in DashBoard and Today page will only display
+first 14 characters of its name and first 21 characters of its location. The entry icon in
+Calendar Page are even more constrained.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addX n/NAME t/DATETIME l/LOCATION c/CALORIE es/False dr/DURATION r/REMARK&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -350,7 +366,7 @@ Format: <code>edit DATE [i/INDEX] es/False</code></p>
 <h3 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">4.6. Locating entries by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds entries whose names contain any of the given keywords.<br>
-Format: <code>find (optional) [x/TYPE] [k/ONE OR MOREKEYWORDS]</code></p>
+Format: <code>find [x/TYPE] k/ONE_OR_MOR_ KEYWORDS</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -427,11 +443,7 @@ Deletes the 2nd sports entry in the <code>2020-03-02</code> daily file in the fi
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-the-entries"><a class="link" href="#sort-the-entries">4.8. Sort the entries</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="keep-a-diary"><a class="link" href="#keep-a-diary">4.9. Keep a diary</a></h3>
+<h3 id="keep-a-diary"><a class="link" href="#keep-a-diary">4.8. Keep a diary</a></h3>
 <div class="paragraph">
 <p>The user can keep a diary in FitHelper, and command for adding/editing/deleting/searching/clearing diary logs.</p>
 </div>
@@ -443,7 +455,7 @@ Deletes the 2nd sports entry in the <code>2020-03-02</code> daily file in the fi
 </ul>
 </div>
 <div class="sect3">
-<h4 id="add-a-new-diary"><a class="link" href="#add-a-new-diary">4.9.1. Add a new diary</a></h4>
+<h4 id="add-a-new-diary"><a class="link" href="#add-a-new-diary">4.8.1. Add a new diary</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -468,7 +480,7 @@ Adds a diary log on the date <code>2020-03-31</code> with the content <code>Happ
 </div>
 </div>
 <div class="sect3">
-<h4 id="append-new-content-to-an-existing-diary"><a class="link" href="#append-new-content-to-an-existing-diary">4.9.2. Append new content to an existing diary</a></h4>
+<h4 id="append-new-content-to-an-existing-diary"><a class="link" href="#append-new-content-to-an-existing-diary">4.8.2. Append new content to an existing diary</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -495,7 +507,7 @@ The new diary content after this command will be "Happy birthday Alice! You are 
 </div>
 </div>
 <div class="sect3">
-<h4 id="edit-a-diary"><a class="link" href="#edit-a-diary">4.9.3. Edit a diary</a></h4>
+<h4 id="edit-a-diary"><a class="link" href="#edit-a-diary">4.8.3. Edit a diary</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -523,7 +535,7 @@ This command edits the content of the diary log on the date <code>2020-03-31</co
 </div>
 </div>
 <div class="sect3">
-<h4 id="delete-a-diary"><a class="link" href="#delete-a-diary">4.9.4. Delete a diary</a></h4>
+<h4 id="delete-a-diary"><a class="link" href="#delete-a-diary">4.8.4. Delete a diary</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -550,7 +562,7 @@ if no diary was added previously on this date.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="find-a-diary"><a class="link" href="#find-a-diary">4.9.5. Find a diary</a></h4>
+<h4 id="find-a-diary"><a class="link" href="#find-a-diary">4.8.5. Find a diary</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -613,7 +625,7 @@ Returns the diary on the date of <code>2020-03-31</code> regardless of the <code
 </div>
 </div>
 <div class="sect3">
-<h4 id="clear-the-diary"><a class="link" href="#clear-the-diary">4.9.6. Clear the diary</a></h4>
+<h4 id="clear-the-diary"><a class="link" href="#clear-the-diary">4.8.6. Clear the diary</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -628,7 +640,7 @@ clears all diary logs in this FitHelper.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-data-in-fithelper-code-clear-code"><a class="link" href="#clearing-all-data-in-fithelper-code-clear-code">4.10. Clearing all data in FitHelper : <code>clear</code></a></h3>
+<h3 id="clearing-all-data-in-fithelper-code-clear-code"><a class="link" href="#clearing-all-data-in-fithelper-code-clear-code">4.9. Clearing all data in FitHelper : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the fitness log book.<br></p>
 </div>
@@ -637,7 +649,7 @@ clears all diary logs in this FitHelper.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-code-undo-code"><a class="link" href="#undo-code-undo-code">4.11. Undo : <code>undo</code></a></h3>
+<h3 id="undo-code-undo-code"><a class="link" href="#undo-code-undo-code">4.10. Undo : <code>undo</code></a></h3>
 <div class="paragraph">
 <p><code>undo</code> revokes the last undoable command.<br>
 This command back-roll FitHelper to the previous status before the last undoable command was executed.</p>
@@ -655,7 +667,7 @@ This <code>undo</code> commands remove the added diary log from FitHelper.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redo-code-redo-code"><a class="link" href="#redo-code-redo-code">4.12. Redo : <code>redo</code></a></h3>
+<h3 id="redo-code-redo-code"><a class="link" href="#redo-code-redo-code">4.11. Redo : <code>redo</code></a></h3>
 <div class="paragraph">
 <p><code>redo</code> is the reverse of <code>undo</code>.<br>
 This command re-execute the last undoable command that has been undone.</p>
@@ -685,7 +697,7 @@ This <code>undo</code> commands adds the diary log back to FitHelper.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.13. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br></p>
 </div>
@@ -694,7 +706,7 @@ This <code>undo</code> commands adds the diary log back to FitHelper.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.14. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.13. Saving the data</a></h3>
 <div class="paragraph">
 <p>fitness log book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.<br></p>
@@ -721,11 +733,11 @@ There is no need to save manually.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.15. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.14. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="check-calorie-intake-consumption-reference-values"><a class="link" href="#check-calorie-intake-consumption-reference-values">4.16. Check calorie intake/consumption reference values</a></h3>
+<h3 id="check-calorie-intake-consumption-reference-values"><a class="link" href="#check-calorie-intake-consumption-reference-values">4.15. Check calorie intake/consumption reference values</a></h3>
 <div class="paragraph">
 <p>Asks the application to show records of calorie intake of some common food (unit: kcal per serving)
 or calorie consumption of some common sports (unit: kcal per hour),
@@ -750,7 +762,7 @@ The recorded are searched within the application&#8217;s pre-installed data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="show-calorie-table"><a class="link" href="#show-calorie-table">4.17. Show calorie table</a></h3>
+<h3 id="show-calorie-table"><a class="link" href="#show-calorie-table">4.16. Show calorie table</a></h3>
 <div class="paragraph">
 <p>Asks the application to display a table that shows calorie intake from food consumption
 or calorie consumption from exercise in a particular day specified by the user.</p>
@@ -770,7 +782,7 @@ or calorie consumption from exercise in a particular day specified by the user.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="profile-page-code-profile-code"><a class="link" href="#profile-page-code-profile-code">4.18. Profile Page: <code>profile</code></a></h3>
+<h3 id="profile-page-code-profile-code"><a class="link" href="#profile-page-code-profile-code">4.17. Profile Page: <code>profile</code></a></h3>
 <div class="paragraph">
 <p>Profile page serves to be a summary for basic user data.<br>
 The profile information includes: Name, Age, Gender, Address, Height, Target Weight, Current Weight and Current BMI.<br></p>
@@ -780,7 +792,7 @@ The profile information includes: Name, Age, Gender, Address, Height, Target Wei
 </div>
 </div>
 <div class="sect2">
-<h3 id="update-profile-data-code-update-code"><a class="link" href="#update-profile-data-code-update-code">4.19. Update Profile Data : <code>update</code></a></h3>
+<h3 id="update-profile-data-code-update-code"><a class="link" href="#update-profile-data-code-update-code">4.18. Update Profile Data : <code>update</code></a></h3>
 <div class="paragraph">
 <p>Update user data in the profile by attributes. Profile attributes include: Name, Age, Address, Gender, Height and Target Weight.<br>
 Every <code>update</code> command will lead to the profile page.<br></p>
@@ -826,7 +838,7 @@ Every <code>update</code> command will lead to the profile page.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="weight-page-code-weight-code"><a class="link" href="#weight-page-code-weight-code">4.20. Weight Page: <code>weight</code></a></h3>
+<h3 id="weight-page-code-weight-code"><a class="link" href="#weight-page-code-weight-code">4.19. Weight Page: <code>weight</code></a></h3>
 <div class="paragraph">
 <p>Weight page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
 It shows user data in graph for easy understanding. By default, it will generate graph from all history data chronologically.</p>
@@ -862,7 +874,7 @@ Display a trend graph of user&#8217;s BMI according to time. The BMI value is ca
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-weight-records-code-addweight-code"><a class="link" href="#add-weight-records-code-addweight-code">4.21. Add Weight Records : <code>addWeight</code></a></h3>
+<h3 id="add-weight-records-code-addweight-code"><a class="link" href="#add-weight-records-code-addweight-code">4.20. Add Weight Records : <code>addWeight</code></a></h3>
 <div class="paragraph">
 <p>Add a new weight record into the weight records database. A weight record is related to date and weight value, and a auto-computed BMI value will be stored as well.<br>
 Every <code>addWeight</code> command will lead to the weight page. If the new weight record is added successfully, explicit changes of new points in the two trend graph can be found.<br></p>
@@ -905,7 +917,7 @@ Every <code>addWeight</code> command will lead to the weight page. If the new we
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-view"><a class="link" href="#calendar-view">4.22. Calendar View</a></h3>
+<h3 id="calendar-view"><a class="link" href="#calendar-view">4.21. Calendar View</a></h3>
 <div class="paragraph">
 <p>Calendar view will display all the exercises and meals for each day of the current month. For past dates, signs of different colors will be highlighted to show whether the calories intake exceeds or is below the target.<br>
 For female users, the monthly period will be highlighted<br>
@@ -914,7 +926,7 @@ Format for entering calendar view: <code>calendar</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="today-page"><a class="link" href="#today-page">4.23. Today Page</a></h3>
+<h3 id="today-page"><a class="link" href="#today-page">4.22. Today Page</a></h3>
 <div class="paragraph">
 <p>Today page serves to be a summary for the daily arrangements.<br>
 It shows the daily schedule for the user. Users can see the entries for the day, a recommended lunch place, and their performances. They can also see their diary for the day as well as the rewarding point.<br>
@@ -948,7 +960,7 @@ in the <code>FitHelper Feedback</code> area.</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="proposed-some-day-page"><a class="link" href="#proposed-some-day-page">4.23.1. [proposed] Some Day Page</a></h4>
+<h4 id="proposed-some-day-page"><a class="link" href="#proposed-some-day-page">4.22.1. [proposed] Some Day Page</a></h4>
 <div class="paragraph">
 <p>The <code>Today Page</code> for some day in the history can be displayed.
 Format: <code>today DATE</code></p>
@@ -981,7 +993,7 @@ The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring 
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-weekly-report"><a class="link" href="#proposed-weekly-report">4.24. [proposed] Weekly Report</a></h3>
+<h3 id="proposed-weekly-report"><a class="link" href="#proposed-weekly-report">4.23. [proposed] Weekly Report</a></h3>
 <div class="paragraph">
 <p>A weekly report serves as a summary for the past week. The user can see his performance in the past week. The weekly report also contains his rewarding points, diary logs, and preferred sports and food from the previous week.<br>
 Format: <code>weekreport</code></p>
@@ -1003,7 +1015,7 @@ Users can see his preferred food and sports, based on his entries for the past w
 </ul>
 </div>
 <div class="sect3">
-<h4 id="some-week-report"><a class="link" href="#some-week-report">4.24.1. Some Week Report</a></h4>
+<h4 id="some-week-report"><a class="link" href="#some-week-report">4.23.1. Some Week Report</a></h4>
 <div class="paragraph">
 <p>The <code>Week Report</code> for some week in the history can be displayed.<br>
 Format: <code>weekreport DATE</code> where <code>DATE</code> specifies the week it is in</p>
@@ -1036,13 +1048,18 @@ The <code>DATE</code> should be equal or prior to days in the current week. Requ
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-food-consumption-or-exercise-record"><a class="link" href="#sort-food-consumption-or-exercise-record">4.25. Sort food consumption or exercise record</a></h3>
+<h3 id="sort-food-sports-entry-list"><a class="link" href="#sort-food-sports-entry-list">4.24. Sort food/sports entry list</a></h3>
 <div class="paragraph">
-<p>Sorts the records of food consumption or exercise workout based on time of record or calorie,
-in either ascending or descending order.</p>
+<p>Sorts food or sports entry list, or both of them, based on starting time or
+calorie value of the entry, in either ascending or descending order.
+The user must specify the sorting criterion <code>cal/c OR time/t</code>.
+If the user does not specify type of entry list, both lists will be sorted.
+And if the user does not specify the sorting order <code>a OR d</code>,
+the default order is descending (i.e. entry that starts later
+or entry with higher calorie value comes first).</p>
 </div>
 <div class="paragraph">
-<p>format: <code>sortX -c/-t -a/-d</code></p>
+<p>format: <code>sort [x/TYPE] by/SORT_BY [o/ORDER]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1050,10 +1067,63 @@ in either ascending or descending order.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>sortf -t -a</code> (sort records of food consumption in ascending order of recording time, i.e. the oldest record comes first)</p>
+<p><code>sort x/f by/time o/a</code> (sort food entry list in ascending order of recording time, i.e. the older entry comes first)</p>
 </li>
 <li>
-<p><code>sorts -c -d</code> (sort records of exercise workout in descending order of calorie burned during the workout)</p>
+<p><code>sort by/c</code> (sort both food and sports entry list in descending order of calorie value
+i.e. entry with higher calorie intake/consumption comes first)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="check-calorie-intake-consumption-of-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-common-food-sports">4.25. Check calorie intake/consumption of common food/sports</a></h3>
+<div class="paragraph">
+<p>Searches through the pre-set database for calorie intake/consumption information
+about food/sports whose name match/contain keywords specified by the user.
+Note that due to space constraint, at most 3 matching results will be shown
+at the left-bottom corner of the application. Each result contains the name of
+the food/sports and its calorie intake/consumption information: for food, it will be
+in cal per serving (weight per serving in g will also be listed); for spots, it will
+be in cal per hour. The searching works as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Retrieve calorie data of food/sports based on check type specified by the user.</p>
+</li>
+<li>
+<p>First, check if there are food/sports whose name <strong>equals</strong> one of the keywords.
+If so, add them to the result list. Stop checking when 3 matching results are found or
+when all food/sports are checked.</p>
+</li>
+<li>
+<p>Secondly, if fewer than 3 food/sports are added so far, check if there are food/sports
+whose name <strong>contains</strong> the keywords as a whole. If so, add them to the result list.
+Stop checking when 3 matching results are found so far or when all food/sports are checked.</p>
+</li>
+<li>
+<p>Lastly, if still fewer than 3 food/sports are added so far, check if there are food/sports
+whose name <strong>contains</strong> the keywords as a whole. If so, add them to the result list.
+Stop checking when 3 matching results are found so far or when all food/sports are checked.</p>
+</li>
+<li>
+<p>If no matching result is found after all the steps, feedback user search failure.
+Otherwise, show feedback user matching results.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>format: <code>check x/TYPE k/ONE_OR_MOR_ KEYWORDS</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>check x/food k/apple</code> (searches for calorie intake of food
+whose name match/contain keyword "apple")</p>
 </li>
 </ul>
 </div>
@@ -1146,4 +1216,4 @@ in either ascending or descending order.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-02 11:02:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-02 12:21:57 UTC</div></div></div></body></html>
