@@ -91,10 +91,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all logs</p>
 </li>
 <li>
-<p><strong><code>adds</code></strong><code>n/running t/Wednesday 6 pm l/utown gym c/500kcal es/False</code> : adds an entry named <code>swimming</code> to the dashboard page.</p>
+<p><strong><code>add</code></strong><code>x/s n/running t/Wednesday 18:00 l/utown gym c/500</code> : adds an entry named <code>swimming</code> to the dashboard page.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd entry shown in the current list</p>
+<p><strong><code>delete</code></strong><code>i/3 x/f</code> : deletes the 3rd entry from food entry list shown in the dashboard</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -192,16 +192,19 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[r/remark]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>r/really fun</code>, <code>r/really fun r/helps me lose weight</code> etc.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME t/Wednesday 6 pm</code>, <code>t/Wednesday 6 pm n/NAME</code> is also acceptable.</p>
+<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME t/Wednesday 18:00</code>, <code>t/Wednesday 18:00 n/NAME</code> is also acceptable.</p>
 </li>
 <li>
 <p><code>x/</code> in this document refers to type of entries: food/sport, it can also be write in short form: f/s.</p>
 </li>
 <li>
-<p>The field <code>TIME</code> can entered with natural language, e.g. <code>t/tomorrow 3pm</code></p>
+<p>The field <code>TIME</code> can entered with natural language for the date, the time needs to be in the format of hh:MM, e.g. <code>t/tomorrow 03:00</code></p>
 </li>
 <li>
 <p>The field <code>DATE</code> should be entered in the fixed format of <code>yyyy-mm-dd</code> in order to trace the corresponding daily file.</p>
+</li>
+<li>
+<p>The field <code>DURATION</code> should be a postive double number, representing duration in hours. e.g. <code>dr/1.5</code> for 1.5 hours.</p>
 </li>
 </ul>
 </div>
@@ -227,24 +230,15 @@ can directly access the Guide by pasting the url into the browser.</p>
 <div class="paragraph">
 <p>Adds an entry to the fitness log book. The entry added will be displayed in DashBoard, Calendar
 and possibly Today Page (if its date is today) immediately after the command is executed.
-Note that due to space constraint, entry card in DashBoard and Today page will only display
+Maximum two entries can have time clashes. If a duration of an entry is not specified, default duration is set to 1 hour.<br></p>
+</div>
+<div class="paragraph">
+<p>Note that due to space constraint, entry card in DashBoard and Today page will only display
 first 14 characters of its name and first 21 characters of its location. The entry icon in
 Calendar Page are even more constrained.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>addX n/NAME t/DATETIME l/LOCATION c/CALORIE es/False dr/DURATION r/REMARK&#8230;&#8203;</code></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-An entry in the log book can have any number of remarks (including 0)
-</td>
-</tr>
-</table>
+<p>Format: <code>add x/TYPE n/NAME t/DATETIME l/LOCATION c/CALORIE [dr/DURATION] [r/REMARK]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -252,10 +246,10 @@ An entry in the log book can have any number of remarks (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>adds n/running t/Wednesday 6 pm l/utown gym c/500kcal es/True r/relly fun</code></p>
+<p><code>add x/s n/running t/Wednesday 18:00 l/utown gym c/500 r/relly fun</code></p>
 </li>
 <li>
-<p><code>addf n/chicken rice t/Sunday 11 am l/Super Snacks c/460kcal es/False r/cheap and yummy</code></p>
+<p><code>add x/f n/chicken rice t/Sunday 11:00 l/Super Snacks c/200 r/cheap and yummy</code></p>
 </li>
 </ul>
 </div>
@@ -264,10 +258,7 @@ An entry in the log book can have any number of remarks (including 0)
 <h3 id="listing-all-entries-code-list-code"><a class="link" href="#listing-all-entries-code-list-code">4.3. Listing all entries : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all entries in the fitness log book.<br>
-Format: <code>list[X]</code></p>
-</div>
-<div class="paragraph">
-<p>If <code>X</code> is omitted, a list of mixed entries will be displayed.</p>
+Format: <code>list</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -275,7 +266,7 @@ Format: <code>list[X]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>lists</code></p>
+<p><code>list</code></p>
 </li>
 </ul>
 </div>
@@ -307,14 +298,14 @@ Format: <code>reminders (optional)DATE</code></p>
 <h3 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">4.5. Editing an entry : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing entry in the fitness log book.<br>
-Format: <code>edit DATE [i/INDEX] [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK] [dr/DURATION]&#8230;&#8203;</code></p>
+Format: <code>edit x/TYPE i/INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK] [dr/DURATION]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the entry at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed corresponding faily entry list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Edits the entry at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed corresponding entry list from the dashboard. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
@@ -338,12 +329,12 @@ Format: <code>edit DATE [i/INDEX] [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 2020-03-02 i/1 t/Friday 4pm l/PGP gym</code><br>
+<p><code>edit x/s i/1 t/Friday 16:00 l/PGP gym</code><br>
 Edits the time and email location of the 1st entry to be <code>Friday 4pm</code> and <code>PGP gym</code> respectively.</p>
 </li>
 <li>
-<p><code>edit 2020-04-18 i/2 n/Fries r/</code><br>
-Edits the name of the 2nd entry to be <code>Fries</code> and clears all existing remarks.</p>
+<p><code>edit x/f i/2 n/Fries r/</code><br>
+Edits the name of the 2nd entry from food entry list to be <code>Fries</code> and clears all existing remarks.</p>
 </li>
 </ul>
 </div>
@@ -351,22 +342,24 @@ Edits the name of the 2nd entry to be <code>Fries</code> and clears all existing
 <h4 id="mark-an-entry-as-done"><a class="link" href="#mark-an-entry-as-done">4.5.1. Mark an entry as done</a></h4>
 <div class="paragraph">
 <p>Users can mark an entry as done, either a meal or sports, where the calories intake and consumption will be taken in to consideration.
-Format: <code>edit DATE [i/INDEX] es/TRUE</code></p>
+Format: <code>edit x/TYPE i/INDEX s/Done</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="mark-an-entry-as-undone"><a class="link" href="#mark-an-entry-as-undone">4.5.2. Mark an entry as undone</a></h4>
 <div class="paragraph">
-<p>Similar to the previous command, marking an entry as undone edits the <code>es/</code> field and modify it as <code>False</code>.
-Format: <code>edit DATE [i/INDEX] es/False</code></p>
+<p>Similar to the previous command, marking an entry as undone edits the <code>s/</code> field and modify it as <code>Undone</code>.
+Format: <code>edit x/TYPE i/INDEX s/Undone</code></p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">4.6. Locating entries by name: <code>find</code></a></h3>
 <div class="paragraph">
-<p>Finds entries whose names contain any of the given keywords.<br>
-Format: <code>find [x/TYPE] k/ONE_OR_MOR_ KEYWORDS</code></p>
+<p>Finds entries whose names contain any of the given keywords.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>find [x/TYPE] k/ONE_OR_MOR_ KEYWORDS</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -397,11 +390,11 @@ Format: <code>find [x/TYPE] k/ONE_OR_MOR_ KEYWORDS</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find running</code><br>
+<p><code>find x/s k/running</code><br>
 Returns <code>running</code> and <code>slow running</code></p>
 </li>
 <li>
-<p><code>find x/food Juice Apple</code><br>
+<p><code>find x/food k/Juice Apple</code><br>
 Returns any entry having names <code>Juice</code>,  or <code>Apple</code></p>
 </li>
 </ul>
@@ -411,7 +404,7 @@ Returns any entry having names <code>Juice</code>,  or <code>Apple</code></p>
 <h3 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">4.7. Deleting an entry : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified entry from the fitness log book.<br>
-Format: <code>delete [x/type] [i/INDEX]</code></p>
+Format: <code>delete x/TYPE i/INDEX</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -436,8 +429,8 @@ Format: <code>delete [x/type] [i/INDEX]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete [x/sports] 2020-03-02 [index/2]</code>
-Deletes the 2nd sports entry in the <code>2020-03-02</code> daily file in the fitness log book.</p>
+<p><code>delete x/sports index/2</code>
+Deletes the 2nd sports entry in the sports list from dashboard.</p>
 </li>
 </ul>
 </div>
@@ -919,10 +912,65 @@ Every <code>addWeight</code> command will lead to the weight page. If the new we
 <div class="sect2">
 <h3 id="calendar-view"><a class="link" href="#calendar-view">4.21. Calendar View</a></h3>
 <div class="paragraph">
-<p>Calendar view will display all the exercises and meals for each day of the current month. For past dates, signs of different colors will be highlighted to show whether the calories intake exceeds or is below the target.<br>
-For female users, the monthly period will be highlighted<br>
-Format for entering data: <code>periodstart d/yyyy-mm-dd periodend d/yyyy-mm-dd</code><br>
-Format for entering calendar view: <code>calendar</code></p>
+<p>Calendar view will display all the food and sports entries for each day of the referenced week/month. The referenced date is default set to be the current date, but can be changed to a user given date. Calendar can be switched between two modes, list mode or timetable mode, with default set to be in timetable mode.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>For list mode</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Monthly View</strong><br>
+The lists of entries for food and sports are display by their given dates in the referenced month. Completed entries will be strikethrough. Calorie value is also shown for each date.</p>
+</li>
+<li>
+<p><strong>Calendar of the month</strong><br>
+On the top right corner, the dates of the referenced month displayed, with red-colored date if the given date has more calorie intake than calorie burnt (considering the entries with status done of that particular date), else if calorie burnt is greater than calorie intake, the font color is green. Default color is blue. For each date, upon clicking, a popup window will show all entries of the date. The ones with strikethrough in text means the status of the entry is done. For this functionality, the corresponding command is <code>calendar sh/DATE</code>. The leftward and rightward arrow from the title bar can switch the calendar to previous or next month, with matching CLI command <code>calendar d/next month</code> and <code>calendar d/prevous month</code>.</p>
+</li>
+<li>
+<p><strong>Daily tasks completion status</strong><br>
+On the bottom right corner, completion status for existing entries will be displayed by their dates, showing the calorie intake from food, calorie burnt from sports as well as total calorie. The calculation only considers entries which are completed.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>For timetable mode:</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Weekly View</strong><br>
+The entries of food and sports of the given time period are displayed. Food entries will be in pink, sports entries will be in blue, and entries completed will be in grey regardless of their type. Maximum two entries can have time clashes. Entries with long names or locations will not be displayed fully. Only when mouse is over the entry, the details will be shown. Entries upon clicking will have console errors, caused by disabling certain functionalies from third party libraries.</p>
+</li>
+<li>
+<p><strong>Calendar of the month</strong><br>
+Same as above.</p>
+</li>
+<li>
+<p><strong>Upcoming list</strong><br>
+It displays all entries after the current date and time and within the referenced month. So if the referenced month is in the past, no entries will be shown.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format for entering calendar view: <code>calendar</code><br>
+Format for switching to timetable mode: <code>calendar m/tb</code><br>
+Format for switching to list mode: <code>calendar m/ls</code><br>
+Format for changing the referenced date: <code>calendar d/DATE</code><br>
+Format for showing entries of a particular date: <code>calendar sh/DATE</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>calendar m/ls d/tmr</code></p>
+</li>
+<li>
+<p><code>calendar sh/05-01</code></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -1193,7 +1241,16 @@ whose name match/contain keyword "apple")</p>
 <p><strong>Diary - clear</strong> : <code>clearDiary</code></p>
 </li>
 <li>
-<p><strong>Calendar</strong> : <code>calendar</code></p>
+<p><strong>Calendar - display from a referenced date</strong> : <code>calendar d/DATE</code></p>
+</li>
+<li>
+<p><strong>Calendar - change to list mode</strong> : <code>calendar m/ls [d/DATE]</code></p>
+</li>
+<li>
+<p><strong>Calendar - change to timetable mode</strong> : <code>calendnar m/tb [d/DATE]</code></p>
+</li>
+<li>
+<p><strong>Calendar - display entries from a particular date</strong> : <code>calendar sh/DATE</code></p>
 </li>
 <li>
 <p><strong>Profile</strong>: <code>profile</code></p>
@@ -1216,4 +1273,4 @@ whose name match/contain keyword "apple")</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-02 12:21:57 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-02 13:36:20 UTC</div></div></div></body></html>
