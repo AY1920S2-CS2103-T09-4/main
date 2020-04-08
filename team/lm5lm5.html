@@ -10,7 +10,10 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>FitHelper is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>FitHelper is a desktop diet-and-exercise-recording application. It is built based on AddressBook (Level 3),
+a desktop address book application used for teaching Software Engineering principles.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 18 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,29 +23,50 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement 1</strong>: added <strong>the ability to sort entry and reminder list</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: allows the application to sort and display the entries in food and/or sports entry list
+based on time/name/calorie value in ascending or descending order. The user can specify sort order and criterion.
+Note that the entries in the reminder list will also be sorted in the same manner.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature allows the user to view entries in a particular order.
+It also helps the user to view entry that he/she may deem more important first
+(for example entry with a higher calorie value, as it has a larger impact on the user&#8217;s fitness).</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights:</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Major enhancement 2</strong>: added <strong>the ability to search for calorie data of common food/sports</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to search for calorie intake/consumption of food/sports by keywords.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p>Justification: This feature makes it easier for the user to estimate how much calorie he/she will gain/burn
+by eating/exercising, so that he/she can create food/sports entry without the need to search online for relevant information.</p>
+</li>
+<li>
+<p>Highlights:</p>
+</li>
+<li>
+<p>Credits: The calorie data are collected from the following websites: <a href="https://www.calories.info/" class="bare">https://www.calories.info/</a> and <a href="https://www.nutristrategy.com/caloriesburned.htm" class="bare">https://www.nutristrategy.com/caloriesburned.htm</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: added and updated the Help Page, which shows the list of valid user commands and their usage, and the link to the user guide.</p>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=lm5lm5">Functional and Test code</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -306,4 +330,4 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-08 15:30:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-08 15:57:41 UTC</div></div></div></body></html>
