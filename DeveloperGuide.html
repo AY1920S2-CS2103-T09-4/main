@@ -24,10 +24,11 @@
 <ul class="sectlevel2">
 <li><a href="#today-feature">3.1. Today Feature</a></li>
 <li><a href="#diary-feature">3.2. Diary Feature</a></li>
-<li><a href="#calendar">3.3. Calendar</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Add Weight Records</a></li>
-<li><a href="#check-calorie-intake-consumption-of-some-common-food-sports">3.6. Check calorie intake/consumption of some common food/sports</a></li>
+<li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
+<li><a href="#calendar">3.4. Calendar</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.6. Add Weight Records</a></li>
+<li><a href="#check-calorie-intake-consumption-of-some-common-food-sports">3.7. Check calorie intake/consumption of some common food/sports</a></li>
 </ul>
 </li>
 <li><a href="#testing">4. Testing</a></li>
@@ -266,7 +267,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the fitHelper data.</p>
 </li>
 <li>
 <p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
@@ -283,7 +284,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>FitHelper</code>, which <code>Person</code> can reference. This would allow <code>FitHelper</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
 <span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
 </td>
@@ -311,7 +312,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the Address Book data in json format and read it back.</p>
+<p>can save the FitHelper data in json format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -336,86 +337,67 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <h4 id="implementation-2"><a class="link" href="#implementation-2">3.1.1. Implementation</a></h4>
 <div class="paragraph">
 <p>FitHelper&#8217;s entries have a <code>Time</code> attribute including a <code>Date</code> and a specific <code>Time</code> in the format of <code>yyyy-mm-dd HH:mm</code>.
-This feature allows the user to view entries with the <code>Date</code> of today, i.e. shows only entries in today.
-It fetches the <code>filteredFoodEntryList</code> and <code>FilteredSportsEntryList</code> stored in FitHelper storage.</p>
-</div>
-<div class="paragraph">
-<p>The today mechanism is facilitated by
-<a href="https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/FilteredList.html">FilteredList</a>
-which wraps a ObservableList and
-filters using the provided Predicate.
-A <code>FilteredList&lt;Entry&gt; filteredEntries</code> is stored in the <code>ModelManager</code>.
-In <code>FitHelper</code>, there is an
-<code>ObservableList&lt;Entry&gt; entries</code> which contains all entries, regardless of its <code>Type</code> and <code>Date</code>. <code>filteredEntries</code>
-in the ModelManager is initialized with this ObservableList.</p>
-</div>
-<div class="paragraph">
-<p>Since a FilteredList needs a Predicate, which matches the elements in the source list that should be visible, the filter mechanism implements the following operation to support filtering:</p>
+Today feature allows the user to view entries with the <code>Date</code> of today, i.e. shows only entries in today.
+It fetches the <code>todayFoodEntries</code> and <code>todaySportsEntries</code> stored in FitHelper storage. Because the display of these two lists
+have the same logic, they are illustrated as <code>todayEntries</code> in this section, as a whole.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Model#updateFilteredEntryList(Predicate&lt;Entry&gt; predicate)</code>&#8201;&#8212;&#8201;Sets the value of the property Predicate in the <code>filteredEntries</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Predicates are declared statically in the <code>Model</code> interface, namely
-<code>PREDICATE_SHOW_ALL_ENTRIES</code>, <code>PREDICATE_SHOW_UNDONE_ENTRIES</code>, and <code>PREDICATE_SHOW_TODAY_ENTRIES</code>.
-In particular <code>PREDICATE_SHOW_TODAY_ENTRIES</code> is as follows</p>
+<p>In <code>FitHelper</code>, the <code>UniqueEntryList&lt;Entry&gt; todayEntries</code> contains all entries on today.
+The list is updated whenever changes are made to the general UniqueEntryList&lt;Entry&gt; entries which contains entries of all dates.</p>
 </li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="predefined-type">Predicate</span>&lt;Entry&gt; PREDICATE_SHOW_TODAY_ENTRIES = entry -&gt;
-            entry.getTime().getDateStr().equals(<span class="keyword">new</span> Today().getTodayDateStr());</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p>The <code>TodayCommand</code> will call this method to change the visibility of entries with different status by passing in the corresponding predicate.</p>
+<p>A <code>FilteredList&lt;Entry&gt; filteredTodayEntries</code> is stored in the <code>ModelManager</code>. <code>filteredTodayEntries</code>
+in the ModelManager is initialized with this <code>UniqueEntryList&lt;Entry&gt;</code> by converting it to an <code>ObservableList&lt;Entry&gt;</code>.</p>
+</li>
+<li>
+<p><code>Today Page</code> takes in <code>todayEntries</code> as a parameter when it is initialized. The list is always displayed on the GUI page as a ListView.</p>
+</li>
+<li>
+<p>When the <code>today</code> command is executed, FitHelper switches to <code>Today Page</code> where the entries on today can be seen.</p>
+</li>
+<li>
+<p>Other features implemented in <code>Today Page</code>, like <code>daily calorie calculation</code>, <code>daily task completion</code>, and <code>dialy performance assessment</code>,
+all depend on the data carried by the passed in list.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>An example usage scenario and how the today mechanism behaves at each step is shown below.</p>
+<p>An example usage scenario and how the <code>today</code> mechanism behaves at each step is shown below.</p>
 </div>
 <div class="paragraph">
 <p><strong>Step 1.</strong> The user launches the application for the first time.
-<code>UniqueEntryList</code> will be initialized with a list of default entries in FitHelper.
-This list contains a few entries with various dates.</p>
+<code>UniqueEntryList</code> will be initialized with a list of default entries in FitHelper, which contains a few entries with various dates.
+<code>UniqueTodayEntryList</code> will be initialized concurrently by filtering out entries on today.</p>
 </div>
 <div class="paragraph">
-<p><strong>Step 2.</strong> The user inputs <code>today</code> to list all today entries. <code>UI</code> passes the input to <code>Logic</code>.
-Logic then uses a few <code>Parser</code> classes to extract layers of information out as seen from steps 3 to 5.</p>
+<p><strong>Step 2.</strong> <code>MainWindow</code> fetches <code>ObservableList&lt;Entry&gt; todayEntries</code>.
+<code>Today Page</code> is initialized in <code>MainWindow</code> with the <code>ObservableList&lt;Entry&gt; todayEntries</code> passed from the model.</p>
 </div>
 <div class="paragraph">
-<p><strong>Step 3.</strong> Logic passes the user input to <code>FitHelperParser</code>. <code>FitHelperParser</code> identifies that this is a <code>TodayCommand</code>
+<p><strong>Step 3.</strong> The user inputs <code>today</code> to view all today entries. <code>UI</code> passes the input to <code>Logic</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> Logic passes the user input to <code>FitHelperParser</code>. <code>FitHelperParser</code> identifies that this is a <code>TodayCommand</code>
 through the word "today".
-It then creates a
-<code>TodayCommandParser</code> to parse the it into a <code>TodayCommand</code> and return.</p>
+It then creates a <code>TodayCommandParser</code> to parse the it into a <code>TodayCommand</code> and return.</p>
 </div>
 <div class="paragraph">
-<p><strong>Step 4.</strong> <code>Logic</code> finally gets the <code>TodayCommand</code> and execute it.
-The execution firstly calls
-<code>Model#updateFilteredEntryList(Predicate&lt;Entry&gt; predicate)</code> to update the Predicate in
-<code>filteredEntries</code> in <code>Model</code>.
-This execution then returns a <code>CommandResult</code> to <code>UI</code>, containing the response to the user.</p>
+<p><strong>Step 5.</strong> <code>Logic</code> gets the <code>TodayCommand</code> and execute it.
+This execution then returns a <code>CommandResult</code> to <code>UI</code>, containing the success message and a specified displayed page of <code>Today Page</code>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Step 5.</strong> <code>UI</code> displays the response in the <code>CommandResult</code>.
-In addition, UI will change to display today entries after model updates <code>filteredEntries</code>, since <code>UI</code> is constantly listening for the change in <code>Model</code>.</p>
+<code>UI</code> also switches FitHelper to <code>Today Page</code>, where the continuously updated
+<code>todayEntryList</code> is displayed, since <code>UI</code> is constantly listening for the change in <code>Model</code>.</p>
 </div>
 <div class="paragraph">
 <p>The Sequence Diagram below shows how the components interact with each other for the above mentioned scenario.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/TodaySequenceDiagram.png" alt="TodaySequenceDiagram">
+<img src="images/InitiateTodayPageSequenceDiagram.png" alt="InitiateTodayPageSequenceDiagram">
 </div>
 <div class="title">Figure 9. Sequence Diagram for Today Feature</div>
 </div>
@@ -512,7 +494,152 @@ In addition, UI will change to display diaries after model updates <code>filtere
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar"><a class="link" href="#calendar">3.3. Calendar</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.3. Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.3.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The undo/redo mechanism is facilitated by <code>VersionedFitHelper</code>.
+It extends <code>FitHelper</code> with an undo/redo history, stored internally as an <code>fitHelperStateList</code> and <code>currentStatePointer</code>.
+Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>VersionedFitHelper#commit()</code>&#8201;&#8212;&#8201;Saves the current FitHelper state in its history.</p>
+</li>
+<li>
+<p><code>VersionedFitHelper#undo()</code>&#8201;&#8212;&#8201;Restores the previous FitHelper state from its history.</p>
+</li>
+<li>
+<p><code>VersionedFitHelper#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone FitHelper state from its history.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commit()</code>, <code>Model#undo()</code> and <code>Model#redo()</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time. The <code>VersionedFitHelper</code> will be initialized with the initial FitHelper state, and the <code>currentStatePointer</code> pointing to that single FitHelper state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState0.png" alt="UndoRedoState0">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>delete x/f i/5</code> command to delete the 5th food entry in the FitHelper. The <code>delete</code> command calls <code>Model#commit()</code>, causing the modified state of the FitHelper after the <code>delete x/f i/5</code> command executes to be saved in the <code>fitHelperStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted FitHelper state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState1.png" alt="UndoRedoState1">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>add x/f n/apple &#8230;&#8203;</code> to add a new food entry. The <code>add</code> command also calls <code>Model#commit()</code>, causing another modified FitHelper state to be saved into the <code>fitHelperStateList</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState2.png" alt="UndoRedoState2">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a command fails its execution, it will not call <code>Model#commit()</code>, so the FitHelper state will not be saved into the <code>fitHelperStateList</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 4. The user now decides that adding the food entry was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undo()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous FitHelper state, and restores the FitHelper to that state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState3.png" alt="UndoRedoState3">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the <code>currentStatePointer</code> is at index 0, pointing to the initial FitHelper state, then there are no previous FitHelper states to restore. The <code>undo</code> command uses <code>Model#canundo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the undo operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redo()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the FitHelper to that state.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.size() - 1</code>, pointing to the latest FitHelper state, then there are no undone FitHelper states to restore. The <code>redo</code> command uses <code>Model#canRedo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the FitHelper, such as <code>list</code>, will usually not call <code>Model#commit()</code>, <code>Model#undo()</code> or <code>Model#redo()</code>. Thus, the <code>fitHelperStateList</code> remains unchanged.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState4.png" alt="UndoRedoState4">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commit()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>fitHelperStateList</code>, all FitHelper states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState5.png" alt="UndoRedoState5">
+</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calendar"><a class="link" href="#calendar">3.4. Calendar</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -530,20 +657,22 @@ In addition, UI will change to display diaries after model updates <code>filtere
 <li>
 <p>The <code>Ui</code> gets the <code>date</code> from <code>LogicManager</code> and updates the Ui to display the module.
 The following sequence diagram shows how the update operation works to change calendar page in model:
-<span class="image"><img src="images/CalendarSequenceDiagram.png" alt="CalendarSequenceDiagram"></span></p>
+<span class="image"><img src="images/CalendarSequenceDiagram.png" alt="CalendarSequenceDiagram"></span>
+Structure of calendar command:
+<span class="image"><img src="images/CalendarClassDiagram.png" alt="CalendarClassDiagram"></span></p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Add Weight Records&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Add Weight Records&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -574,12 +703,12 @@ The following sequence diagram shows how the update operation works to change ca
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Add Weight Records</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Add Weight Records</a></h3>
 <div class="paragraph">
 <p>FitHelper allows the user to track with their weight change easily by allowing user to add their current weight and previous weight.</p>
 </div>
 <div class="sect3">
-<h4 id="sample"><a class="link" href="#sample">3.5.1. Sample</a></h4>
+<h4 id="sample"><a class="link" href="#sample">3.6.1. Sample</a></h4>
 <div class="paragraph">
 <p>An example usage scenario and how the <code>addWeight</code> command behaves at each step is shown below.</p>
 </div>
@@ -668,7 +797,7 @@ The following sequence diagram shows how the update operation works to change ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.5.2. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.6.2. Implementation</a></h4>
 <div class="sect4">
 <h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
 <div class="paragraph">
@@ -761,12 +890,12 @@ The text content of top notification will also be updated if the gap between Cur
 </div>
 </div>
 <div class="sect2">
-<h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">3.6. Check calorie intake/consumption of some common food/sports</a></h3>
+<h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">3.7. Check calorie intake/consumption of some common food/sports</a></h3>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">3.6.1. Implementation</a></h4>
+<h4 id="implementation-6"><a class="link" href="#implementation-6">3.7.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The check function is achieved by calling the <code>FitHelper</code> inside the <code>ModelManager</code> to search
-through either <code>FoodCalorieTable</code> or <code>SportsCalorieTable</code> for <code>CalorieEntry</code> that contain the
+through either <code>FoodCalorieTable</code> or <code>SportsCalorieTable</code> for <code>CalorieDatum</code> that contain the
 keywords specified by the user.</p>
 </div>
 <div class="paragraph">
@@ -775,7 +904,7 @@ keywords specified by the user.</p>
 <div class="paragraph">
 <p>Initialization: when the application is launched, <code>ModelManager</code> will initialize a <code>FitHelper</code>, which
 will in turn initialize both <code>FoodCalorieTable</code> and <code>SportsCalorieTable</code> to contain pre-set data
-which is a list of one type of <code>CalorieEntry</code> (either <code>FoodCalorieEntry</code> or <code>SportsCalorieEntry</code>).</p>
+which is a list of one type of <code>CalorieDatum</code> (either <code>FoodCalorieDatum</code> or <code>SportsCalorieDatum</code>).</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -785,17 +914,17 @@ which is a list of one type of <code>CalorieEntry</code> (either <code>FoodCalor
 <div class="paragraph">
 <p>Case 1: when the user enter the command <code>check x/sports k/swim</code>, the <code>LogicManager</code> will create
 a <code>CheckCommand</code>, which askes <code>ModelManager</code> to let <code>FitHelper</code> to search through <code>SportsCalorieTable</code>
-to add first 3 <code>CalorieEntry</code> whose name contains the keyword <code>swim</code> into a List, and return the
-list to <code>CheckCommand</code>. Since the list contains at least one <code>CalorieEntry</code> (meaning there is
-some matching entries), the <code>CheckCommand</code> returns a <code>CommandResult</code> whose <code>feedbackToUser</code>
-contains a success message followed by the string representation of each matching entries.</p>
+to add first 3 <code>CalorieDatum</code> whose name contains the keyword <code>swim</code> into a List, and return the
+list to <code>CheckCommand</code>. Since the list contains at least one <code>CalorieDatum</code> (meaning there is
+some matching data), the <code>CheckCommand</code> returns a <code>CommandResult</code> whose <code>feedbackToUser</code>
+contains a success message followed by the string representation of each matching datum.</p>
 </div>
 <div class="paragraph">
 <p>Case 2: when the user enter the command <code>check x/f k/swim</code>, the <code>LogicManager</code> will create
 a <code>CheckCommand</code>, which askes <code>ModelManager</code> to let ` FitHelper` to search through <code>FoodCalorieTable</code>
-to add first 3 <code>CalorieEntry`s whose name contains the keyword `swim</code> into a List, and return
-the list to <code>CheckCommand</code>. Since the list contains no <code>CalorieEntry</code> (meaning there is no
-matching entries), the <code>CheckCommand</code> returns a <code>CommandResult</code> whose <code>feedbackToUser</code> contains
+to add first 3 <code>CalorieDatum`s whose name contains the keyword `swim</code> into a List, and return
+the list to <code>CheckCommand</code>. Since the list contains no <code>CalorieDatum</code> (meaning there is no
+matching data), the <code>CheckCommand</code> returns a <code>CommandResult</code> whose <code>feedbackToUser</code> contains
 a failure message followed by the string representation of the keyword.</p>
 </div>
 <div class="imageblock">
@@ -805,7 +934,7 @@ a failure message followed by the string representation of the keyword.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.7.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Aspect: Data structure to store entries</p>
 </div>
@@ -1639,4 +1768,4 @@ Expected:</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-02 13:44:06 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-08 12:55:53 UTC</div></div></div></body></html>
