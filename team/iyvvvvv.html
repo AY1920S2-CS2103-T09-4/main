@@ -10,42 +10,210 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>FitHelper is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p><strong>FitHelper</strong> is a desktop diet-and-exercise-recording application made for Users who want to keep fit.
+It is built based on <strong>AddressBook</strong> (Level 3), a desktop address book application used for teaching Software Engineering principles.</p>
+</div>
+<div class="paragraph">
+<p><strong>FitHelper</strong> enables Users to record their basic profile data, weight records, daily food intake and sports.
+Rather than just keeping the raw data, <strong>FitHelper</strong> also provided useful analysis and other customized services, such as calendar view and reminders.</p>
+</div>
+<div class="paragraph">
+<p>The application is mainly written in <strong>Java</strong> and built by a considerable <strong>19k Lines of Code</strong>.
+The codebase is well-maintained by reasonable amount of tests, and the program is written in high-quality code.
+A detailed and comprehensive set of guides are also provided for both application developers and users.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="major-enhancement"><a class="link" href="#major-enhancement">1.1. Major Enhancement</a></h3>
+<div class="sect3">
+<h4 id="build-fithelper-entry-in-model-storage-part-and-its-basic-commands-a-href-https-github-com-ay1920s2-cs2103-t09-4-main-pull-143-143-a"><a class="link" href="#build-fithelper-entry-in-model-storage-part-and-its-basic-commands-a-href-https-github-com-ay1920s2-cs2103-t09-4-main-pull-143-143-a">1.1.1. Build FitHelper Entry in Model, Storage Part and Its Basic Commands (<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/143">#143</a>)</a></h4>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Content</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p><strong>Model Part</strong>: Create Entry class (for both food and sport entries) and all of its attributes classes.
+Modify Model and Model Manager to build a basic skeleton of FitHelper.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p><strong>Storage Part</strong>: Create Json-adaptive Entry and Json-adaptive FitHelper main storage.
+Modify Storage and Storage Manager to enable FitHelper store both type of entry (food and sports).</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p><strong>Logic Part</strong>: Update all command prefix and flags. Create basic commands and corresponding parsers related to Entry, including <code>add</code>, <code>edit</code>, <code>find</code>, <code>delete</code>.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Justification</strong><br>
+This feature builds the basic skeleton of the whole application in Model and Storage Part.
+The creation of Entry allows user to record their daily food intake and sports.</p>
 </li>
+<li>
+<p><strong>Highlights</strong><br>
+This feature allows other developers to build all other features related to Entry, such as Today Page, Calendar Page.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="build-profile-in-model-storage-ui-part-and-its-commands"><a class="link" href="#build-profile-in-model-storage-ui-part-and-its-commands">1.1.2. Build Profile in Model, Storage, UI Part and Its Commands</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Content</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Model Part</strong>: Create Profile class and all of its attributes classes.
+A UserProfile class is built to wrap up user profile, which is parallel to the FitHelper class.
+Modify Model and Model Manager to include the profile system.
+(<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/170">#170</a>,
+<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/186">#186</a>)</p>
+</li>
+<li>
+<p><strong>Storage Part</strong>: Create Json-adaptive Profile and Json-adaptive UserProfile main storage.
+Modify Storage and Storage Manager to establish a separate new database for profile-related data.
+(<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/203">#203</a>,
+<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/248">#248</a>)</p>
+</li>
+<li>
+<p><strong>UI Part</strong>: Build Profile Page, which shows a table of user profile data.
+(<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/186">#186</a>,
+<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/203">#203</a>)</p>
+</li>
+<li>
+<p><strong>Logic Part</strong>:  Enable Profile Page switch
+and enable user to update profile&#8217;s attributes value by corresponding commands and command parsers,
+including <code>profile</code> and <code>update</code>.
+(<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/203">#203</a>,
+<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/214">#214</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Justification</strong><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>This feature influences all Model, Storage, Logic and UI part in the application.
+It builds and manipulated a separate new database just for user profile.</p>
+</li>
+<li>
+<p>Profile Page is an essential part of the application, as user&#8217;s basic data
+can be used in other features and analysis to provide a more customized service.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Highlights</strong><br>
+Originally, the application only contains a system dealing with Entry and Entry data.
+This feature creates a new parallel system, handling user&#8217;s profile data from back end to front end.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="build-weight-in-model-storage-ui-part-and-its-commands"><a class="link" href="#build-weight-in-model-storage-ui-part-and-its-commands">1.1.3. Build Weight in Model, Storage, UI Part and Its Commands</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Content</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Model Part</strong>: Create Weight class and all of its attributes classes.
+A WeightRecords class is built to wrap up all weight records, which is parallel to the FitHelper and UserProfile class.
+Modify Model and Model Manager to include the weight system.
+(<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/186">#186</a>,
+<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/240">#240</a>)</p>
+</li>
+<li>
+<p><strong>Storage Part</strong>: Create Json-adaptive Weight and Json-adaptive WeightRecords main storage.
+Modify Storage and Storage Manager to establish a separate new database for weight-related data.
+(<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/240">#240</a>)</p>
+</li>
+<li>
+<p><strong>UI Part</strong>: Build Weight Page, which shows a notification indicating the gap to user target data and two Trend Graphs for weight and data.
+(<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/186">#186</a>,
+<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/242">#242</a>)</p>
+</li>
+<li>
+<p><strong>Logic Part</strong>:  Enable Weight Page switch
+and enable user to manipulate weight database by corresponding commands and command parsers,
+including <code>weight</code>, <code>addWeight</code>, <code>editWeight</code>, <code>deleteWeight</code> and <code>clearWeight</code>.
+(<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/240">#240</a>,
+<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/311">#311</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Justification</strong><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>This feature influences all Model, Storage, Logic and UI part in the application.
+It builds and manipulated a separate new database just for user weight records.</p>
+</li>
+<li>
+<p>Weight Page is one of the main parts in this application, as keep tracking of user&#8217;s weight and provided useful analysis
+can significantly help the user to lose weight and keep fit.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Highlights</strong><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>With this feature, all three database for this database are built:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FitHelper for entry and diary data</p>
+</li>
+<li>
+<p>UserProfile for profile data</p>
+</li>
+<li>
+<p>WeightRecords for weight data</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>This feature is also strongly linked with profile. One command may change both profile and weight database and GUI page.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-contribution"><a class="link" href="#code-contribution">1.2. Code contribution</a></h3>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=iyvvvvv&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2020-02-14&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=IYVVVVV&amp;tabRepo=AY1920S2-CS2103-T09-4%2Fmain%5Bmaster%5D">Functional code</a>]</p>
 </li>
-<li>
-<p><strong>Other contributions</strong>:</p>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">1.3. Other contributions</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -53,7 +221,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Create Milestone <code>v1.0</code>-<code>v2.0</code> on GitHub</p>
+</li>
+<li>
+<p>Updated and closed issues and milestone regularly on GitHub</p>
 </li>
 </ul>
 </div>
@@ -63,10 +234,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Updated the GUI color scheme (<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/214">#214</a>)</p>
 </li>
 </ul>
 </div>
@@ -76,7 +244,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Make each session in User Guide aligned in structure, and summarize all commands (<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/324">#324</a>)</p>
 </li>
 </ul>
 </div>
@@ -86,40 +254,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>PRs reviewed (with non-trivial review comments) (<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/242">#242</a>)</p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Reported bugs and suggestions for other teams in the class (examples: <a href="https://github.com/IYVVVVV/ped/issues/1">#1</a>, <a href="https://github.com/IYVVVVV/ped/issues/4">#4</a>, <a href="https://github.com/IYVVVVV/ped/issues/7">#7</a> )</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -132,42 +276,112 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="sect3">
-<h4 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">Deleting an entry : <code>delete</code></a></h4>
-<div class="paragraph">
-<p>Deletes the specified entry from the fitness log book.<br>
-Format: <code>delete x/TYPE i/INDEX</code></p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-If <code>delete</code> is called right after a <code>find</code> command (when a shortened list is displayed), the index follows the current list view
-after executing <code>find</code> command. i.e. If entry X originally has an index 3 and currently has an index 1 after the <code>find</code> command,
-calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
-</td>
-</tr>
-</table>
+</div>
+<div class="sect1">
+<h2 id="common-fields-and-keywords"><a class="link" href="#common-fields-and-keywords">Common Fields and Keywords</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>x/</strong> entry type</p>
+</li>
+<li>
+<p><strong>n/</strong> entry name</p>
+</li>
+<li>
+<p><strong>t/</strong> entry time</p>
+</li>
+<li>
+<p><strong>l/</strong> entry location</p>
+</li>
+<li>
+<p><strong>c/</strong> entry calorie</p>
+</li>
+<li>
+<p><strong>s/</strong> entry status</p>
+</li>
+<li>
+<p><strong>r/</strong> entry remark</p>
+</li>
+<li>
+<p><strong>i/</strong> entry index</p>
+</li>
+<li>
+<p><strong>d/</strong> date in format yyyy-MM-dd</p>
+</li>
+<li>
+<p><strong>m/</strong> mode</p>
+</li>
+<li>
+<p><strong>dc/</strong> diary content</p>
+</li>
+<li>
+<p><strong>dr/</strong> duration</p>
+</li>
+<li>
+<p><strong>attr/</strong> profile attribute name</p>
+</li>
+<li>
+<p><strong>v/</strong> profile attribute value/ weight value</p>
+</li>
+<li>
+<p><strong>by/</strong> sorting criterion</p>
+</li>
+<li>
+<p><strong>o/</strong> sorting order</p>
+</li>
+<li>
+<p><strong>k/</strong> keywords for searching/checking</p>
+</li>
+<li>
+<p><strong>-f</strong> force change flag</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="keep-user-profile"><a class="link" href="#keep-user-profile">Keep User Profile</a></h3>
+<div class="sect3">
+<h4 id="profile-page-code-profile-code"><a class="link" href="#profile-page-code-profile-code">Profile Page: <code>profile</code></a></h4>
+<div class="paragraph">
+<p>Profile page serves to be a summary for basic user data.<br>
+The profile information includes: Name, Age, Gender, Address, Height, Target Weight, Current Weight and Current BMI.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>profile</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="update-profile-data-code-update-code"><a class="link" href="#update-profile-data-code-update-code">Update Profile Data : <code>update</code></a></h4>
+<div class="paragraph">
+<p>Update user data in the profile by attributes. Profile attributes include: Name, Age, Address, Gender, Height and Target Weight.<br>
+Every <code>update</code> command will lead to the profile page.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>update [-f] attr/ATTRIBUTE v/VALUE</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the entry at the specified <code>INDEX</code>.</p>
+<p>If no user profile data is provided by the user, FitHelper will initialize with the sample profile data.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the displayed entry list.</p>
+<p>The updated attribute name is <strong>not</strong> case-sensitive and can include spaces, but the name must match some fields in user profile.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>e.g. Both <code>attr/target weight</code> and <code>attr/TARGETWEIGHT</code> are acceptable.</p>
+</li>
+<li>
+<p>Any updated value should follow its original data type.</p>
+</li>
+<li>
+<p>If the chosen updated attribute has already had original value, <strong>flag <code>-f</code></strong> need to be used to enable <strong>force overwrite</strong>.</p>
 </li>
 </ul>
 </div>
@@ -179,23 +393,373 @@ calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete x/sports i/2</code>
-Deletes the 2nd sports entry in the sports list from dashboard.</p>
+<p><code>update attr/height v/160</code></p>
+</li>
+<li>
+<p><code>update -f attr/name v/Alice Wang</code></p>
 </li>
 </ul>
 </div>
-<div class="imageblock">
+</div>
+</div>
+<div class="sect2">
+<h3 id="keep-weight-records"><a class="link" href="#keep-weight-records">Keep Weight Records</a></h3>
+<div class="sect3">
+<h4 id="weight-page-code-weight-code"><a class="link" href="#weight-page-code-weight-code">Weight Page: <code>weight</code></a></h4>
+<div class="paragraph">
+<p>Weight page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
+It shows user data in graph for easy understanding. By default, it will generate graph from all history data chronologically.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Gap notification</strong><br>
+The top notification shows the comparison between user current weight and target weight.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>If current weight is <strong>larger</strong> than target, the gap between the two will be highlighted.</p>
+</li>
+<li>
+<p>If current weight is <strong>the same or less</strong> than the target, a succeed notification will be generated.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Trend Graph - Weight</strong><br>
+Display a trend graph of user&#8217;s weight according to time.</p>
+</li>
+<li>
+<p><strong>Trend Graph - BMI</strong><br>
+Display a trend graph of user&#8217;s BMI according to time. The BMI value is calculated by weight and height value at that date.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>weight</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-weight-records-code-addweight-code"><a class="link" href="#add-weight-records-code-addweight-code">Add Weight Records : <code>addWeight</code></a></h4>
+<div class="paragraph">
+<p>Add a new weight record into the weight records database. A weight record is related to date and weight value, and a auto-computed BMI value will be stored as well.<br>
+Every <code>addWeight</code> command will lead to the weight page.
+If a new weight record is added successfully, two new points will be added into the two trend graphs separately.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addWeight v/WEIGHT_VALUE [d/DATE]</code></p>
+</div>
+<div class="sidebarblock">
 <div class="content">
-<img src="../images/delete.png" alt="delete">
+<div class="ulist">
+<ul>
+<li>
+<p>If no weight record exists in the database, "Not Available Now" will be shown in Profile Page&#8217;s Current Weight and Current BMI fields.</p>
+</li>
+<li>
+<p>The date of a new weight record can be <strong>omitted</strong> when user inputs the <code>addWeight</code> command. By default, it will refer to the date of today.</p>
+</li>
+<li>
+<p>The date should be in format of <code>yyyy-MM-dd</code>, and should <strong>not after the date of today</strong>.</p>
+</li>
+<li>
+<p><strong>No two weight records should have the same date.</strong> If adding a new weight record with the same date as an existing weight,
+a warning will be generated, and thus will fail to add.</p>
+</li>
+</ul>
 </div>
-<div class="title">Figure 1. Delete Command</div>
 </div>
-<div class="imageblock">
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addWeight v/50.0 d/2020-02-01</code></p>
+</li>
+<li>
+<p><code>addWeight v/52.30</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="edit-weight-records-code-editweight-code"><a class="link" href="#edit-weight-records-code-editweight-code">Edit Weight Records : <code>editWeight</code></a></h4>
+<div class="paragraph">
+<p>Edit an existing weight record in the weight records database.
+A weight record is identified by its <strong>unique date</strong>, and user can find the date on the x-axis of the Weight Trend Graph.<br>
+User are able to edit the weight value, and corresponding BMI value will be auto-computed using the new weight value and user&#8217;s <strong>current height</strong>.<br>
+Every <code>editWeight</code> command will lead to the weight page.
+If a weight record is edited successfully, two new points will change their positions on the two trend graphs separately.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>editWeight [d/DATE] v/NEW_WEIGHT_VALUE</code></p>
+</div>
+<div class="sidebarblock">
 <div class="content">
-<img src="../images/delete2.png" alt="delete2">
+<div class="ulist">
+<ul>
+<li>
+<p>The date should be in format of <code>yyyy-MM-dd</code>. If no existing weight record is on the input date, the input date is considered as invalid, and thus a warning will be thrown.</p>
+</li>
+<li>
+<p>If the date is <strong>omitted</strong> when user inputs the <code>editWeight</code> command, by default, it will refer to the date of today.</p>
+</li>
+<li>
+<p>If the edited weight record is the <strong>latest weight record</strong> in the database, an update in Profile Page&#8217;s Current Weight and Current BMI fields can be found as well.</p>
+</li>
+<li>
+<p>If the new weight value is the same as original weight value in the weight records, an exception will be thrown.</p>
+</li>
+</ul>
 </div>
-<div class="title">Figure 2. Delete Command Result</div>
 </div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editWeight d/2020-02-01 v/51.0</code></p>
+</li>
+<li>
+<p><code>editWeight v/52.40</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-weight-records-code-deleteweight-code"><a class="link" href="#delete-weight-records-code-deleteweight-code">Delete Weight Records : <code>deleteWeight</code></a></h4>
+<div class="paragraph">
+<p>Delete an existing weight record in the weight records database.
+Same as <code>editWeight</code> command, a weight record is identified by its <strong>unique date</strong>, and user can find the date on the x-axis of the Weight Trend Graph.<br>
+Every <code>deleteWeight</code> command will lead to the weight page.
+If a weight record is deleted successfully, two corresponding points will be removed from the two trend graphs separately.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteWeight [d/DATE]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The date should be in format of <code>yyyy-MM-dd</code>. If no existing weight record is on the input date, the input date is considered as invalid, and thus a warning will be thrown.</p>
+</li>
+<li>
+<p>If the date is <strong>omitted</strong> when user inputs the <code>deleteWeight</code> command, by default, it will refer to the date of today.</p>
+</li>
+<li>
+<p>If the deleted weight record is the <strong>latest weight record</strong> in the database, the second latest weight record will be used to update Profile Page&#8217;s Current Weight and Current BMI fields.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteWeight d/2020-02-01</code></p>
+</li>
+<li>
+<p><code>deleteWeight</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clear-weight-records-code-clearweight-code"><a class="link" href="#clear-weight-records-code-clearweight-code">Clear Weight Records : <code>clearWeight</code></a></h4>
+<div class="paragraph">
+<p>Clear all weight records in the weight records database.<br>
+Weight Page&#8217;s graphs will be empty, and
+Profile Page&#8217;s Current Weight and Current BMI fields will be <code>Not Available Now</code> after clear all weight records.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>clearWeight</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exit-the-program-code-exit-code-code-bye-code-code-quit-code"><a class="link" href="#exit-the-program-code-exit-code-code-bye-code-code-quit-code">Exit the program : <code>exit</code>/<code>bye</code>/<code>quit</code></a></h3>
+<div class="paragraph">
+<p>Exits the program.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>exit</code> or <code>bye</code> or <code>quit</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="save-the-data"><a class="link" href="#save-the-data">Save the data</a></h3>
+<div class="paragraph">
+<p>fitness log book data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.<br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Three local database in Json format will exist after running FitHelper:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>fithelper.json</strong> : data related to entries and diaries.</p>
+</li>
+<li>
+<p><strong>userprofile.json</strong> : data related to user profile.</p>
+</li>
+<li>
+<p><strong>weightrecords.json</strong> : data related to weight records.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">Command Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Help - switch to Help Page</strong> : <code>help</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Entry - switch to DashBoard</strong> : <code>home</code></p>
+</li>
+<li>
+<p><strong>Entry - add an entry</strong> <code>add n/NAME t/TIME l/LOCATION c/CALORIE [r/remark]&#8230;&#8203;</code></p>
+</li>
+<li>
+<p><strong>Entry - list all entries</strong> : <code>list</code></p>
+</li>
+<li>
+<p><strong>Entry - view reminders</strong> : <code>reminder</code></p>
+</li>
+<li>
+<p><strong>Entry - edit an entry</strong> : <code>edit INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/remark]&#8230;&#8203;</code></p>
+</li>
+<li>
+<p><strong>Entry - find by name</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+</li>
+<li>
+<p><strong>Entry - delete an entry</strong> : <code>delete INDEX</code></p>
+</li>
+<li>
+<p><strong>Entry - sort entry list</strong> : <code>sort [x/TYPE] by/SORT_BY [o/ORDER]</code></p>
+</li>
+<li>
+<p><strong>Entry - check calorie reference</strong> : <code>check x/TYPE k/ONE_OR_MORE_KEYWORDS</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Diary - switch to Diary Page</strong> : <code>diary</code></p>
+</li>
+<li>
+<p><strong>Diary - add a diary</strong> : <code>addDiary d/DATE dc/DIARYCONTENT</code></p>
+</li>
+<li>
+<p><strong>Diary - edit a diary</strong> : <code>editDiary d/DATE dc/DIARYCONTENT</code></p>
+</li>
+<li>
+<p><strong>Diary - delete a diary</strong> : <code>deleteDiary d/DATE</code></p>
+</li>
+<li>
+<p><strong>Diary - find a diary</strong> : <code>findDiary [d/DATE] [dc/DIARYCONTENT]</code></p>
+</li>
+<li>
+<p><strong>Diary - clear all diaries</strong> : <code>clearDiary</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Clear - clear all entries and diaries</strong> : <code>clear</code></p>
+</li>
+<li>
+<p><strong>Undo - undo commands related to entries and diaries</strong> : <code>undo</code></p>
+</li>
+<li>
+<p><strong>Redo - redo commands related to entries and diaries</strong> : <code>redo</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Calendar - switch to Calendar Page</strong> : <code>calendar</code></p>
+</li>
+<li>
+<p><strong>Calendar - display from a referenced date</strong> : <code>calendar d/DATE</code></p>
+</li>
+<li>
+<p><strong>Calendar - change to list mode</strong> : <code>calendar m/ls [d/DATE]</code></p>
+</li>
+<li>
+<p><strong>Calendar - change to timetable mode</strong> : <code>calendnar m/tb [d/DATE]</code></p>
+</li>
+<li>
+<p><strong>Calendar - display entries from a particular date</strong> : <code>calendar sh/DATE</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Today - switch to Today Page</strong> : <code>today</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Profile - switch to Profile Page</strong>: <code>profile</code></p>
+</li>
+<li>
+<p><strong>Profile - update profile data</strong>: <code>update [-f] attr/ATTRIBUTE V/VALUE</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Weight - switch to Weight Page</strong>: <code>weight</code></p>
+</li>
+<li>
+<p><strong>Weight - add a weight record</strong> <code>addWeight v/VALUE [d/DATE]</code></p>
+</li>
+<li>
+<p><strong>Weight - edit a weight record</strong> <code>editWeight [d/DATE] v/VALUE</code></p>
+</li>
+<li>
+<p><strong>Weight - delete a weight record</strong> <code>deleteWeight [d/DATE]</code></p>
+</li>
+<li>
+<p><strong>Weight - clear all weight records</strong> <code>clearWeight</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Exit the Program</strong>: <code>exit</code> or <code>bye</code> or <code>quit</code></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -213,146 +777,227 @@ Deletes the 2nd sports entry in the sports list from dashboard.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
-<div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">Storage component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram">
+</div>
+<div class="title">Figure 1. Structure of the Storage Component</div>
+</div>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedFitHelper</code>.
-It extends <code>FitHelper</code> with an undo/redo history, stored internally as an <code>fitHelperStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Storage</code> component,</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedFitHelper#commit()</code>&#8201;&#8212;&#8201;Saves the current FitHelper state in its history.</p>
+<p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p><code>VersionedFitHelper#undo()</code>&#8201;&#8212;&#8201;Restores the previous FitHelper state from its history.</p>
+<p>can save the FitHelper data in json format and read it back.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">Common classes</a></h3>
+<div class="paragraph">
+<p>Classes used by multiple components are in the <code>fithelper.commons</code> package.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implementation"><a class="link" href="#implementation">Implementation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes some noteworthy details on how certain features are implemented.</p>
+</div>
+<div class="sect2">
+<h3 id="add-weight-records"><a class="link" href="#add-weight-records">Add Weight Records</a></h3>
+<div class="paragraph">
+<p>FitHelper allows the user to track with their weight change easily by allowing user to add their current weight and previous weight.</p>
+</div>
+<div class="sect3">
+<h4 id="sample"><a class="link" href="#sample">Sample</a></h4>
+<div class="paragraph">
+<p>An example usage scenario and how the <code>addWeight</code> command behaves at each step is shown below.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 1.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user launches the application for the first time.</p>
 </li>
 <li>
-<p><code>VersionedFitHelper#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone FitHelper state from its history.</p>
+<p><code>UniqueWeightList</code> in Model contains no default weights before the user adds any.</p>
+</li>
+<li>
+<p><code>weightrecords.json</code> in local Storage contains no weight records as well.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commit()</code>, <code>Model#undo()</code> and <code>Model#redo()</code> respectively.</p>
+<p><strong>Step 2.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user inputs <code>addWeight</code> command word, followed by <code>v/WEIGHT_VALUE</code> and an optional <code>d/DATE</code>.</p>
+</li>
+<li>
+<p><code>UI</code> passes the input to <code>Logic</code>.</p>
+</li>
+<li>
+<p><code>Logic</code> then uses a few <code>Parser</code> classes to extract layers of information out as seen from steps 3 to 5.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+<p><strong>Step 3.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Logic</code> passes the user input to <code>FitHelperParser</code>.</p>
+</li>
+<li>
+<p><code>FitHelperParser</code> identifies that this is a <code>AddWeightCommand</code> through the command word "addWeight".</p>
+</li>
+<li>
+<p>It then creates a <code>AddWeightCommandParser</code> to parse the input into a <code>AddWeightCommand</code> and return back.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedFitHelper</code> will be initialized with the initial FitHelper state, and the <code>currentStatePointer</code> pointing to that single FitHelper state.</p>
+<p><strong>Step 4.</strong></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState0.png" alt="UndoRedoState0">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete x/f i/5</code> command to delete the 5th food entry in the FitHelper. The <code>delete</code> command calls <code>Model#commit()</code>, causing the modified state of the FitHelper after the <code>delete x/f i/5</code> command executes to be saved in the <code>fitHelperStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted FitHelper state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState1.png" alt="UndoRedoState1">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add x/f n/apple &#8230;&#8203;</code> to add a new food entry. The <code>add</code> command also calls <code>Model#commit()</code>, causing another modified FitHelper state to be saved into the <code>fitHelperStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState2.png" alt="UndoRedoState2">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commit()</code>, so the FitHelper state will not be saved into the <code>fitHelperStateList</code>.
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Logic</code> gets the <code>AddWeightCommand</code> and execute it.</p>
+</li>
+<li>
+<p>The execution firstly check is the new weight date is after today&#8217;s date and if there is already a existing weight in the UniqueList.</p>
+</li>
+<li>
+<p>Both of these two cases will throw corresponding <code>CommandException</code>.</p>
+</li>
+<li>
+<p>Then the execution add the new <code>Weight</code> into model.</p>
+</li>
+<li>
+<p>Finally, it returns a <code>CommandResult</code> to <code>UI</code>, containing the response to the user and the displayPage, which equals to <code>WEIGHT</code> page.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the food entry was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undo()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous FitHelper state, and restores the FitHelper to that state.</p>
+<p><strong>Step 5.</strong></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState3.png" alt="UndoRedoState3">
+<div class="ulist">
+<ul>
+<li>
+<p><code>UI</code> displays the response in the <code>CommandResult</code>.</p>
+</li>
+<li>
+<p>In addition, UI will change to display Weight Page after updating Profile Page and Weight Page.</p>
+</li>
+</ul>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial FitHelper state, then there are no previous FitHelper states to restore. The <code>undo</code> command uses <code>Model#canundo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<div class="sect4">
+<h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
+<div class="paragraph">
+<p>A weight is stored with three attributes in the <code>weightrecords.json</code> database:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>date</code> : the date of the weight record in format of <code>yyyy-MM-dd</code>, if no date is provided by the user, the <strong>default value</strong> is the date of today</p>
+</li>
+<li>
+<p><code>weightValue</code> : a double value with two decimal places.</p>
+</li>
+<li>
+<p><code>bmi</code> : the BMI value is also a double value with two decimal places.
+It is auto-computed and stored, using the formula : <code>BMI = Weight Value(kg) / Height(m)^2</code>.
+The Height value gets from user profile in <code>userprofile.json</code> database.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="model"><a class="link" href="#model">Model</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>A single weight is represented as model <code>Weight</code> with the attributes of <code>Date</code>, <code>WeightValue</code>, and <code>Bmi</code>.<br></p>
+</li>
+<li>
+<p>In <code>ModelManager</code>, all weights are represented by <code>WeightRecords weightRecords</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>WeightRecords</code> class implements <code>ReadOnlyWeightRecords</code> interface, and therefore can return an <strong>unmodifiable</strong> version of a <strong>unique</strong> list of weights.</p>
+</li>
+<li>
+<p>The <code>WeightRecords</code> wraps a <code>UniqueWeightList</code> which allows adding and iterating. <strong>Unique</strong> here refers to the constraint that no two weight with the same date can exist in the list/database.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>In <code>ModelManager</code>, a <code>FilteredList&lt;Weight&gt; filteredWeight</code> object is used to store and update a filtered version of all weights.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The
+<a href="https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/FilteredList.html">FilteredList</a>
+wraps a <code>ObservableList</code> and filters using a provided <code>Predicate</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ui"><a class="link" href="#ui">UI</a></h5>
+<div class="paragraph">
+<p>When user input <code>addWeight</code> command to <code>UI</code>, the input is passed to <code>Logic</code> part as a <code>String</code>.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
+<p>After <code>addWeight</code> command is executed, a <code>CommandResult</code> with <code>DisplayPage</code> equals <code>WEIGHT</code> will be passed back to <code>MainWindow</code> in <code>UI</code> part. Then:</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram">
+<div class="ulist">
+<ul>
+<li>
+<p>Firstly, it will call <code>updateProfilePage()</code>, since if the newly added weight has the lasted date, Current Weight and Current BMI in uer profile will need to be updated.</p>
+</li>
+<li>
+<p>Secondly, it will call <code>updateWeightPage()</code>, since if a new weight is added successfully, new points should be added on to Weight Line Chart and BMI Line Chart.
+The text content of top notification will also be updated if the gap between Current Weight and Target Weight is changed.</p>
+</li>
+<li>
+<p>Lastly, it will call <code>showWeightPage()</code>. This allows the Main Window auto-switch to Weight Page after each <code>addWeight</code> command by user.</p>
+</li>
+</ul>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
+<div class="sect4">
+<h5 id="logic"><a class="link" href="#logic">Logic</a></h5>
+<div class="paragraph">
+<p>The Sequence Diagram below shows how the components interact with each other for the mentioned scenario in sample.</p>
 </div>
 <div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redo()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the FitHelper to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.size() - 1</code>, pointing to the latest FitHelper state, then there are no undone FitHelper states to restore. The <code>redo</code> command uses <code>Model#canRedo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the FitHelper, such as <code>list</code>, will usually not call <code>Model#commit()</code>, <code>Model#undo()</code> or <code>Model#redo()</code>. Thus, the <code>fitHelperStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState4.png" alt="UndoRedoState4">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commit()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>fitHelperStateList</code>, all FitHelper states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState5.png" alt="UndoRedoState5">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+<div class="title">Sequence Diagram for Add Weight Feature</div>
+<p><span class="image"><img src="../images/AddWeightSequenceDiagram.png" alt="AddWeightSequenceDiagram"></span></p>
 </div>
 </div>
 </div>
@@ -360,11 +1005,385 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </div>
 </div>
 <div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
+<h2 id="product-scope"><a class="link" href="#product-scope">Appendix A: Product Scope</a></h2>
 <div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p><strong>Target user profile</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>has a need to control weight, therefore need to record daily food intake and sports</p>
+</li>
+<li>
+<p>prefer desktop apps over other types</p>
+</li>
+<li>
+<p>can type fast</p>
+</li>
+<li>
+<p>prefers typing over mouse input</p>
+</li>
+<li>
+<p>is reasonably comfortable using CLI apps</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Value proposition</strong>: achieve fitness control faster than a typical mouse/GUI driven app</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 13:29:38 UTC</div></div></div></body></html>
+</div>
+<div class="sect1">
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix B: Non Functional Requirements</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.</p>
+</li>
+<li>
+<p>Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage</p>
+</li>
+<li>
+<p>Should be able to function normally without internet access.</p>
+</li>
+<li>
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li>
+<p>A user can get response from the system within 5 seconds after command input.</p>
+</li>
+<li>
+<p>A user can be familiar with the system commands and interface within half an hour usage.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{More to be added}</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">Appendix C: Glossary</a></h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
+<dd>
+<p>Windows, Linux, Unix, OS-X</p>
+</dd>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Command Prefix</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+<th class="tableblock halign-left valign-top">Used in the following Command(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, check, delete, edit, find</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Index of entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit, delete, edit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">n/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time in format of "date hour minute"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">l/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">c/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calorie</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">r/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date in format of <strong>yyyy-MM-dd</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">calendar, addWeight</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dr/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duration in format of <strong>yyyy-MM-dd yyyy-MM-dd</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add, edit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dc/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dairy contents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dairy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">k/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check, find</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attr/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute in user profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute Value in user profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update, addWeight</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Possible Command Flags</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Flag</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-a</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort in <strong>ascending</strong> order</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-d</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort in <strong>descending</strong> order</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort according to <strong>time</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-c</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort according to <strong>calorie intake</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-f</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Force update</strong> even with existing value</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix D: Instructions for Manual Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Given below are instructions to test the app manually.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">Launch and Shutdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Initial launch</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Download the jar file and copy into an empty folder</p>
+</li>
+<li>
+<p>Double-click the jar file<br>
+Expected: Shows the welcome page of FitHelper. On the left hand side, the user can see a list of page name. Users are able to click on the button or using corresponding command to direct to that page.</p>
+</li>
+<li>
+<p>The window size is fixed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Shutdown</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Users are able to shutdown the application using CLI with following commands:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>exit</code></p>
+</li>
+<li>
+<p><code>quit</code></p>
+</li>
+<li>
+<p><code>bye</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Users can also choose to shutdown the application by clicking on X button on the right top side if the window.</p>
+</li>
+<li>
+<p>User data will be auto-saved if user choose to shutdown the application. Three local data file in json format can be find:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fithelper.json</code> : containg data related to entries and diaries.</p>
+</li>
+<li>
+<p><code>userprofile.json</code> : containing data related to user profile.</p>
+</li>
+<li>
+<p><code>weightrecords.json</code> : containing data related to all weight records.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-new-weight-record"><a class="link" href="#adding-a-new-weight-record">Adding A New Weight Record</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add <strong>first weight record</strong> while there is no previous weight record in the database.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: None. Users are able to use <code>addWeight</code> command at any page.</p>
+</li>
+<li>
+<p>Test case: <code>addWeight v/50.0</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A new <code>Weight</code> is added into <code>weightrecords</code> database, with <code>WeightValue</code> equals 50.0, <code>Date</code> with default value(today&#8217;s date) and <code>BMI</code> calculated by <code>Height</code>.</p>
+</li>
+<li>
+<p>The window is automatically directed to weight page. A new point is shown on both Weight Line Graph and BMI Line Graph. The top notification is also updated.</p>
+</li>
+<li>
+<p>In profile page, Current Weight and Current BMI change from "Not Available Now" to the newest value.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test case: <code>addWeight v/49.0 d/2050-01-01</code><br>
+Expected: No new weight record is added since the date is after current date. An error message is shown in the command result box.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Add new weight record when there is already <strong>some previous weight records existing</strong> in the database.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: None. Users are able to use <code>addWeight</code> command at any page.</p>
+</li>
+<li>
+<p>Test case: <code>addWeight v/48.0</code><br>
+Expected: No new weight record is added since there is existing weight record with the same date (by default is today&#8217;s date) in the data base. An error message is shown in the command result box.</p>
+</li>
+<li>
+<p>Test case : <code>addWeight v/47.0 d/2020-03-01</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A new <code>Weight</code> is added into <code>weightrecords</code> database, with <code>WeightValue</code> equals 47.0, <code>Date</code> with 2020-03-01 and <code>BMI</code> calculated by <code>Height</code>.</p>
+</li>
+<li>
+<p>The window is automatically directed to weight page. A new point is shown on both Weight Line Graph and BMI Line Graph, and form a new trend line with previous data points. The top notification is also updated.</p>
+</li>
+<li>
+<p>In profile page, Current Weight and Current BMI remain the same, since the newly added weight record is not the most recent record in the database.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">Saving data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dealing with missing/corrupted data files</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If the application is launched and shut down at least once, there will be three local database in json format.</p>
+</li>
+<li>
+<p>Delete <code>fithelper.json</code>, and launch FitHelper again. All user manipulation on entries and diaries will be cleared. <code>Dashboard</code>, <code>Today</code>, <code>Calendar</code> and <code>Diary</code> Page will restart with sample data.</p>
+</li>
+<li>
+<p>Delete <code>userprofile.json</code>, and launch FitHelper again. All user manipulation on user profile will be clear. <code>Profile</code> page will restart with sample user data.</p>
+</li>
+<li>
+<p>Delete <code>weightrecords.json</code>, and launch FitHelper again. All user manipulation on weight records will be clear. <code>Profile</code> page will show Current Weight and Current BMI as "Not Available Now", and <code>Weight</code> Page will have no data point on the trend line graph.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 15:21:15 UTC</div></div></div></body></html>
