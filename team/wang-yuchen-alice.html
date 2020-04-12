@@ -209,11 +209,25 @@ FitHelper accepts duplicate fields, but only the last value specified under this
 <p><code>add x/s n/running t/2020-04-10-18:00 l/utown gym c/500 r/relly fun</code></p>
 </li>
 <li>
-<p><code>add x/f n/chicken rice t/2020-04-10-11:00 l/Super Snacks c/200 r/cheap and yummy</code>
-==== Editing an entry : <code>edit</code></p>
+<p><code>add x/f n/chicken rice t/2020-04-10-11:00 l/Super Snacks c/200 r/cheap and yummy</code></p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add.png" alt="add">
+</div>
+<div class="title">Figure 1. Add Command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add2.png" alt="add2">
+</div>
+<div class="title">Figure 2. Add Command Result</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">Editing an entry : <code>edit</code></a></h4>
 <div class="paragraph">
 <p>Edits an existing entry in the fitness log book.<br>
 Format: <code>edit x/TYPE i/INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK] [dr/DURATION]&#8230;&#8203;</code></p>
@@ -255,6 +269,18 @@ Edits the time and email location of the 1st entry to be <code>Friday 4pm</code>
 Edits the name of the 2nd entry from food entry list to be <code>Fries</code> and clears all existing remarks.</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/edit.png" alt="edit">
+</div>
+<div class="title">Figure 3. Edit Command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/edit2.png" alt="edit2">
+</div>
+<div class="title">Figure 4. Edit Command Result</div>
 </div>
 <div class="sect4">
 <h5 id="mark-an-entry-as-done"><a class="link" href="#mark-an-entry-as-done">Mark an entry as done</a></h5>
@@ -311,12 +337,28 @@ calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete x/sports index/2</code>
-Deletes the 2nd sports entry in the sports list from dashboard.
-=== Clear All Entries And Diaries: <code>clear</code></p>
+<p><code>delete x/sports i/2</code>
+Deletes the 2nd sports entry in the sports list from dashboard.</p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete.png" alt="delete">
+</div>
+<div class="title">Figure 5. Delete Command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete2.png" alt="delete2">
+</div>
+<div class="title">Figure 6. Delete Command Result</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clear-all-entries-and-diaries-code-clear-code"><a class="link" href="#clear-all-entries-and-diaries-code-clear-code">Clear All Entries And Diaries: <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries and diaries from the fitness log book.<br></p>
 </div>
@@ -389,10 +431,8 @@ Format: <code>reminders</code></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
 <div class="sect3">
-<h4 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">Editing an entry : <code>edit</code></a></h4>
+<h4 id="editing-an-entry-code-edit-code-2"><a class="link" href="#editing-an-entry-code-edit-code-2">Editing an entry : <code>edit</code></a></h4>
 <div class="paragraph">
 <p>Edits an existing entry in the fitness log book.<br>
 Format: <code>edit x/TYPE i/INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK] [dr/DURATION]&#8230;&#8203;</code></p>
@@ -434,6 +474,18 @@ Edits the time and email location of the 1st entry to be <code>Friday 4pm</code>
 Edits the name of the 2nd entry from food entry list to be <code>Fries</code> and clears all existing remarks.</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/edit.png" alt="edit">
+</div>
+<div class="title">Figure 7. Edit Command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/edit2.png" alt="edit2">
+</div>
+<div class="title">Figure 8. Edit Command Result</div>
 </div>
 <div class="sect4">
 <h5 id="mark-an-entry-as-done-2"><a class="link" href="#mark-an-entry-as-done-2">Mark an entry as done</a></h5>
@@ -539,10 +591,22 @@ calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete x/sports index/2</code>
+<p><code>delete x/sports i/2</code>
 Deletes the 2nd sports entry in the sports list from dashboard.</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete.png" alt="delete">
+</div>
+<div class="title">Figure 9. Delete Command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete2.png" alt="delete2">
+</div>
+<div class="title">Figure 10. Delete Command Result</div>
 </div>
 </div>
 <div class="sect3">
@@ -833,7 +897,7 @@ The user can always revoke the clearing command by calling <code>undo</code>, wh
 </div>
 </div>
 <div class="sect2">
-<h3 id="clear-all-entries-and-diaries-code-clear-code"><a class="link" href="#clear-all-entries-and-diaries-code-clear-code">Clear All Entries And Diaries: <code>clear</code></a></h3>
+<h3 id="clear-all-entries-and-diaries-code-clear-code-2"><a class="link" href="#clear-all-entries-and-diaries-code-clear-code-2">Clear All Entries And Diaries: <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries and diaries from the fitness log book.<br></p>
 </div>
@@ -920,8 +984,10 @@ This <code>undo</code> commands adds the diary log back to FitHelper.</p>
 <p>Calendar view will display all the food and sports entries for each day of the referenced week/month. The referenced date is default set to be the current date, but can be changed to a user given date. Calendar can be switched between two modes, list mode or timetable mode, with default set to be in timetable mode.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>For list mode</strong>:</p>
+<p>Format for entering calendar view: <code>calendar</code></p>
 </div>
+<div class="sect3">
+<h4 id="calendar-list-mode-code-calendar-m-ls-d-date-code"><a class="link" href="#calendar-list-mode-code-calendar-m-ls-d-date-code">Calendar list mode: <code>calendar m/ls [d/DATE]</code></a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -933,14 +999,23 @@ The lists of entries for food and sports are display by their given dates in the
 On the top right corner, the dates of the referenced month displayed, with red-colored date if the given date has more calorie intake than calorie burnt (considering the entries with status done of that particular date), else if calorie burnt is greater than calorie intake, the font color is green. Default color is blue. For each date, upon clicking, a popup window will show all entries of the date. The ones with strikethrough in text means the status of the entry is done. For this functionality, the corresponding command is <code>calendar sh/DATE</code>.</p>
 </li>
 <li>
-<p><strong>Daily tasks completion status</strong><br>
-On the bottom right corner, completion status for existing entries will be displayed by their dates, showing the calorie intake from food, calorie burnt from sports as well as total calorie. The calculation only considers entries which are completed.</p>
+<p><strong>Daily calorie status</strong><br>
+On the bottom right corner, calorie status for existing entries will be displayed by their dates, showing the calorie intake from food, calorie burnt from sports as well as total calorie. The calculation only considers entries which are completed.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>For timetable mode:</strong><br></p>
+<p>Format for switching to list mode: <code>calendar m/ls [d/DATE]</code></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/calendarls.png" alt="calendarls">
+</div>
+<div class="title">Figure 11. Calendar list mode</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="calendar-timetable-mode-code-calendar-m-tb-d-date-code"><a class="link" href="#calendar-timetable-mode-code-calendar-m-tb-d-date-code">Calendar timetable mode: <code>calendar m/tb [d/DATE]</code></a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -953,16 +1028,25 @@ Same as above.</p>
 </li>
 <li>
 <p><strong>Upcoming list</strong><br>
-It displays all entries after the current date and time and within the referenced month. Only entries with status "undone" will be shown. So if the referenced month is in the past, no entries will be shown.<br></p>
+It displays all entries after the current date and time and within the referenced month. Only entries with status <code>Undone</code> will be shown. So if the referenced month is in the past, no entries will be shown.<br>
+Format for switching to timetable mode: <code>calendar m/tb [d/DATE]</code></p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/calendartb.png" alt="calendartb">
+</div>
+<div class="title">Figure 12. Calendar timetable mode</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="calendar-display-entries-from-a-day-code-calendar-sh-date-code"><a class="link" href="#calendar-display-entries-from-a-day-code-calendar-sh-date-code">Calendar display entries from a day: <code>calendar sh/DATE</code></a></h4>
 <div class="paragraph">
-<p>Format for entering calendar view: <code>calendar</code><br>
-Format for switching to timetable mode: <code>calendar m/tb</code><br>
-Format for switching to list mode: <code>calendar m/ls</code><br>
-Format for changing the referenced date: <code>calendar d/DATE</code><br>
-Format for showing entries of a particular date: <code>calendar sh/DATE</code></p>
+<p>A pop up window will display all entries from the chosen date.</p>
+</div>
+<div class="paragraph">
+<p>Format for showing entries of a particular date: <code>calendar sh/DATE</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -970,12 +1054,16 @@ Format for showing entries of a particular date: <code>calendar sh/DATE</code></
 <div class="ulist">
 <ul>
 <li>
+<p><code>calendar d/2020-04-15</code></p>
+</li>
+<li>
 <p><code>calendar m/ls d/2020-04-20</code></p>
 </li>
 <li>
 <p><code>calendar sh/2020-05-01</code></p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1630,8 +1718,10 @@ This <code>undo</code> commands adds the diary log back to FitHelper.</p>
 <p>Calendar view will display all the food and sports entries for each day of the referenced week/month. The referenced date is default set to be the current date, but can be changed to a user given date. Calendar can be switched between two modes, list mode or timetable mode, with default set to be in timetable mode.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>For list mode</strong>:</p>
+<p>Format for entering calendar view: <code>calendar</code></p>
 </div>
+<div class="sect3">
+<h4 id="calendar-list-mode-code-calendar-m-ls-d-date-code-2"><a class="link" href="#calendar-list-mode-code-calendar-m-ls-d-date-code-2">Calendar list mode: <code>calendar m/ls [d/DATE]</code></a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1643,14 +1733,23 @@ The lists of entries for food and sports are display by their given dates in the
 On the top right corner, the dates of the referenced month displayed, with red-colored date if the given date has more calorie intake than calorie burnt (considering the entries with status done of that particular date), else if calorie burnt is greater than calorie intake, the font color is green. Default color is blue. For each date, upon clicking, a popup window will show all entries of the date. The ones with strikethrough in text means the status of the entry is done. For this functionality, the corresponding command is <code>calendar sh/DATE</code>.</p>
 </li>
 <li>
-<p><strong>Daily tasks completion status</strong><br>
-On the bottom right corner, completion status for existing entries will be displayed by their dates, showing the calorie intake from food, calorie burnt from sports as well as total calorie. The calculation only considers entries which are completed.</p>
+<p><strong>Daily calorie status</strong><br>
+On the bottom right corner, calorie status for existing entries will be displayed by their dates, showing the calorie intake from food, calorie burnt from sports as well as total calorie. The calculation only considers entries which are completed.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>For timetable mode:</strong><br></p>
+<p>Format for switching to list mode: <code>calendar m/ls [d/DATE]</code></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/calendarls.png" alt="calendarls">
+</div>
+<div class="title">Figure 13. Calendar list mode</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="calendar-timetable-mode-code-calendar-m-tb-d-date-code-2"><a class="link" href="#calendar-timetable-mode-code-calendar-m-tb-d-date-code-2">Calendar timetable mode: <code>calendar m/tb [d/DATE]</code></a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1663,16 +1762,25 @@ Same as above.</p>
 </li>
 <li>
 <p><strong>Upcoming list</strong><br>
-It displays all entries after the current date and time and within the referenced month. Only entries with status "undone" will be shown. So if the referenced month is in the past, no entries will be shown.<br></p>
+It displays all entries after the current date and time and within the referenced month. Only entries with status <code>Undone</code> will be shown. So if the referenced month is in the past, no entries will be shown.<br>
+Format for switching to timetable mode: <code>calendar m/tb [d/DATE]</code></p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/calendartb.png" alt="calendartb">
+</div>
+<div class="title">Figure 14. Calendar timetable mode</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="calendar-display-entries-from-a-day-code-calendar-sh-date-code-2"><a class="link" href="#calendar-display-entries-from-a-day-code-calendar-sh-date-code-2">Calendar display entries from a day: <code>calendar sh/DATE</code></a></h4>
 <div class="paragraph">
-<p>Format for entering calendar view: <code>calendar</code><br>
-Format for switching to timetable mode: <code>calendar m/tb</code><br>
-Format for switching to list mode: <code>calendar m/ls</code><br>
-Format for changing the referenced date: <code>calendar d/DATE</code><br>
-Format for showing entries of a particular date: <code>calendar sh/DATE</code></p>
+<p>A pop up window will display all entries from the chosen date.</p>
+</div>
+<div class="paragraph">
+<p>Format for showing entries of a particular date: <code>calendar sh/DATE</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1680,12 +1788,16 @@ Format for showing entries of a particular date: <code>calendar sh/DATE</code></
 <div class="ulist">
 <ul>
 <li>
+<p><code>calendar d/2020-04-15</code></p>
+</li>
+<li>
 <p><code>calendar m/ls d/2020-04-20</code></p>
 </li>
 <li>
 <p><code>calendar sh/2020-05-01</code></p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2687,7 +2799,7 @@ This execution then returns a <code>CommandResult</code> to <code>UI</code>, con
 <div class="content">
 <img src="../images/InitiateTodayPageSequenceDiagram.png" alt="InitiateTodayPageSequenceDiagram">
 </div>
-<div class="title">Figure 1. Sequence Diagram for Today Feature</div>
+<div class="title">Figure 15. Sequence Diagram for Today Feature</div>
 </div>
 </div>
 </div>
@@ -2777,7 +2889,7 @@ In addition, UI will change to display diaries after model updates <code>filtere
 <div class="content">
 <img src="../images/DiarySequenceDiagram.png" alt="DiarySequenceDiagram">
 </div>
-<div class="title">Figure 2. Sequence Diagram for Diary Feature</div>
+<div class="title">Figure 16. Sequence Diagram for Diary Feature</div>
 </div>
 </div>
 </div>
@@ -2933,20 +3045,33 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The user enters a view command in the <code>calendar d/tmr</code>.</p>
+<p>The user enters a view command in the <code>calendar d/2020-04-13</code>.</p>
 </li>
 <li>
 <p><code>LogicManager</code> parses the user input, constructs and executes the <code>CalendarCommand</code>.</p>
 </li>
 <li>
-<p>The <code>CalendarCommand</code> reaches <code>setCalendarDate</code> in the <code>Model</code> and returns the <code>CommandResult</code> to the <code>LogicManager</code>.</p>
+<p>The <code>CalendarCommand</code> reaches <code>setCalendarDate</code>, <code>setCalendarMode</code>, <code>setCalendarShow</code> in the <code>Model</code> and returns the <code>CommandResult</code> to the <code>LogicManager</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#setCalendarDate()</code>&#8201;&#8212;&#8201;Set the referenced date for calendar, default set to current date.</p>
+</li>
+<li>
+<p><code>Model#setCalendarMode()</code>&#8201;&#8212;&#8201;Set the calendar display mode, can be either <code>list</code> or <code>calendar</code> mode.</p>
+</li>
+<li>
+<p><code>Model#setCalendarShow()</code>&#8201;&#8212;&#8201;Set the display of entries of a particular date, default set to <code>null</code>.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>The <code>LogicManager</code> returns the <code>CommandResult</code> to the <code>Ui</code>.</p>
 </li>
 <li>
-<p>The <code>Ui</code> gets the <code>date</code> from <code>LogicManager</code> and updates the Ui to display the module.
-The following sequence diagram shows how the update operation works to change calendar page in model:</p>
+<p>The <code>Ui</code> gets the <code>CommandResult</code> from <code>LogicManager</code> and updates the Ui to display the module.
+The following sequence diagram shows how the update operation works to change calendar page:</p>
 </li>
 </ol>
 </div>
@@ -2954,13 +3079,13 @@ The following sequence diagram shows how the update operation works to change ca
 <div class="content">
 <img src="../images/CalendarSequenceDiagram.png" alt="CalendarSequenceDiagram">
 </div>
-<div class="title">Figure 3. CalendarCommand Sequence Diagram</div>
+<div class="title">Figure 17. CalendarCommand Sequence Diagram</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/CalendarClassDiagram.png" alt="CalendarClassDiagram">
 </div>
-<div class="title">Figure 4. CalendarCommand Class Diagram</div>
+<div class="title">Figure 18. CalendarCommand Class Diagram</div>
 </div>
 </div>
 <div class="sect3">
@@ -4252,4 +4377,4 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 10:25:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 11:55:01 UTC</div></div></div></body></html>

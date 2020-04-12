@@ -863,20 +863,33 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The user enters a view command in the <code>calendar d/tmr</code>.</p>
+<p>The user enters a view command in the <code>calendar d/2020-04-13</code>.</p>
 </li>
 <li>
 <p><code>LogicManager</code> parses the user input, constructs and executes the <code>CalendarCommand</code>.</p>
 </li>
 <li>
-<p>The <code>CalendarCommand</code> reaches <code>setCalendarDate</code> in the <code>Model</code> and returns the <code>CommandResult</code> to the <code>LogicManager</code>.</p>
+<p>The <code>CalendarCommand</code> reaches <code>setCalendarDate</code>, <code>setCalendarMode</code>, <code>setCalendarShow</code> in the <code>Model</code> and returns the <code>CommandResult</code> to the <code>LogicManager</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#setCalendarDate()</code>&#8201;&#8212;&#8201;Set the referenced date for calendar, default set to current date.</p>
+</li>
+<li>
+<p><code>Model#setCalendarMode()</code>&#8201;&#8212;&#8201;Set the calendar display mode, can be either <code>list</code> or <code>calendar</code> mode.</p>
+</li>
+<li>
+<p><code>Model#setCalendarShow()</code>&#8201;&#8212;&#8201;Set the display of entries of a particular date, default set to <code>null</code>.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>The <code>LogicManager</code> returns the <code>CommandResult</code> to the <code>Ui</code>.</p>
 </li>
 <li>
-<p>The <code>Ui</code> gets the <code>date</code> from <code>LogicManager</code> and updates the Ui to display the module.
-The following sequence diagram shows how the update operation works to change calendar page in model:</p>
+<p>The <code>Ui</code> gets the <code>CommandResult</code> from <code>LogicManager</code> and updates the Ui to display the module.
+The following sequence diagram shows how the update operation works to change calendar page:</p>
 </li>
 </ol>
 </div>
@@ -2028,4 +2041,4 @@ Expected:</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 10:25:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 11:55:01 UTC</div></div></div></body></html>
