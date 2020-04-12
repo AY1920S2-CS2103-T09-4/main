@@ -173,32 +173,27 @@
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="keep-food-and-sports-entries"><a class="link" href="#keep-food-and-sports-entries">Keep Food and Sports Entries</a></h3>
 <div class="sect3">
 <h4 id="adding-an-entry-code-add-code"><a class="link" href="#adding-an-entry-code-add-code">Adding an entry: <code>add</code></a></h4>
 <div class="paragraph">
 <p>Adds an entry to the fitness log book. The entry added will be displayed in DashBoard, Calendar
-and possibly Today Page (if its date is today) immediately after the command is executed.
-No entry can have time clashes. If a duration of an entry is not specified, default duration is set to 1 hour.<br>
+and possibly Today Page (if its date is today) immediately after the command is executed.<br>
 Note that due to space constraint, entry card in DashBoard and Today page will only display
 first 14 characters of its name and first 21 characters of its location. The entry icon in
 Calendar Page are even more constrained.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-FitHelper accepts duplicate fields, but only the last value specified under this field will be taken.
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p>FitHelper accepts duplicate fields, but only the last value specified under this field will be taken.*</p>
+</li>
+<li>
+<p>Default value for unspecified optional field: <code>status</code> : Undone; <code>duration</code>: 1 hr*</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Format: <code>add x/TYPE n/NAME t/DATETIME l/LOCATION c/CALORIE [dr/DURATION] [r/REMARK]&#8230;&#8203;</code></p>
+<p>Format: <code>add x/TYPE n/NAME t/DATETIME l/LOCATION c/CALORIE [dr/DURATION]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -206,10 +201,10 @@ FitHelper accepts duplicate fields, but only the last value specified under this
 <div class="ulist">
 <ul>
 <li>
-<p><code>add x/s n/running t/2020-04-10-18:00 l/utown gym c/500 r/relly fun</code></p>
+<p><code>add x/s n/running t/2020-04-10-18:00 l/utown gym c/500</code></p>
 </li>
 <li>
-<p><code>add x/f n/chicken rice t/2020-04-10-11:00 l/Super Snacks c/200 r/cheap and yummy</code></p>
+<p><code>add x/f n/chicken rice t/2020-04-10-11:00 l/Super Snacks c/200</code></p>
 </li>
 </ul>
 </div>
@@ -229,58 +224,38 @@ FitHelper accepts duplicate fields, but only the last value specified under this
 <div class="sect3">
 <h4 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">Editing an entry : <code>edit</code></a></h4>
 <div class="paragraph">
-<p>Edits an existing entry in the fitness log book.<br>
-Format: <code>edit x/TYPE i/INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK] [dr/DURATION]&#8230;&#8203;</code></p>
+<p>Edits an existing entry in the fitness log book with the specified values.<br>
+Format: <code>edit x/TYPE i/INDEX [s/STATUS] [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE][dr/DURATION]&#8230;&#8203;</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the entry at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed corresponding entry list from the dashboard. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
 <p>At least one of the optional fields must be provided.</p>
 </li>
 <li>
-<p>Existing values will be updated to the input values.</p>
+<p>If the user is currently in other pages, a successful execution of <code>edit</code> will switch the page to the dashboard.</p>
 </li>
 <li>
-<p>When editing remarks, the existing remarks of the entry will be removed i.e adding of remarks is not cumulative.</p>
+<p>To obtain accurate indices, the user should first switch to the home page by calling <code>home</code> or <code>list</code> and refer to the displayed list in <code>food entry history</code> and <code>sport entry history</code> fields.</p>
 </li>
 <li>
-<p>You can remove all the entry&#8217;s remarks by typing <code>r/</code> without specifying any remarks after it.</p>
+<p>Additionally, the user can first called <code>find</code> command and then refer to the resulting list&#8217;s indices to <code>edit</code> an entry. However, right after a <code>find</code>, the user can only refer to entries that are currently displayed.<br>
+i.e. If there are 5 food entries in total, and after <code>find</code> 2 food entries are displayed. If the user does not switch back to the home page, he can only refer to the displayed 2 entries (with indices 1 and 2). He can <code>edit</code> any entries only when he turns to home page after the <code>find</code>.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edit x/s i/1 t/Friday 16:00 l/PGP gym</code><br>
+<p>Examples:
+(after switching to Home Page)
+* <code>edit x/s i/1 t/Friday 16:00 l/PGP gym</code><br>
 Edits the time and email location of the 1st entry to be <code>Friday 4pm</code> and <code>PGP gym</code> respectively.</p>
-</li>
-<li>
-<p><code>edit x/f i/2 n/Fries r/</code><br>
-Edits the name of the 2nd entry from food entry list to be <code>Fries</code> and clears all existing remarks.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/edit.png" alt="edit">
-</div>
-<div class="title">Figure 3. Edit Command</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/edit2.png" alt="edit2">
-</div>
-<div class="title">Figure 4. Edit Command Result</div>
 </div>
 <div class="sect4">
 <h5 id="mark-an-entry-as-done"><a class="link" href="#mark-an-entry-as-done">Mark an entry as done</a></h5>
@@ -293,36 +268,26 @@ Format: <code>edit x/TYPE i/INDEX s/Done</code></p>
 <h5 id="mark-an-entry-as-undone"><a class="link" href="#mark-an-entry-as-undone">Mark an entry as undone</a></h5>
 <div class="paragraph">
 <p>Similar to the previous command, marking an entry as undone edits the <code>s/</code> field and modify it as <code>Undone</code>.
-Format: <code>edit x/TYPE i/INDEX s/Undone</code>
-==== Deleting an entry : <code>delete</code></p>
+Format: <code>edit x/TYPE i/INDEX s/Undone</code></p>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">Deleting an entry : <code>delete</code></a></h4>
 <div class="paragraph">
-<p>Deletes the specified entry from the fitness log book.<br>
+<p>Deletes the entry at the specified <code>INDEX</code> from the fitness log book.<br>
 Format: <code>delete x/TYPE i/INDEX</code></p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-If <code>delete</code> is called right after a <code>find</code> command (when a shortened list is displayed), the index follows the current list view
-after executing <code>find</code> command. i.e. If entry X originally has an index 3 and currently has an index 1 after the <code>find</code> command,
-calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
-</td>
-</tr>
-</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the entry at the specified <code>INDEX</code>.</p>
+<p>To obtain accurate indices, the user should first switch to the home page by calling <code>home</code> or <code>list</code> and refer to the displayed list in <code>food entry history</code> and <code>sport entry history</code> fields.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the displayed entry list.</p>
+<p>Additionally, the user can first called a <code>find</code> and then refer to the resulting list&#8217;s indices to <code>delete</code> an entry. However, right after a <code>find</code>, the user can only refer to entries that are currently displayed.<br>
+i.e. If there are 5 food entries in total, and after <code>find</code> 2 food entries are displayed. If the user does not switch back to the home page, he can only refer to the displayed 2 entries (with indices 1 and 2).</p>
 </li>
 <li>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
@@ -337,28 +302,12 @@ calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete x/sports i/2</code>
-Deletes the 2nd sports entry in the sports list from dashboard.</p>
+<p><code>delete x/sports index/2</code>
+Deletes the 2nd sports entry in the sports list from dashboard.
+=== Clear All Entries And Diaries: <code>clear</code></p>
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete.png" alt="delete">
-</div>
-<div class="title">Figure 5. Delete Command</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete2.png" alt="delete2">
-</div>
-<div class="title">Figure 6. Delete Command Result</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="clear-all-entries-and-diaries-code-clear-code"><a class="link" href="#clear-all-entries-and-diaries-code-clear-code">Clear All Entries And Diaries: <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries and diaries from the fitness log book.<br></p>
 </div>
@@ -383,19 +332,19 @@ If the <code>TYPE</code> field is empty, FitHelper will search from the whole li
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>apples</code> will match <code>Apples</code></p>
+<p>The search is case insensitive. e.g <code>apples</code> will match <code>Apples</code>.</p>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Apple Pie</code> will match <code>Pie Apple</code></p>
+<p>The order of the keywords does not matter. e.g. <code>Apple Pie</code> will match <code>Pie Apple</code>.</p>
 </li>
 <li>
 <p>Only the name is searched.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Straw</code> will not match <code>Strawberries</code></p>
+<p>Only full words will be matched e.g. <code>Straw</code> will not match <code>Strawberries</code>.</p>
 </li>
 <li>
-<p>Entries matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Apple Banana</code> will return <code>Apple Pie</code>, <code>Banana Milkshake</code></p>
+<p>Entries matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Apple Banana</code> will return <code>Apple Pie</code>, <code>Banana Milkshake</code>.</p>
 </li>
 </ul>
 </div>
@@ -418,491 +367,8 @@ Returns any entry having names <code>Juice</code>,  or <code>Apple</code>
 </ul>
 </div>
 <div class="paragraph">
-<p>Shows a list of all undone tasks in the fitness log book, which can be seen from a fixed field in the home page.<br>
-Format: <code>reminders</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>reminder</code></p>
-</li>
-</ul>
-</div>
-<div class="sect3">
-<h4 id="editing-an-entry-code-edit-code-2"><a class="link" href="#editing-an-entry-code-edit-code-2">Editing an entry : <code>edit</code></a></h4>
-<div class="paragraph">
-<p>Edits an existing entry in the fitness log book.<br>
-Format: <code>edit x/TYPE i/INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/REMARK] [dr/DURATION]&#8230;&#8203;</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Edits the entry at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed corresponding entry list from the dashboard. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-<li>
-<p>When editing remarks, the existing remarks of the entry will be removed i.e adding of remarks is not cumulative.</p>
-</li>
-<li>
-<p>You can remove all the entry&#8217;s remarks by typing <code>r/</code> without specifying any remarks after it.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edit x/s i/1 t/Friday 16:00 l/PGP gym</code><br>
-Edits the time and email location of the 1st entry to be <code>Friday 4pm</code> and <code>PGP gym</code> respectively.</p>
-</li>
-<li>
-<p><code>edit x/f i/2 n/Fries r/</code><br>
-Edits the name of the 2nd entry from food entry list to be <code>Fries</code> and clears all existing remarks.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/edit.png" alt="edit">
-</div>
-<div class="title">Figure 7. Edit Command</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/edit2.png" alt="edit2">
-</div>
-<div class="title">Figure 8. Edit Command Result</div>
-</div>
-<div class="sect4">
-<h5 id="mark-an-entry-as-done-2"><a class="link" href="#mark-an-entry-as-done-2">Mark an entry as done</a></h5>
-<div class="paragraph">
-<p>Users can mark an entry as done, either a meal or sports, where the calories intake and consumption will be taken in to consideration.
-Format: <code>edit x/TYPE i/INDEX s/Done</code></p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="mark-an-entry-as-undone-2"><a class="link" href="#mark-an-entry-as-undone-2">Mark an entry as undone</a></h5>
-<div class="paragraph">
-<p>Similar to the previous command, marking an entry as undone edits the <code>s/</code> field and modify it as <code>Undone</code>.
-Format: <code>edit x/TYPE i/INDEX s/Undone</code></p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">Locating entries by name: <code>find</code></a></h4>
-<div class="paragraph">
-<p>Finds entries whose names contain any of the given keywords.<br>
-Format: <code>find [x/TYPE] k/ONE_OR_MORE_KEYWORDS</code>
-If the <code>TYPE</code> field is empty, FitHelper will search from the whole list.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>apples</code> will match <code>Apples</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Apple Pie</code> will match <code>Pie Apple</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Straw</code> will not match <code>Strawberries</code></p>
-</li>
-<li>
-<p>Entries matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Apple Banana</code> will return <code>Apple Pie</code>, <code>Banana Milkshake</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find x/s k/running</code><br>
-Returns <code>running</code> and <code>slow running</code></p>
-</li>
-<li>
-<p><code>find x/food k/Juice Apple</code><br>
-Returns any entry having names <code>Juice</code>,  or <code>Apple</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">Deleting an entry : <code>delete</code></a></h4>
-<div class="paragraph">
-<p>Deletes the specified entry from the fitness log book.<br>
-Format: <code>delete x/TYPE i/INDEX</code></p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-If <code>delete</code> is called right after a <code>find</code> command (when a shortened list is displayed), the index follows the current list view
-after executing <code>find</code> command. i.e. If entry X originally has an index 3 and currently has an index 1 after the <code>find</code> command,
-calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
-</td>
-</tr>
-</table>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the entry at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed entry list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete x/sports i/2</code>
-Deletes the 2nd sports entry in the sports list from dashboard.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete.png" alt="delete">
-</div>
-<div class="title">Figure 9. Delete Command</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete2.png" alt="delete2">
-</div>
-<div class="title">Figure 10. Delete Command Result</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="sort-food-sports-entry-list-code-sort-code"><a class="link" href="#sort-food-sports-entry-list-code-sort-code">Sort food/sports entry list: <code>sort</code></a></h4>
-<div class="paragraph">
-<p>Sorts food or sports entry list, or both of them, based on starting time or
-calorie value or name of the entry (case insensitive), in either ascending or descending order.
-In addition, the reminders entry list will also be sorted in the same manner specified by the user.
-The user must specify the sorting criterion <code>cal/c OR time/t OR name/n</code>.
-If the user does not specify the type of entry list, both lists will be sorted.
-And if the user does not specify the sorting order <code>a OR d</code>,
-the default order is descending (i.e. entry that starts later
-or entry with higher calorie value or entry whose name starts with
-later alphabet comes first).</p>
-</div>
-<div class="paragraph">
-<p>format: <code>sort [x/TYPE] by/SORT_BY [o/ORDER]</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>sort x/f by/time o/a</code> (sort food entry list and reminders list in ascending order of recording time,
-i.e. the older entry comes first)</p>
-</li>
-<li>
-<p><code>sort by/c</code> (sort both food and sports entry list, as well as reminders list,
-in descending order of calorie value, i.e. entry with higher calorie intake/consumption comes first)</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="check-calorie-intake-consumption-of-common-food-sports-code-check-code"><a class="link" href="#check-calorie-intake-consumption-of-common-food-sports-code-check-code">Check calorie intake/consumption of common food/sports: <code>check</code></a></h4>
-<div class="paragraph">
-<p>Searches through the pre-set database for calorie intake/consumption information
-about common food/sports (i.e. a datum) whose name matches/contains keywords specified by the user.
-Note that due to space constraint, at most 3 matching data will be shown
-at the left-bottom corner of the application. Each datum shows the name of
-the food/sports and its calorie intake/consumption information: for food, it will be
-in cal per serving (weight per serving in gram will also be shown); for sports, it will
-be in cal per hour. The searching works as follows:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Retrieves food/sports data based on check type specified by the user.</p>
-</li>
-<li>
-<p>Checks and adds food/sports datum whose name <strong>equals one of the keywords</strong>.</p>
-</li>
-<li>
-<p>If fewer than 3 food/sports data are added so far, checks and adds food/sports datum
-whose name <strong>contains the keywords as a whole</strong>.</p>
-</li>
-<li>
-<p>If still fewer than 3 food/sports data are added so far, checks and adds food/sports datum
-whose name <strong>contains one of the keywords</strong>.</p>
-</li>
-<li>
-<p>If no datum is added after all the steps, replies user that search failed.
-Otherwise, shows user the data.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>format: <code>check x/TYPE k/ONE_OR_MORE_KEYWORDS</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>check x/food k/apple</code> (searches for calorie intake of food
-whose name match/contain keyword "apple")</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="keep-diaries"><a class="link" href="#keep-diaries">Keep Diaries</a></h3>
-<div class="paragraph">
-<p>The user can keep a diary in FitHelper, and command for adding/editing/deleting/searching/clearing diary logs.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>diary</code> switches to the <code>Diary Page</code> where all diary logs are displayed in chronological order</p>
-</li>
-</ul>
-</div>
-<div class="sect3">
-<h4 id="add-a-new-diary-code-adddiary-code"><a class="link" href="#add-a-new-diary-code-adddiary-code">Add a new diary: <code>addDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addDiary d/DATE dc/DIARYCONTENT</code><br>
-adds a new diary on the specified <code>DATE</code> with the specified <code>CONTENT</code><br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If there is previously added diary on the specified <code>DATE</code>, calling <code>addDiary</code> will rewrite the content.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addDiary d/2020-03-31 dc/Happy birthday Alice!</code>
-Adds a diary log on the date <code>2020-03-31</code> with the content <code>Happy birthday Alice!</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="append-new-content-to-an-existing-diary-code-appenddiary-code"><a class="link" href="#append-new-content-to-an-existing-diary-code-appenddiary-code">Append new content to an existing diary: <code>appendDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>appendDiary d/DATE dc/APPENDED CONTENT</code><br>
-appends new content to the existing diary on the specified <code>DATE</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If the specified <code>DATE</code> does not have previously added diary log, this command will be discarded with a <code>DIARY_NOT_FOUND</code>
-reminder.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>appendDiary d/2020-03-31 dc/You are one year older now:)</code> (after <code>addDiary d/2020-03-31 dc/Happy birthday Alice!</code>)+
-This command appends the new diary content to the existing the diary log on the date <code>2020-03-31</code>.
-The new diary content after this command will be "Happy birthday Alice! You are one year older now:)".</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="edit-a-diary-code-editdiary-code"><a class="link" href="#edit-a-diary-code-editdiary-code">Edit a diary: <code>editDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editDiary d/DATE dc/NEW DIARYCONTENT</code><br>
-edits the diary on the specified <code>DATE</code> with the new <code>DIARYCONTENT</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If the specified <code>DATE</code> does not have previously added diary log, this command will be discarded with a <code>DIARY_NOT_FOUND</code>
-reminder.
-If the existing diary with the specified <code>DATE</code> has the same content as the specified content, this command will be discarded with a <code>DUPLICATE_DIARY</code>
-reminder.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editDiary d/2020-03-31 dc/Happy birthday Alice!</code><br>
-This command edits the content of the diary log on the date <code>2020-03-31</code> with the content <code>Happy birthday Alice!</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="delete-a-diary-code-deletediary-code"><a class="link" href="#delete-a-diary-code-deletediary-code">Delete a diary: <code>deleteDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteDiary d/DATE</code><br>
-deletes the diary on the specified <code>DATE</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If there is no diary under the specified <code>DATE</code>, this command will be discarded with the reminder of
-<code>DIARY_NOT_FOUND</code>.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteDiary d/2020-03-31</code><br>
-This command deletes the diary log on the date <code>2020-03-3</code>, if the diary on this date exists, and discards the command
-if no diary was added previously on this date.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="find-a-diary-code-finddiary-code"><a class="link" href="#find-a-diary-code-finddiary-code">Find a diary: <code>findDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>findDiary [d/DATE] [k/ONE OR MORE KEYWORDS]</code><br>
-finds diaries either on the specified <code>DATE</code> or contains the specified <code>KEYWORDS</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If there is no diary under the specified <code>DATE</code>, this command will be discarded with the reminder of
-<code>DIARY_NOT_FOUND</code>.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The field <code>DATE</code> has higher priority than <code>KEYWORDS</code> in the search.
-i.e. If the <code>DATE</code> field is non-empty, regardless of the presence and the content of the <code>KEYWORDS</code> field,
-the diary under that date will be displayed. If the specified <code>DATE</code> contains no previous diary logs,
-no diary will be listed.</p>
-</li>
-<li>
-<p>If the field <code>DATE</code> is left empty, only the <code>KEYWORDS</code> field is considered in the search,
-similar to the case of <code>find</code> command for food/sport entries.</p>
-</li>
-<li>
-<p>The search is case insensitive. e.g <code>apples</code> will match <code>Apples</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Apple Pie</code> will match <code>Pie Apple</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Straw</code> will not match <code>Strawberries</code></p>
-</li>
-<li>
-<p>Entries matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Apple Banana</code> will return <code>Apple Pie</code>, <code>Banana Milkshake</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>findDiary k/running</code><br>
-Displays diaries with their content containing the keyword <code>running</code>, ignoring the letter capitalization.</p>
-</li>
-<li>
-<p><code>find d/2020-03-31 k/cake</code><br>
-Returns the diary on the date of <code>2020-03-31</code> regardless of the <code>KEYWORDS</code> field.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="clear-the-diary-code-cleardairy-code"><a class="link" href="#clear-the-diary-code-cleardairy-code">Clear the diary: <code>clearDairy</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>clearDiary</code>＋
-clears all diary logs in this FitHelper.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The user can always revoke the clearing command by calling <code>undo</code>, which will be explained in a later section.
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="clear-all-entries-and-diaries-code-clear-code-2"><a class="link" href="#clear-all-entries-and-diaries-code-clear-code-2">Clear All Entries And Diaries: <code>clear</code></a></h3>
-<div class="paragraph">
-<p>Clears all entries and diaries from the fitness log book.<br></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>clear</code></p>
+<p>Shows a list of all undone tasks which can be seen from a fixed field in the home page (Dashboard).<br>
+Format: <code>reminder</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -1011,7 +477,7 @@ On the bottom right corner, calorie status for existing entries will be displaye
 <div class="content">
 <img src="../images/calendarls.png" alt="calendarls">
 </div>
-<div class="title">Figure 11. Calendar list mode</div>
+<div class="title">Figure 3. Calendar list mode</div>
 </div>
 </div>
 <div class="sect3">
@@ -1037,7 +503,7 @@ Format for switching to timetable mode: <code>calendar m/tb [d/DATE]</code></p>
 <div class="content">
 <img src="../images/calendartb.png" alt="calendartb">
 </div>
-<div class="title">Figure 12. Calendar timetable mode</div>
+<div class="title">Figure 4. Calendar timetable mode</div>
 </div>
 </div>
 <div class="sect3">
@@ -1116,6 +582,16 @@ in the <code>FitHelper Feedback</code> area.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>today</code></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="some-day-page-code-coming-in-v2-0-code"><a class="link" href="#some-day-page-code-coming-in-v2-0-code">Some Day Page <code>[coming in v2.0]</code></a></h4>
@@ -1140,9 +616,6 @@ The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring 
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p><code>today</code></p>
-</li>
 <li>
 <p><code>today 2020-02-14</code></p>
 </li>
@@ -1640,941 +1113,15 @@ There is no need to save manually.<br></p>
 </ul>
 </div>
 <div class="sect2">
-<h3 id="undo-code-undo-code-2"><a class="link" href="#undo-code-undo-code-2">Undo : <code>undo</code></a></h3>
-<div class="paragraph">
-<p><code>undo</code> revokes the last undoable command.<br>
-This command back-roll FitHelper to the previous status before the last undoable command was executed.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Undoable commands include: <code>add</code>, <code>edit</code>, <code>delete</code>, <code>clear</code>, <code>addDiary</code>, <code>appendDiary</code>, <code>editDiary</code>, <code>deleteDiary</code>, <code>clearDiary</code>.
-Other commands are not affected by <code>undo</code> command. The same applies for <code>redo</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-After executing <code>undo</code> or <code>redo</code>, FitHelper switches to <code>Home Page</code> (<code>DashBoard</code>).
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>undo</code> (after <code>addDiary d/2020-03-31 dc/I am happy.</code>)<br>
-This <code>undo</code> commands remove the added diary log from FitHelper.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="redo-code-redo-code-2"><a class="link" href="#redo-code-redo-code-2">Redo : <code>redo</code></a></h3>
-<div class="paragraph">
-<p><code>redo</code> is the reverse of <code>undo</code>.<br>
-This command re-execute the last undoable command that has been undone.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<code>redo</code> can only be executed after an <code>undo</code> has been previously performed.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>redo</code> (after <code>undo</code>-ing the previous <code>addDiary d/2020-03-31 dc/I am happy.</code>)<br>
-This <code>undo</code> commands adds the diary log back to FitHelper.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="calendar-view-code-calendar-code-2"><a class="link" href="#calendar-view-code-calendar-code-2">Calendar View: <code>calendar</code></a></h3>
-<div class="paragraph">
-<p>Calendar view will display all the food and sports entries for each day of the referenced week/month. The referenced date is default set to be the current date, but can be changed to a user given date. Calendar can be switched between two modes, list mode or timetable mode, with default set to be in timetable mode.<br></p>
-</div>
-<div class="paragraph">
-<p>Format for entering calendar view: <code>calendar</code></p>
-</div>
-<div class="sect3">
-<h4 id="calendar-list-mode-code-calendar-m-ls-d-date-code-2"><a class="link" href="#calendar-list-mode-code-calendar-m-ls-d-date-code-2">Calendar list mode: <code>calendar m/ls [d/DATE]</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Monthly View</strong><br>
-The lists of entries for food and sports are display by their given dates in the referenced month. Completed entries will be strikethrough. Calorie value is also shown for each date.</p>
-</li>
-<li>
-<p><strong>Calendar of the month</strong><br>
-On the top right corner, the dates of the referenced month displayed, with red-colored date if the given date has more calorie intake than calorie burnt (considering the entries with status done of that particular date), else if calorie burnt is greater than calorie intake, the font color is green. Default color is blue. For each date, upon clicking, a popup window will show all entries of the date. The ones with strikethrough in text means the status of the entry is done. For this functionality, the corresponding command is <code>calendar sh/DATE</code>.</p>
-</li>
-<li>
-<p><strong>Daily calorie status</strong><br>
-On the bottom right corner, calorie status for existing entries will be displayed by their dates, showing the calorie intake from food, calorie burnt from sports as well as total calorie. The calculation only considers entries which are completed.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Format for switching to list mode: <code>calendar m/ls [d/DATE]</code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/calendarls.png" alt="calendarls">
-</div>
-<div class="title">Figure 13. Calendar list mode</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="calendar-timetable-mode-code-calendar-m-tb-d-date-code-2"><a class="link" href="#calendar-timetable-mode-code-calendar-m-tb-d-date-code-2">Calendar timetable mode: <code>calendar m/tb [d/DATE]</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Weekly View</strong><br>
-The entries of food and sports of the given time period are displayed. Food entries will be in pink, sports entries will be in blue, and entries completed will be in grey regardless of their type. No entries can have time clashes. Entries with long names or locations will not be displayed fully. Only when mouse is over the entry, the details will be shown. Entries upon clicking will have console errors, caused by disabling certain functionality from third party libraries.</p>
-</li>
-<li>
-<p><strong>Calendar of the month</strong><br>
-Same as above.</p>
-</li>
-<li>
-<p><strong>Upcoming list</strong><br>
-It displays all entries after the current date and time and within the referenced month. Only entries with status <code>Undone</code> will be shown. So if the referenced month is in the past, no entries will be shown.<br>
-Format for switching to timetable mode: <code>calendar m/tb [d/DATE]</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/calendartb.png" alt="calendartb">
-</div>
-<div class="title">Figure 14. Calendar timetable mode</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="calendar-display-entries-from-a-day-code-calendar-sh-date-code-2"><a class="link" href="#calendar-display-entries-from-a-day-code-calendar-sh-date-code-2">Calendar display entries from a day: <code>calendar sh/DATE</code></a></h4>
-<div class="paragraph">
-<p>A pop up window will display all entries from the chosen date.</p>
-</div>
-<div class="paragraph">
-<p>Format for showing entries of a particular date: <code>calendar sh/DATE</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>calendar d/2020-04-15</code></p>
-</li>
-<li>
-<p><code>calendar m/ls d/2020-04-20</code></p>
-</li>
-<li>
-<p><code>calendar sh/2020-05-01</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="daily-summary-2"><a class="link" href="#daily-summary-2">Daily Summary</a></h3>
-<div class="sect3">
-<h4 id="today-page-code-today-code-2"><a class="link" href="#today-page-code-today-code-2">Today Page: <code>today</code></a></h4>
-<div class="paragraph">
-<p>Today page serves to be a summary for the daily arrangements.<br>
-It shows the daily schedule for the user. Users can see the entries for the day, a recommended lunch place, and their performances. They can also see their diary for the day as well as the rewarding point.<br>
-Format: <code>today</code></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Daily Food/Sports Entries</strong><br>
-The lists of food and sports entries on "today" are displayed in two list view, with indices in chronological order specific for today.</p>
-</li>
-<li>
-<p><strong>Plan Counter</strong><br>
-The 4 counters keep track of the number of done/undone food/sports plans on today.</p>
-</li>
-<li>
-<p><strong>Calorie Report</strong><br>
-Calorie report contains the data of daily calorie intake/consumption from done food/sports entries correspondingly.
-The food calorie pie chart consists of all food entries on today, regardless of the status. The labels are the corresponding indices
-of the food entries in <code>Today&#8217;s Food</code> list.
-From the pie chart, the user can view the component of calorie intake of each food entry, so he/she can adjust the diet plan.</p>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-In cases where some food entries contribute to the great majority of the total food intake, the pie chart only displays labels for
-food entries that contain relatively high calorie values.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p><strong>Task Completion</strong><br>
-The user&#8217;s daily task completion is shown in percentage (round to integer).</p>
-</li>
-<li>
-<p><strong>FitHelper Feedback</strong><br>
-Based on the user&#8217;s intake food calorie and sport task completion, FitHelper provides suggestions and reminders
-in the <code>FitHelper Feedback</code> area.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="some-day-page-code-coming-in-v2-0-code-2"><a class="link" href="#some-day-page-code-coming-in-v2-0-code-2">Some Day Page <code>[coming in v2.0]</code></a></h4>
-<div class="paragraph">
-<p>The <code>Today Page</code> for some day in the history can be displayed.
-Format: <code>today DATE</code></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring a <code>Today Page</code> for a future <mark>date</mark> will generate a blank page if that particular day does not have any entries.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>today</code></p>
-</li>
-<li>
-<p><code>today 2020-02-14</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="weekly-summary-2"><a class="link" href="#weekly-summary-2">Weekly Summary</a></h3>
-<div class="sect3">
-<h4 id="weekly-report-code-coming-in-v2-0-code-2"><a class="link" href="#weekly-report-code-coming-in-v2-0-code-2">Weekly Report <code>[coming in v2.0]</code></a></h4>
-<div class="paragraph">
-<p>A weekly report serves as a summary for the past week. The user can see his performance in the past week. The weekly report also contains his rewarding points, diary logs, and preferred sports and food from the previous week.<br>
-Format: <code>weekreport</code></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Weekly Performance</strong><br>
-The weekly performance is generated based on the ratio of done and undone tasks and the calorie consumption, together with the system feedbacks.</p>
-</li>
-<li>
-<p><strong>Rewarding Points</strong><br>
-Rewarding points gained from the past week and current "fit level" is also shown. The weekly increment of rewarding points from past several weeks can be visualized.</p>
-</li>
-<li>
-<p><strong>Trendy Food and Sports</strong><br>
-Users can see his preferred food and sports, based on his entries for the past week.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="some-week-report-code-coming-in-v2-0-code-2"><a class="link" href="#some-week-report-code-coming-in-v2-0-code-2">Some Week Report <code>[coming in v2.0]</code></a></h4>
-<div class="paragraph">
-<p>The <code>Week Report</code> for some week in the history can be displayed.<br>
-Format: <code>weekreport DATE</code> where <code>DATE</code> specifies the week it is in</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The <code>DATE</code> should be equal or prior to days in the current week. Requiring a <code>Week Report</code> for a future week will generate a blank page if that particular day does not have any entries.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>weekreport</code></p>
-</li>
-<li>
-<p><code>weekreport 2020-02-14</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="keep-user-profile-2"><a class="link" href="#keep-user-profile-2">Keep User Profile</a></h3>
-<div class="sect3">
-<h4 id="profile-page-code-profile-code-2"><a class="link" href="#profile-page-code-profile-code-2">Profile Page: <code>profile</code></a></h4>
-<div class="paragraph">
-<p>Profile page serves to be a summary for basic user data.<br>
-The profile information includes: Name, Age, Gender, Address, Height, Target Weight, Current Weight and Current BMI.<br></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>profile</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="update-profile-data-code-update-code-2"><a class="link" href="#update-profile-data-code-update-code-2">Update Profile Data : <code>update</code></a></h4>
-<div class="paragraph">
-<p>Update user data in the profile by attributes. Profile attributes include: Name, Age, Address, Gender, Height and Target Weight.<br>
-Every <code>update</code> command will lead to the profile page.<br></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>update [-f] attr/ATTRIBUTE v/VALUE</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>If no user profile data is provided by the user, FitHelper will initialize with the sample profile data.</p>
-</li>
-<li>
-<p>The updated attribute name is <strong>not</strong> case-sensitive and can include spaces, but the name must match some fields in user profile.</p>
-</li>
-<li>
-<p>e.g. Both <code>attr/target weight</code> and <code>attr/TARGETWEIGHT</code> are acceptable.</p>
-</li>
-<li>
-<p>Any updated value should follow its original data type.</p>
-</li>
-<li>
-<p>If the chosen updated attribute has already had original value, <strong>flag <code>-f</code></strong> need to be used to enable <strong>force overwrite</strong>.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>update attr/height v/160</code></p>
-</li>
-<li>
-<p><code>update -f attr/name v/Alice Wang</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="keep-weight-records-2"><a class="link" href="#keep-weight-records-2">Keep Weight Records</a></h3>
-<div class="sect3">
-<h4 id="weight-page-code-weight-code-2"><a class="link" href="#weight-page-code-weight-code-2">Weight Page: <code>weight</code></a></h4>
-<div class="paragraph">
-<p>Weight page serves to be a summary for user&#8217;s weight and BMI changes according to time.<br>
-It shows user data in graph for easy understanding. By default, it will generate graph from all history data chronologically.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Gap notification</strong><br>
-The top notification shows the comparison between user current weight and target weight.<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>If current weight is <strong>larger</strong> than target, the gap between the two will be highlighted.</p>
-</li>
-<li>
-<p>If current weight is <strong>the same or less</strong> than the target, a succeed notification will be generated.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Trend Graph - Weight</strong><br>
-Display a trend graph of user&#8217;s weight according to time.</p>
-</li>
-<li>
-<p><strong>Trend Graph - BMI</strong><br>
-Display a trend graph of user&#8217;s BMI according to time. The BMI value is calculated by weight and height value at that date.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Format: <code>weight</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="add-weight-records-code-addweight-code-2"><a class="link" href="#add-weight-records-code-addweight-code-2">Add Weight Records : <code>addWeight</code></a></h4>
-<div class="paragraph">
-<p>Add a new weight record into the weight records database. A weight record is related to date and weight value, and a auto-computed BMI value will be stored as well.<br>
-Every <code>addWeight</code> command will lead to the weight page.
-If a new weight record is added successfully, two new points will be added into the two trend graphs separately.<br></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>addWeight v/WEIGHT_VALUE [d/DATE]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>If no weight record exists in the database, "Not Available Now" will be shown in Profile Page&#8217;s Current Weight and Current BMI fields.</p>
-</li>
-<li>
-<p>The date of a new weight record can be <strong>omitted</strong> when user inputs the <code>addWeight</code> command. By default, it will refer to the date of today.</p>
-</li>
-<li>
-<p>The date should be in format of <code>yyyy-MM-dd</code>, and should <strong>not after the date of today</strong>.</p>
-</li>
-<li>
-<p><strong>No two weight records should have the same date.</strong> If adding a new weight record with the same date as an existing weight,
-a warning will be generated, and thus will fail to add.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addWeight v/50.0 d/2020-02-01</code></p>
-</li>
-<li>
-<p><code>addWeight v/52.30</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="edit-weight-records-code-editweight-code-2"><a class="link" href="#edit-weight-records-code-editweight-code-2">Edit Weight Records : <code>editWeight</code></a></h4>
-<div class="paragraph">
-<p>Edit an existing weight record in the weight records database.
-A weight record is identified by its <strong>unique date</strong>, and user can find the date on the x-axis of the Weight Trend Graph.<br>
-User are able to edit the weight value, and corresponding BMI value will be auto-computed using the new weight value and user&#8217;s <strong>current height</strong>.<br>
-Every <code>editWeight</code> command will lead to the weight page.
-If a weight record is edited successfully, two new points will change their positions on the two trend graphs separately.<br></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>editWeight [d/DATE] v/NEW_WEIGHT_VALUE</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The date should be in format of <code>yyyy-MM-dd</code>. If no existing weight record is on the input date, the input date is considered as invalid, and thus a warning will be thrown.</p>
-</li>
-<li>
-<p>If the date is <strong>omitted</strong> when user inputs the <code>editWeight</code> command, by default, it will refer to the date of today.</p>
-</li>
-<li>
-<p>If the edited weight record is the <strong>latest weight record</strong> in the database, an update in Profile Page&#8217;s Current Weight and Current BMI fields can be found as well.</p>
-</li>
-<li>
-<p>If the new weight value is the same as original weight value in the weight records, an exception will be thrown.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editWeight d/2020-02-01 v/51.0</code></p>
-</li>
-<li>
-<p><code>editWeight v/52.40</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="delete-weight-records-code-deleteweight-code-2"><a class="link" href="#delete-weight-records-code-deleteweight-code-2">Delete Weight Records : <code>deleteWeight</code></a></h4>
-<div class="paragraph">
-<p>Delete an existing weight record in the weight records database.
-Same as <code>editWeight</code> command, a weight record is identified by its <strong>unique date</strong>, and user can find the date on the x-axis of the Weight Trend Graph.<br>
-Every <code>deleteWeight</code> command will lead to the weight page.
-If a weight record is deleted successfully, two corresponding points will be removed from the two trend graphs separately.<br></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>deleteWeight [d/DATE]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The date should be in format of <code>yyyy-MM-dd</code>. If no existing weight record is on the input date, the input date is considered as invalid, and thus a warning will be thrown.</p>
-</li>
-<li>
-<p>If the date is <strong>omitted</strong> when user inputs the <code>deleteWeight</code> command, by default, it will refer to the date of today.</p>
-</li>
-<li>
-<p>If the deleted weight record is the <strong>latest weight record</strong> in the database, the second latest weight record will be used to update Profile Page&#8217;s Current Weight and Current BMI fields.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteWeight d/2020-02-01</code></p>
-</li>
-<li>
-<p><code>deleteWeight</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="clear-weight-records-code-clearweight-code-2"><a class="link" href="#clear-weight-records-code-clearweight-code-2">Clear Weight Records : <code>clearWeight</code></a></h4>
-<div class="paragraph">
-<p>Clear all weight records in the weight records database.<br>
-Weight Page&#8217;s graphs will be empty, and
-Profile Page&#8217;s Current Weight and Current BMI fields will be <code>Not Available Now</code> after clear all weight records.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>clearWeight</code></p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="exit-the-program-code-exit-code-code-bye-code-code-quit-code-2"><a class="link" href="#exit-the-program-code-exit-code-code-bye-code-code-quit-code-2">Exit the program : <code>exit</code>/<code>bye</code>/<code>quit</code></a></h3>
-<div class="paragraph">
-<p>Exits the program.<br></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>exit</code> or <code>bye</code> or <code>quit</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="save-the-data-2"><a class="link" href="#save-the-data-2">Save the data</a></h3>
-<div class="paragraph">
-<p>fitness log book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.<br></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Three local database in Json format will exist after running FitHelper:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>fithelper.json</strong> : data related to entries and diaries.</p>
-</li>
-<li>
-<p><strong>userprofile.json</strong> : data related to user profile.</p>
-</li>
-<li>
-<p><strong>weightrecords.json</strong> : data related to weight records.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="encrypte-data-files-code-coming-in-v2-0-code-2"><a class="link" href="#encrypte-data-files-code-coming-in-v2-0-code-2">Encrypte data files <code>[coming in v2.0]</code></a></h3>
-
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="faq-2"><a class="link" href="#faq-2">FAQ</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous fitness log book folder.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="command-summary-2"><a class="link" href="#command-summary-2">Command Summary</a></h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Help - switch to Help Page</strong> : <code>help</code></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Entry - switch to DashBoard</strong> : <code>home</code></p>
-</li>
-<li>
-<p><strong>Entry - add an entry</strong> <code>add n/NAME t/TIME l/LOCATION c/CALORIE [r/remark]&#8230;&#8203;</code></p>
-</li>
-<li>
-<p><strong>Entry - list all entries</strong> : <code>list</code></p>
-</li>
-<li>
-<p><strong>Entry - view reminders</strong> : <code>reminder</code></p>
-</li>
-<li>
-<p><strong>Entry - edit an entry</strong> : <code>edit INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/remark]&#8230;&#8203;</code></p>
-</li>
-<li>
-<p><strong>Entry - find by name</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code></p>
-</li>
-<li>
-<p><strong>Entry - delete an entry</strong> : <code>delete INDEX</code></p>
-</li>
-<li>
-<p><strong>Entry - sort entry list</strong> : <code>sort [x/TYPE] by/SORT_BY [o/ORDER]</code></p>
-</li>
-<li>
-<p><strong>Entry - check calorie reference</strong> : <code>check x/TYPE k/ONE_OR_MORE_KEYWORDS</code></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Diary - switch to Diary Page</strong> : <code>diary</code></p>
-</li>
-<li>
-<p><strong>Diary - add a diary</strong> : <code>addDiary d/DATE dc/DIARYCONTENT</code></p>
-</li>
-<li>
-<p><strong>Diary - edit a diary</strong> : <code>editDiary d/DATE dc/DIARYCONTENT</code></p>
-</li>
-<li>
-<p><strong>Diary - delete a diary</strong> : <code>deleteDiary d/DATE</code></p>
-</li>
-<li>
-<p><strong>Diary - find a diary</strong> : <code>findDiary [d/DATE] [dc/DIARYCONTENT]</code></p>
-</li>
-<li>
-<p><strong>Diary - clear all diaries</strong> : <code>clearDiary</code></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Clear - clear all entries and diaries</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Undo - undo commands related to entries and diaries</strong> : <code>undo</code></p>
-</li>
-<li>
-<p><strong>Redo - redo commands related to entries and diaries</strong> : <code>redo</code></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Calendar - switch to Calendar Page</strong> : <code>calendar</code></p>
-</li>
-<li>
-<p><strong>Calendar - display from a referenced date</strong> : <code>calendar d/DATE</code></p>
-</li>
-<li>
-<p><strong>Calendar - change to list mode</strong> : <code>calendar m/ls [d/DATE]</code></p>
-</li>
-<li>
-<p><strong>Calendar - change to timetable mode</strong> : <code>calendnar m/tb [d/DATE]</code></p>
-</li>
-<li>
-<p><strong>Calendar - display entries from a particular date</strong> : <code>calendar sh/DATE</code></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Today - switch to Today Page</strong> : <code>today</code></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Profile - switch to Profile Page</strong>: <code>profile</code></p>
-</li>
-<li>
-<p><strong>Profile - update profile data</strong>: <code>update [-f] attr/ATTRIBUTE V/VALUE</code></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Weight - switch to Weight Page</strong>: <code>weight</code></p>
-</li>
-<li>
-<p><strong>Weight - add a weight record</strong> <code>addWeight v/VALUE [d/DATE]</code></p>
-</li>
-<li>
-<p><strong>Weight - edit a weight record</strong> <code>editWeight [d/DATE] v/VALUE</code></p>
-</li>
-<li>
-<p><strong>Weight - delete a weight record</strong> <code>deleteWeight [d/DATE]</code></p>
-</li>
-<li>
-<p><strong>Weight - clear all weight records</strong> <code>clearWeight</code></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Exit the Program</strong>: <code>exit</code> or <code>bye</code> or <code>quit</code></p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="keep-diaries-2"><a class="link" href="#keep-diaries-2">Keep Diaries</a></h3>
+<h3 id="keep-diaries"><a class="link" href="#keep-diaries">Keep Diaries</a></h3>
 <div class="paragraph">
 <p>The user can keep a diary in FitHelper, and command for adding/editing/deleting/searching/clearing diary logs.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>diary</code> switches to the <code>Diary Page</code> where all diary logs are displayed in chronological order</p>
-</li>
-</ul>
-</div>
-<div class="sect3">
-<h4 id="add-a-new-diary-code-adddiary-code-2"><a class="link" href="#add-a-new-diary-code-adddiary-code-2">Add a new diary: <code>addDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addDiary d/DATE dc/DIARYCONTENT</code><br>
-adds a new diary on the specified <code>DATE</code> with the specified <code>CONTENT</code><br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If there is previously added diary on the specified <code>DATE</code>, calling <code>addDiary</code> will rewrite the content.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addDiary d/2020-03-31 dc/Happy birthday Alice!</code>
-Adds a diary log on the date <code>2020-03-31</code> with the content <code>Happy birthday Alice!</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="append-new-content-to-an-existing-diary-code-appenddiary-code-2"><a class="link" href="#append-new-content-to-an-existing-diary-code-appenddiary-code-2">Append new content to an existing diary: <code>appendDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>appendDiary d/DATE dc/APPENDED CONTENT</code><br>
-appends new content to the existing diary on the specified <code>DATE</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If the specified <code>DATE</code> does not have previously added diary log, this command will be discarded with a <code>DIARY_NOT_FOUND</code>
-reminder.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>appendDiary d/2020-03-31 dc/You are one year older now:)</code> (after <code>addDiary d/2020-03-31 dc/Happy birthday Alice!</code>)+
-This command appends the new diary content to the existing the diary log on the date <code>2020-03-31</code>.
-The new diary content after this command will be "Happy birthday Alice! You are one year older now:)".</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="edit-a-diary-code-editdiary-code-2"><a class="link" href="#edit-a-diary-code-editdiary-code-2">Edit a diary: <code>editDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editDiary d/DATE dc/NEW DIARYCONTENT</code><br>
-edits the diary on the specified <code>DATE</code> with the new <code>DIARYCONTENT</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If the specified <code>DATE</code> does not have previously added diary log, this command will be discarded with a <code>DIARY_NOT_FOUND</code>
-reminder.
-If the existing diary with the specified <code>DATE</code> has the same content as the specified content, this command will be discarded with a <code>DUPLICATE_DIARY</code>
-reminder.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editDiary d/2020-03-31 dc/Happy birthday Alice!</code><br>
-This command edits the content of the diary log on the date <code>2020-03-31</code> with the content <code>Happy birthday Alice!</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="delete-a-diary-code-deletediary-code-2"><a class="link" href="#delete-a-diary-code-deletediary-code-2">Delete a diary: <code>deleteDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteDiary d/DATE</code><br>
-deletes the diary on the specified <code>DATE</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If there is no diary under the specified <code>DATE</code>, this command will be discarded with the reminder of
-<code>DIARY_NOT_FOUND</code>.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteDiary d/2020-03-31</code><br>
-This command deletes the diary log on the date <code>2020-03-3</code>, if the diary on this date exists, and discards the command
-if no diary was added previously on this date.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="find-a-diary-code-finddiary-code-2"><a class="link" href="#find-a-diary-code-finddiary-code-2">Find a diary: <code>findDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>findDiary [d/DATE] [k/ONE OR MORE KEYWORDS]</code><br>
-finds diaries either on the specified <code>DATE</code> or contains the specified <code>KEYWORDS</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If there is no diary under the specified <code>DATE</code>, this command will be discarded with the reminder of
-<code>DIARY_NOT_FOUND</code>.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The field <code>DATE</code> has higher priority than <code>KEYWORDS</code> in the search.
-i.e. If the <code>DATE</code> field is non-empty, regardless of the presence and the content of the <code>KEYWORDS</code> field,
-the diary under that date will be displayed. If the specified <code>DATE</code> contains no previous diary logs,
-no diary will be listed.</p>
-</li>
-<li>
-<p>If the field <code>DATE</code> is left empty, only the <code>KEYWORDS</code> field is considered in the search,
-similar to the case of <code>find</code> command for food/sport entries.</p>
-</li>
-<li>
-<p>The search is case insensitive. e.g <code>apples</code> will match <code>Apples</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Apple Pie</code> will match <code>Pie Apple</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Straw</code> will not match <code>Strawberries</code></p>
-</li>
-<li>
-<p>Entries matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Apple Banana</code> will return <code>Apple Pie</code>, <code>Banana Milkshake</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>findDiary k/running</code><br>
-Displays diaries with their content containing the keyword <code>running</code>, ignoring the letter capitalization.</p>
-</li>
-<li>
-<p><code>find d/2020-03-31 k/cake</code><br>
-Returns the diary on the date of <code>2020-03-31</code> regardless of the <code>KEYWORDS</code> field.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="clear-the-diary-code-cleardairy-code-2"><a class="link" href="#clear-the-diary-code-cleardairy-code-2">Clear the diary: <code>clearDairy</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>clearDiary</code>＋
-clears all diary logs in this FitHelper.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The user can always revoke the clearing command by calling <code>undo</code>, which will be explained in a later section.
-==== Today Page: <code>today</code>
-</td>
-</tr>
-</table>
-</div>
+<p><code>diary</code> switches to the <code>Diary Page</code> where all diary logs are displayed in chronological order
+==== Today Page: <code>today</code></p>
 </li>
 </ul>
 </div>
@@ -2624,97 +1171,16 @@ in the <code>FitHelper Feedback</code> area.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="some-day-page-code-coming-in-v2-0-code-3"><a class="link" href="#some-day-page-code-coming-in-v2-0-code-3">Some Day Page <code>[coming in v2.0]</code></a></h4>
-<div class="paragraph">
-<p>The <code>Today Page</code> for some day in the history can be displayed.
-Format: <code>today DATE</code></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The <code>DATE</code> should be equal or prior to <code>today</code>. Requiring a <code>Today Page</code> for a future <mark>date</mark> will generate a blank page if that particular day does not have any entries.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>today</code></p>
-</li>
-<li>
-<p><code>today 2020-02-14</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="weekly-summary-3"><a class="link" href="#weekly-summary-3">Weekly Summary</a></h3>
-<div class="sect3">
-<h4 id="weekly-report-code-coming-in-v2-0-code-3"><a class="link" href="#weekly-report-code-coming-in-v2-0-code-3">Weekly Report <code>[coming in v2.0]</code></a></h4>
-<div class="paragraph">
-<p>A weekly report serves as a summary for the past week. The user can see his performance in the past week. The weekly report also contains his rewarding points, diary logs, and preferred sports and food from the previous week.<br>
-Format: <code>weekreport</code></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Weekly Performance</strong><br>
-The weekly performance is generated based on the ratio of done and undone tasks and the calorie consumption, together with the system feedbacks.</p>
-</li>
-<li>
-<p><strong>Rewarding Points</strong><br>
-Rewarding points gained from the past week and current "fit level" is also shown. The weekly increment of rewarding points from past several weeks can be visualized.</p>
-</li>
-<li>
-<p><strong>Trendy Food and Sports</strong><br>
-Users can see his preferred food and sports, based on his entries for the past week.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="some-week-report-code-coming-in-v2-0-code-3"><a class="link" href="#some-week-report-code-coming-in-v2-0-code-3">Some Week Report <code>[coming in v2.0]</code></a></h4>
-<div class="paragraph">
-<p>The <code>Week Report</code> for some week in the history can be displayed.<br>
-Format: <code>weekreport DATE</code> where <code>DATE</code> specifies the week it is in</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The <code>DATE</code> should be equal or prior to days in the current week. Requiring a <code>Week Report</code> for a future week will generate a blank page if that particular day does not have any entries.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>weekreport</code></p>
-</li>
-<li>
-<p><code>weekreport 2020-02-14</code>
+<p><code>today</code>
 === Encrypte data files <code>[coming in v2.0]</code></p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -2800,7 +1266,7 @@ This execution then returns a <code>CommandResult</code> to <code>UI</code>, con
 <div class="content">
 <img src="../images/InitiateTodayPageSequenceDiagram.png" alt="InitiateTodayPageSequenceDiagram">
 </div>
-<div class="title">Figure 15. Sequence Diagram for Today Feature</div>
+<div class="title">Figure 5. Sequence Diagram for Today Feature</div>
 </div>
 </div>
 </div>
@@ -2890,7 +1356,7 @@ In addition, UI will change to display diaries after model updates <code>filtere
 <div class="content">
 <img src="../images/DiarySequenceDiagram.png" alt="DiarySequenceDiagram">
 </div>
-<div class="title">Figure 16. Sequence Diagram for Diary Feature</div>
+<div class="title">Figure 6. Sequence Diagram for Diary Feature</div>
 </div>
 </div>
 </div>
@@ -3080,13 +1546,13 @@ The following sequence diagram shows how the update operation works to change ca
 <div class="content">
 <img src="../images/CalendarSequenceDiagram.png" alt="CalendarSequenceDiagram">
 </div>
-<div class="title">Figure 17. CalendarCommand Sequence Diagram</div>
+<div class="title">Figure 7. CalendarCommand Sequence Diagram</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/CalendarClassDiagram.png" alt="CalendarClassDiagram">
 </div>
-<div class="title">Figure 18. CalendarCommand Class Diagram</div>
+<div class="title">Figure 8. CalendarCommand Class Diagram</div>
 </div>
 </div>
 <div class="sect3">
@@ -4378,4 +2844,4 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 15:21:15 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 16:55:40 UTC</div></div></div></body></html>
