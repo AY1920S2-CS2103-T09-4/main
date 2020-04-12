@@ -20,40 +20,41 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Enhancement added</strong>-<strong>calendar display</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: allows the application to have a monthly/weekly display of entries</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
-</li>
-<li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Justification: This feature allows the user to have a clearer idea of his/her food entries/sports entries status</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
-</li>
-<li>
-<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=zhangyiping126&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2020-02-14&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false">Functional code</a>]</p>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=zhangyiping126&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2020-02-14&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false">Functional code</a>][<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pulls?page=1&amp;q=is%3Apr+author%3Azhangyiping126">Pull Request</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
+<p>Model</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Add duration attribute for entry, add natty date parser to parse date (removed)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p>Project management:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Managed releases <code>v1.3</code> - <code>v1.3.1</code> (2 releases) on GitHub</p>
 </li>
 </ul>
 </div>
@@ -63,10 +64,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Wrote additional tests for existing features to increase coverage from 0% to 17.29% (Pull requests <a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/317">#317</a>, <a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/308">#308</a>, <a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/213">#213</a>)</p>
 </li>
 </ul>
 </div>
@@ -76,7 +74,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Did cosmetic tweaks to existing contents, added screenshots with explanations, and created the calendar part: <a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/325">#325</a>, <a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/264">#264</a></p>
+</li>
+<li>
+<p>Edited existing uml diagrams, updated design of model component and created implementation of entry and calendar feature: <a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/322">#322</a>, <a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/223">#223</a>, <a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/220">#220</a></p>
 </li>
 </ul>
 </div>
@@ -86,16 +87,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>Contributed to forum discussions (<a href="https://github.com/nus-cs2103-AY1920S2/forum/issues/40">40</a>, <a href="https://github.com/nus-cs2103-AY1920S2/forum/issues/71">71</a>, <a href="https://github.com/nus-cs2103-AY1920S2/forum/issues/80">80</a>)</p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
+<p>Reported bugs and suggestions for other teams in the class (<a href="https://github.com/ZhangYiping126/ped/issues" class="bare">https://github.com/ZhangYiping126/ped/issues</a>)</p>
 </li>
 </ul>
 </div>
@@ -105,10 +100,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
+<p>Set up Codacy to perform code quality check for the group fork</p>
 </li>
 <li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Set up AppVeyor to perform Continuous Integration(CI) for the group fork</p>
+</li>
+<li>
+<p>Integrated a third party library (jfxtras icalendar) to the project (<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/157">#157</a>)</p>
 </li>
 </ul>
 </div>
@@ -117,9 +115,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -136,42 +131,75 @@
 </tr>
 </tbody>
 </table>
-<div class="sect3">
-<h4 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">Deleting an entry : <code>delete</code></a></h4>
+<div class="sect2">
+<h3 id="calendar-view-code-calendar-code"><a class="link" href="#calendar-view-code-calendar-code">Calendar View: <code>calendar</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified entry from the fitness log book.<br>
-Format: <code>delete x/TYPE i/INDEX</code></p>
+<p>Calendar view will display all the food and sports entries for each day of the referenced week/month. The referenced date is default set to be the current date, but can be changed to a user given date. Calendar can be switched between two modes, list mode or timetable mode, with default set to be in timetable mode.<br></p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-If <code>delete</code> is called right after a <code>find</code> command (when a shortened list is displayed), the index follows the current list view
-after executing <code>find</code> command. i.e. If entry X originally has an index 3 and currently has an index 1 after the <code>find</code> command,
-calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Format for entering calendar view: <code>calendar</code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
+<div class="sect3">
+<h4 id="calendar-list-mode-code-calendar-m-ls-d-date-code"><a class="link" href="#calendar-list-mode-code-calendar-m-ls-d-date-code">Calendar list mode: <code>calendar m/ls [d/DATE]</code></a></h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the entry at the specified <code>INDEX</code>.</p>
+<p><strong>Monthly View</strong><br>
+The lists of entries for food and sports are display by their given dates in the referenced month. Completed entries will be strikethrough. Calorie value is also shown for each date.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the displayed entry list.</p>
+<p><strong>Calendar of the month</strong><br>
+On the top right corner, the dates of the referenced month displayed, with red-colored date if the given date has more calorie intake than calorie burnt (considering the entries with status done of that particular date), else if calorie burnt is greater than calorie intake, the font color is green. Default color is blue. For each date, upon clicking, a popup window will show all entries of the date. The ones with strikethrough in text means the status of the entry is done. For this functionality, the corresponding command is <code>calendar sh/DATE</code>.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p><strong>Daily calorie status</strong><br>
+On the bottom right corner, calorie status for existing entries will be displayed by their dates, showing the calorie intake from food, calorie burnt from sports as well as total calorie. The calculation only considers entries which are completed.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Format for switching to list mode: <code>calendar m/ls [d/DATE]</code></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/calendarls.png" alt="calendarls">
+</div>
+<div class="title">Figure 1. Calendar list mode</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="calendar-timetable-mode-code-calendar-m-tb-d-date-code"><a class="link" href="#calendar-timetable-mode-code-calendar-m-tb-d-date-code">Calendar timetable mode: <code>calendar m/tb [d/DATE]</code></a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Weekly View</strong><br>
+The entries of food and sports of the given time period are displayed. Food entries will be in pink, sports entries will be in blue, and entries completed will be in grey regardless of their type. No entries can have time clashes. Entries with long names or locations will not be displayed fully. Only when mouse is over the entry, the details will be shown. Entries upon clicking will have console errors, caused by disabling certain functionality from third party libraries.</p>
+</li>
+<li>
+<p><strong>Calendar of the month</strong><br>
+Same as above.</p>
+</li>
+<li>
+<p><strong>Upcoming list</strong><br>
+It displays all entries after the current date and time and within the referenced month. Only entries with status <code>Undone</code> will be shown. So if the referenced month is in the past, no entries will be shown.<br>
+Format for switching to timetable mode: <code>calendar m/tb [d/DATE]</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/calendartb.png" alt="calendartb">
+</div>
+<div class="title">Figure 2. Calendar timetable mode</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="calendar-display-entries-from-a-day-code-calendar-sh-date-code"><a class="link" href="#calendar-display-entries-from-a-day-code-calendar-sh-date-code">Calendar display entries from a day: <code>calendar sh/DATE</code></a></h4>
+<div class="paragraph">
+<p>A pop up window will display all entries from the chosen date.</p>
+</div>
+<div class="paragraph">
+<p>Format for showing entries of a particular date: <code>calendar sh/DATE</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -179,22 +207,16 @@ calling <code>delete &#8230;&#8203; i/1</code> will successfully delete entry X.
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete x/sports i/2</code>
-Deletes the 2nd sports entry in the sports list from dashboard.</p>
+<p><code>calendar d/2020-04-15</code></p>
+</li>
+<li>
+<p><code>calendar m/ls d/2020-04-20</code></p>
+</li>
+<li>
+<p><code>calendar sh/2020-05-01</code></p>
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete.png" alt="delete">
-</div>
-<div class="title">Figure 1. Delete Command</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete2.png" alt="delete2">
-</div>
-<div class="title">Figure 2. Delete Command Result</div>
 </div>
 </div>
 </div>
@@ -213,149 +235,354 @@ Deletes the 2nd sports entry in the sports list from dashboard.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
-<div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<h3 id="model-component"><a class="link" href="#model-component">Model component</a></h3>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedFitHelper</code>.
-It extends <code>FitHelper</code> with an undo/redo history, stored internally as an <code>fitHelperStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>The <code>Model</code>,</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedFitHelper#commit()</code>&#8201;&#8212;&#8201;Saves the current FitHelper state in its history.</p>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p><code>VersionedFitHelper#undo()</code>&#8201;&#8212;&#8201;Restores the previous FitHelper state from its history.</p>
+<p>stores <code>UserProfile</code> and <code>WeightRecords</code> objects for user&#8217;s personal information.</p>
 </li>
 <li>
-<p><code>VersionedFitHelper#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone FitHelper state from its history.</p>
+<p>stores the FitHelper data.</p>
+</li>
+<li>
+<p>stores <code>FitHelperCommit</code> and <code>VersionedFitHelper</code> objects for execution of <code>redo</code> and <code>undo</code> instructions.</p>
+</li>
+<li>
+<p>exposes multiple unmodifiable <code>ObservableList&lt;Entry&gt;</code> and one unmodifiable <code>ObservableList&lt;Diary&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li>
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram">
+</div>
+<div class="title">Figure 3. Structure of the Model Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>Below are the class diagrams for different components of model</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FitHelperClassDiagram.png" alt="FitHelperClassDiagram">
+</div>
+<div class="title">Figure 4. Class Diagram for FitHelper</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UserPrefsClassDiagram.png" alt="UserPrefsClassDiagram">
+</div>
+<div class="title">Figure 5. Class Diagram for UserPrefs</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UserProfileClassDiagram.png" alt="UserProfileClassDiagram">
+</div>
+<div class="title">Figure 6. Class Diagram for UserProfile</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/VersionedFitHelperClassDiagram.png" alt="VersionedFitHelperClassDiagram">
+</div>
+<div class="title">Figure 7. Structure of VersionedFitHelper and FitHelperCommit</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/WeightRecordsClassDiagram.png" alt="WeightRecordsClassDiagram">
+</div>
+<div class="title">Figure 8. Class Diagram for WeightRecords</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="entry-feature"><a class="link" href="#entry-feature">Entry Feature</a></h3>
+<div class="paragraph">
+<p>The Entry consists of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each <code>Entry</code> consists of a unique combination of <code>Name</code>, <code>Calorie</code>, <code>Location</code>, <code>Duration</code>, <code>Type</code>, <code>Remark</code>, <code>Status</code> and <code>Time</code></p>
+</li>
+<li>
+<p>Each <code>Entry</code> consists of a <code>Duration</code> in hours, default set to 1, smallest accuracy is 0.02 (1 min).</p>
+</li>
+<li>
+<p>Each <code>Entry</code> consists of a <code>Type</code>, either food or sports</p>
+</li>
+<li>
+<p>Each <code>Entry</code> consists of a <code>Remark</code>, default set to be empty</p>
+</li>
+<li>
+<p>Each <code>Entry</code> consists of a <code>Status</code>, either <code>Done</code> or <code>Undone</code></p>
+</li>
+<li>
+<p>Each class has their respective getter methods</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commit()</code>, <code>Model#undo()</code> and <code>Model#redo()</code> respectively.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedFitHelper</code> will be initialized with the initial FitHelper state, and the <code>currentStatePointer</code> pointing to that single FitHelper state.</p>
+<p>The class diagram below is an overview of the <code>Entry</code> class.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState0.png" alt="UndoRedoState0">
+<img src="../images/EntryClassDiagram.png" alt="EntryClassDiagram">
 </div>
+<div class="title">Figure 9. Entry Class Diagram</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-of-entry-commands"><a class="link" href="#implementation-of-entry-commands">Implementation of Entry Commands</a></h4>
+<div class="paragraph">
+<p><code>Entry</code> class supports multiple commands. It includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddCommand</code> - Adds a <code>Entry</code> into <code>FitHelper</code></p>
+</li>
+<li>
+<p><code>DeleteCommand</code> - Deletes a <code>Entry</code> from <code>FitHelper</code></p>
+</li>
+<li>
+<p><code>EditCommand</code> -  Edits a <code>Entry</code> from <code>FitHelper</code></p>
+</li>
+<li>
+<p><code>FindCommand</code> - Finds all <code>Entry</code> whose <code>name</code> contains the keywords user entered</p>
+</li>
+<li>
+<p><code>ListCommand</code> - Lists all <code>Entry</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete x/f i/5</code> command to delete the 5th food entry in the FitHelper. The <code>delete</code> command calls <code>Model#commit()</code>, causing the modified state of the FitHelper after the <code>delete x/f i/5</code> command executes to be saved in the <code>fitHelperStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted FitHelper state.</p>
+<p>All the above entry commands will be parsed in <code>FitHelperParser</code> and based on their
+types (i.e Add, Delete, Edit etc), the corresponding parsers will be invoked (i.e <code>AddCommandParser</code>,
+<code>EditCommandParser</code> etc). After which, the corresponding command will be executed (i.e <code>AddCommand</code>,
+<code>EditCommand</code> etc).</p>
+</div>
+<div class="paragraph">
+<p>The figure below shows the execution of an <code>EditCommand</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState1.png" alt="UndoRedoState1">
+<img src="../images/EditEntryActivityDiagram.png" alt="EditEntryActivityDiagram">
 </div>
+<div class="title">Figure 10. EditCommand Activity Diagram</div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add x/f n/apple &#8230;&#8203;</code> to add a new food entry. The <code>add</code> command also calls <code>Model#commit()</code>, causing another modified FitHelper state to be saved into the <code>fitHelperStateList</code>.</p>
+<p>After a successful execution, the entry with the given index will be edited from FitHelper.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-code-type-code-for-the-entry"><a class="link" href="#aspect-code-type-code-for-the-entry">Aspect: <code>Type</code> for the entry</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Option 1:</strong> As a string attribute in <code>Entry</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, less code required</p>
+</li>
+<li>
+<p>Cons: Provides a lower level of abstraction</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Option 2:</strong> Use two different classes to represent types, such as <code>FoodEntry</code> and <code>SportsEntry</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Higher level of abstraction</p>
+</li>
+<li>
+<p>Cons: More code, generic types are required for implementation of common functionality</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the end, we chose Option 1 as it reduces the amount of duplicated code required, given that all parameters of food entries and sports entries are the same.
+However, Option 2 is still an viable option.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-code-time-code-for-the-entry"><a class="link" href="#aspect-code-time-code-for-the-entry">Aspect: <code>Time</code> for the entry</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Option 1:</strong> Fix the format of <code>Time</code> to be <code>yyyy-MM-dd-hh:mm</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, less bug prone</p>
+</li>
+<li>
+<p>Cons: Adds inconvenience to the user</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Option 2:</strong> Use natty, the natural language date parser</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Brings more convenience for CLI users</p>
+</li>
+<li>
+<p>Cons: More bug prone due to the inaccuracy of the date parser. Moreover, only date can be parsed, not time.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Consequently, we chose Option 1 as it standardized the format of date and time across this application.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-code-duration-code-for-the-entry"><a class="link" href="#aspect-code-duration-code-for-the-entry">Aspect: <code>Duration</code> for the entry</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Option 1:</strong> As an optional attribute</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More user friendly, since duration for food entry is less meaningful</p>
+</li>
+<li>
+<p>Cons: Calendar display will not able to display food entries</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Option 2:</strong> As an optional attribute, with default set to 1</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Calendar display will not able to display food entries with no duration provided</p>
+</li>
+<li>
+<p>Cons: The duration does not reflect the true value when user chooses not to enter</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We chose Option 2 for better display of entries on the calendar
+=== Calendar</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user enters a view command in the <code>calendar d/2020-04-13</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> parses the user input, constructs and executes the <code>CalendarCommand</code>.</p>
+</li>
+<li>
+<p>The <code>CalendarCommand</code> reaches <code>setCalendarDate</code>, <code>setCalendarMode</code>, <code>setCalendarShow</code> in the <code>Model</code> and returns the <code>CommandResult</code> to the <code>LogicManager</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#setCalendarDate()</code>&#8201;&#8212;&#8201;Set the referenced date for calendar, default set to current date.</p>
+</li>
+<li>
+<p><code>Model#setCalendarMode()</code>&#8201;&#8212;&#8201;Set the calendar display mode, can be either <code>list</code> or <code>calendar</code> mode.</p>
+</li>
+<li>
+<p><code>Model#setCalendarShow()</code>&#8201;&#8212;&#8201;Set the display of entries of a particular date, default set to <code>null</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The <code>LogicManager</code> returns the <code>CommandResult</code> to the <code>Ui</code>.</p>
+</li>
+<li>
+<p>The <code>Ui</code> gets the <code>CommandResult</code> from <code>LogicManager</code> and updates the Ui to display the module.
+The following sequence diagram shows how the update operation works to change calendar page:</p>
+</li>
+</ol>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState2.png" alt="UndoRedoState2">
+<img src="../images/CalendarSequenceDiagram.png" alt="CalendarSequenceDiagram">
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commit()</code>, so the FitHelper state will not be saved into the <code>fitHelperStateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the food entry was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undo()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous FitHelper state, and restores the FitHelper to that state.</p>
+<div class="title">Figure 11. CalendarCommand Sequence Diagram</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState3.png" alt="UndoRedoState3">
+<img src="../images/CalendarClassDiagram.png" alt="CalendarClassDiagram">
+</div>
+<div class="title">Figure 12. CalendarCommand Class Diagram</div>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial FitHelper state, then there are no previous FitHelper states to restore. The <code>undo</code> command uses <code>Model#canundo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">Design consideration</a></h4>
+<div class="sect4">
+<h5 id="aspect-allowing-no-time-clashes-for-all-entries"><a class="link" href="#aspect-allowing-no-time-clashes-for-all-entries">Aspect: Allowing no time clashes for all entries</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Option 1:</strong> Allow multiple entries to exist over the same time period</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More user friendly, since users might be doing multiple things for a given time period</p>
+</li>
+<li>
+<p>Cons: Calendar display will not able to display food entries</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
+</li>
+<li>
+<p><strong>Option 2:</strong> No time clashes allowed</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Calendar display becomes clearer</p>
+</li>
+<li>
+<p>Cons: Users are not given the freedom to add multiple entries with the same time period</p>
+</li>
+</ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redo()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the FitHelper to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.size() - 1</code>, pointing to the latest FitHelper state, then there are no undone FitHelper states to restore. The <code>redo</code> command uses <code>Model#canRedo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the FitHelper, such as <code>list</code>, will usually not call <code>Model#commit()</code>, <code>Model#undo()</code> or <code>Model#redo()</code>. Thus, the <code>fitHelperStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState4.png" alt="UndoRedoState4">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commit()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>fitHelperStateList</code>, all FitHelper states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState5.png" alt="UndoRedoState5">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+<p>We chose Option 1 for better display of entries on the calendar</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 11:55:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 13:29:38 UTC</div></div></div></body></html>
