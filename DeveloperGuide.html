@@ -22,13 +22,14 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#today-feature">3.1. Today Feature</a></li>
-<li><a href="#diary-feature">3.2. Diary Feature</a></li>
-<li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
-<li><a href="#calendar">3.4. Calendar</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.6. Add Weight Records</a></li>
-<li><a href="#check-calorie-intake-consumption-of-some-common-food-sports">3.7. Check calorie intake/consumption of some common food/sports</a></li>
+<li><a href="#entry-feature">3.1. Entry Feature</a></li>
+<li><a href="#today-feature">3.2. Today Feature</a></li>
+<li><a href="#diary-feature">3.3. Diary Feature</a></li>
+<li><a href="#undo-redo-feature">3.4. Undo/Redo feature</a></li>
+<li><a href="#calendar">3.5. Calendar</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.7. Add Weight Records</a></li>
+<li><a href="#check-calorie-intake-consumption-of-some-common-food-sports">3.8. Check calorie intake/consumption of some common food/sports</a></li>
 </ul>
 </li>
 <li><a href="#testing">4. Testing</a></li>
@@ -151,13 +152,13 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <h4 id="how-the-architecture-components-interact-with-each-other" class="discrete">How the architecture components interact with each other</h4>
 <div class="paragraph">
-<p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario where the user issues the command <code>delete 1</code>.</p>
+<p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario where the user issues the command <code>delete x/f i/1</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ArchitectureSequenceDiagram.png" alt="ArchitectureSequenceDiagram">
 </div>
-<div class="title">Figure 3. Component interactions for <code>delete 1</code> command</div>
+<div class="title">Figure 3. Component interactions for <code>delete x/f i/1</code> command</div>
 </div>
 <div class="paragraph">
 <p>The sections below give more details of each component.</p>
@@ -226,13 +227,13 @@ The following class plays an important role at the architecture level:</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("delete 1")</code> API call.</p>
+<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("delete x/f i/1")</code> API call.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/DeleteSequenceDiagram.png" alt="DeleteSequenceDiagram">
 </div>
-<div class="title">Figure 6. Interactions Inside the Logic Component for the <code>delete 1</code> Command</div>
+<div class="title">Figure 6. Interactions Inside the Logic Component for the <code>delete x/f i/1</code> Command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -249,6 +250,31 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 </div>
 <div class="sect2">
 <h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
+<div class="paragraph">
+<p>The <code>Model</code>,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+</li>
+<li>
+<p>stores <code>UserProfile</code> and <code>WeightRecords</code> objects for user&#8217;s personal information.</p>
+</li>
+<li>
+<p>stores the FitHelper data.</p>
+</li>
+<li>
+<p>stores <code>FitHelperCommit</code> and <code>VersionedFitHelper</code> objects for execution of <code>redo</code> and <code>undo</code> instructions.</p>
+</li>
+<li>
+<p>exposes multiple unmodifiable <code>ObservableList&lt;Entry&gt;</code> and one unmodifiable <code>ObservableList&lt;Diary&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li>
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
@@ -259,37 +285,37 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>Model</code>,</p>
+<p>Below are the class diagrams for different components of model</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
-</li>
-<li>
-<p>stores the fitHelper data.</p>
-</li>
-<li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
-</li>
-<li>
-<p>does not depend on any of the other three components.</p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="images/FitHelperClassDiagram.png" alt="FitHelperClassDiagram">
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>FitHelper</code>, which <code>Person</code> can reference. This would allow <code>FitHelper</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
-<br>
-<span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
-</td>
-</tr>
-</table>
+<div class="title">Figure 8. Class Diagram for FitHelper</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UserPrefsClassDiagram.png" alt="UserPrefsClassDiagram">
+</div>
+<div class="title">Figure 9. Class Diagram for UserPrefs</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UserProfileClassDiagram.png" alt="UserProfileClassDiagram">
+</div>
+<div class="title">Figure 10. Class Diagram for UserProfile</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/VersionedFitHelperClassDiagram.png" alt="VersionedFitHelperClassDiagram">
+</div>
+<div class="title">Figure 11. Structure of VersionedFitHelper and FitHelperCommit</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/WeightRecordsClassDiagram.png" alt="WeightRecordsClassDiagram">
+</div>
+<div class="title">Figure 12. Class Diagram for WeightRecords</div>
 </div>
 </div>
 <div class="sect2">
@@ -298,7 +324,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>FitHelper</co
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
 </div>
-<div class="title">Figure 8. Structure of the Storage Component</div>
+<div class="title">Figure 13. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
@@ -332,9 +358,201 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>FitHelper</co
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="today-feature"><a class="link" href="#today-feature">3.1. Today Feature</a></h3>
+<h3 id="entry-feature"><a class="link" href="#entry-feature">3.1. Entry Feature</a></h3>
+<div class="paragraph">
+<p>The Entry consists of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each <code>Entry</code> consists of a unique combination of <code>Name</code>, <code>Calorie</code>, <code>Location</code>, <code>Duration</code>, <code>Type</code>, <code>Remark</code>, <code>Status</code> and <code>Time</code></p>
+</li>
+<li>
+<p>Each <code>Entry</code> consists of a <code>Duration</code> in hours, default set to 1, smallest accuracy is 0.02 (1 min).</p>
+</li>
+<li>
+<p>Each <code>Entry</code> consists of a <code>Type</code>, either food or sports</p>
+</li>
+<li>
+<p>Each <code>Entry</code> consists of a <code>Remark</code>, default set to be empty</p>
+</li>
+<li>
+<p>Each <code>Entry</code> consists of a <code>Status</code>, either <code>Done</code> or <code>Undone</code></p>
+</li>
+<li>
+<p>Each class has their respective getter methods</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The class diagram below is an overview of the <code>Entry</code> class.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EntryClassDiagram.png" alt="EntryClassDiagram">
+</div>
+<div class="title">Figure 14. Entry Class Diagram</div>
+</div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.1.1. Implementation</a></h4>
+<h4 id="implementation-of-entry-commands"><a class="link" href="#implementation-of-entry-commands">3.1.1. Implementation of Entry Commands</a></h4>
+<div class="paragraph">
+<p><code>Entry</code> class supports multiple commands. It includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddCommand</code> - Adds a <code>Entry</code> into <code>FitHelper</code></p>
+</li>
+<li>
+<p><code>DeleteCommand</code> - Deletes a <code>Entry</code> from <code>FitHelper</code></p>
+</li>
+<li>
+<p><code>EditCommand</code> -  Edits a <code>Entry</code> from <code>FitHelper</code></p>
+</li>
+<li>
+<p><code>FindCommand</code> - Finds all <code>Entry</code> whose <code>name</code> contains the keywords user entered</p>
+</li>
+<li>
+<p><code>ListCommand</code> - Lists all <code>Entry</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All the above entry commands will be parsed in <code>FitHelperParser</code> and based on their
+types (i.e Add, Delete, Edit etc), the corresponding parsers will be invoked (i.e <code>AddCommandParser</code>,
+<code>EditCommandParser</code> etc). After which, the corresponding command will be executed (i.e <code>AddCommand</code>,
+<code>EditCommand</code> etc).</p>
+</div>
+<div class="paragraph">
+<p>The figure below shows the execution of an <code>EditCommand</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditEntryActivityDiagram.png" alt="EditEntryActivityDiagram">
+</div>
+<div class="title">Figure 15. EditCommand Activity Diagram</div>
+</div>
+<div class="paragraph">
+<p>After a successful execution, the entry with the given index will be edited from FitHelper.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-code-type-code-for-the-entry"><a class="link" href="#aspect-code-type-code-for-the-entry">Aspect: <code>Type</code> for the entry</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Option 1:</strong> As a string attribute in <code>Entry</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, less code required</p>
+</li>
+<li>
+<p>Cons: Provides a lower level of abstraction</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Option 2:</strong> Use two different classes to represent types, such as <code>FoodEntry</code> and <code>SportsEntry</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Higher level of abstraction</p>
+</li>
+<li>
+<p>Cons: More code, generic types are required for implementation of common functionality</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the end, we chose Option 1 as it reduces the amount of duplicated code required, given that all parameters of food entries and sports entries are the same.
+However, Option 2 is still an viable option.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-code-time-code-for-the-entry"><a class="link" href="#aspect-code-time-code-for-the-entry">Aspect: <code>Time</code> for the entry</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Option 1:</strong> Fix the format of <code>Time</code> to be <code>yyyy-MM-dd-hh:mm</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, less bug prone</p>
+</li>
+<li>
+<p>Cons: Adds inconvenience to the user</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Option 2:</strong> Use natty, the natural language date parser</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Brings more convenience for CLI users</p>
+</li>
+<li>
+<p>Cons: More bug prone due to the inaccuracy of the date parser. Moreover, only date can be parsed, not time.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Consequently, we chose Option 1 as it standardized the format of date and time across this application.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-code-duration-code-for-the-entry"><a class="link" href="#aspect-code-duration-code-for-the-entry">Aspect: <code>Duration</code> for the entry</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Option 1:</strong> As an optional attribute</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More user friendly, since duration for food entry is less meaningful</p>
+</li>
+<li>
+<p>Cons: Calendar display will not able to display food entries</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Option 2:</strong> As an optional attribute, with default set to 1</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Calendar display will not able to display food entries with no duration provided</p>
+</li>
+<li>
+<p>Cons: The duration does not reflect the true value when user chooses not to enter</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We chose Option 2 for better display of entries on the calendar</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="today-feature"><a class="link" href="#today-feature">3.2. Today Feature</a></h3>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.2.1. Implementation</a></h4>
 <div class="paragraph">
 <p>FitHelper&#8217;s entries have a <code>Time</code> attribute including a <code>Date</code> and a specific <code>Time</code> in the format of <code>yyyy-mm-dd HH:mm</code>.
 Today feature allows the user to view entries with the <code>Date</code> of today, i.e. shows only entries in today.
@@ -399,14 +617,14 @@ This execution then returns a <code>CommandResult</code> to <code>UI</code>, con
 <div class="content">
 <img src="images/InitiateTodayPageSequenceDiagram.png" alt="InitiateTodayPageSequenceDiagram">
 </div>
-<div class="title">Figure 9. Sequence Diagram for Today Feature</div>
+<div class="title">Figure 16. Sequence Diagram for Today Feature</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="diary-feature"><a class="link" href="#diary-feature">3.2. Diary Feature</a></h3>
+<h3 id="diary-feature"><a class="link" href="#diary-feature">3.3. Diary Feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.2.1. Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>FitHelper also allows the user to keep a diary with a <code>Date</code> in the format of <code>yyyy-mm-dd</code> and the <code>content</code> with no more than 200 characters.
 The diaries are represented as model <code>Diary</code> with the attributes of <code>DiaryId</code>, <code>DiaryDate</code>, and <code>Content</code>.
@@ -489,14 +707,14 @@ In addition, UI will change to display diaries after model updates <code>filtere
 <div class="content">
 <img src="images/DiarySequenceDiagram.png" alt="DiarySequenceDiagram">
 </div>
-<div class="title">Figure 10. Sequence Diagram for Diary Feature</div>
+<div class="title">Figure 17. Sequence Diagram for Diary Feature</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.3. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.4. Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.3.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.4.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedFitHelper</code>.
 It extends <code>FitHelper</code> with an undo/redo history, stored internally as an <code>fitHelperStateList</code> and <code>currentStatePointer</code>.
@@ -639,7 +857,9 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar"><a class="link" href="#calendar">3.4. Calendar</a></h3>
+<h3 id="calendar"><a class="link" href="#calendar">3.5. Calendar</a></h3>
+<div class="sect3">
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.5.1. Implementation</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -656,23 +876,72 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </li>
 <li>
 <p>The <code>Ui</code> gets the <code>date</code> from <code>LogicManager</code> and updates the Ui to display the module.
-The following sequence diagram shows how the update operation works to change calendar page in model:
-<span class="image"><img src="images/CalendarSequenceDiagram.png" alt="CalendarSequenceDiagram"></span>
-Structure of calendar command:
-<span class="image"><img src="images/CalendarClassDiagram.png" alt="CalendarClassDiagram"></span></p>
+The following sequence diagram shows how the update operation works to change calendar page in model:</p>
 </li>
 </ol>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CalendarSequenceDiagram.png" alt="CalendarSequenceDiagram">
+</div>
+<div class="title">Figure 18. CalendarCommand Sequence Diagram</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CalendarClassDiagram.png" alt="CalendarClassDiagram">
+</div>
+<div class="title">Figure 19. CalendarCommand Class Diagram</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.5.2. Design consideration</a></h4>
+<div class="sect4">
+<h5 id="aspect-allowing-no-time-clashes-for-all-entries"><a class="link" href="#aspect-allowing-no-time-clashes-for-all-entries">Aspect: Allowing no time clashes for all entries</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Option 1:</strong> Allow multiple entries to exist over the same time period</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More user friendly, since users might be doing multiple things for a given time period</p>
+</li>
+<li>
+<p>Cons: Calendar display will not able to display food entries</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Option 2:</strong> No time clashes allowed</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Calendar display becomes clearer</p>
+</li>
+<li>
+<p>Cons: Users are not given the freedom to add multiple entries with the same time period</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We chose Option 1 for better display of entries on the calendar</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Add Weight Records&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Add Weight Records&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -688,27 +957,18 @@ Structure of calendar command:
 <div class="ulist">
 <ul>
 <li>
-<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</p>
-</li>
-<li>
-<p><code>WARNING</code> : Can continue, but with caution</p>
-</li>
-<li>
 <p><code>INFO</code> : Information showing the noteworthy actions by the App</p>
-</li>
-<li>
-<p><code>FINE</code> : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Add Weight Records</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Add Weight Records</a></h3>
 <div class="paragraph">
 <p>FitHelper allows the user to track with their weight change easily by allowing user to add their current weight and previous weight.</p>
 </div>
 <div class="sect3">
-<h4 id="sample"><a class="link" href="#sample">3.6.1. Sample</a></h4>
+<h4 id="sample"><a class="link" href="#sample">3.7.1. Sample</a></h4>
 <div class="paragraph">
 <p>An example usage scenario and how the <code>addWeight</code> command behaves at each step is shown below.</p>
 </div>
@@ -797,7 +1057,7 @@ Structure of calendar command:
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">3.6.2. Implementation</a></h4>
+<h4 id="implementation-6"><a class="link" href="#implementation-6">3.7.2. Implementation</a></h4>
 <div class="sect4">
 <h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
 <div class="paragraph">
@@ -890,9 +1150,9 @@ The text content of top notification will also be updated if the gap between Cur
 </div>
 </div>
 <div class="sect2">
-<h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">3.7. Check calorie intake/consumption of some common food/sports</a></h3>
+<h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">3.8. Check calorie intake/consumption of some common food/sports</a></h3>
 <div class="sect3">
-<h4 id="implementation-6"><a class="link" href="#implementation-6">3.7.1. Implementation</a></h4>
+<h4 id="implementation-7"><a class="link" href="#implementation-7">3.8.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The check function is achieved by calling the <code>FitHelper</code> inside the <code>ModelManager</code> to search
 through either <code>FoodCalorieTable</code> or <code>SportsCalorieTable</code> for <code>CalorieDatum</code> that contain the
@@ -934,7 +1194,7 @@ a failure message followed by the string representation of the keyword.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.8.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Aspect: Data structure to store entries</p>
 </div>
@@ -1768,4 +2028,4 @@ Expected:</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 06:15:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 09:47:16 UTC</div></div></div></body></html>
