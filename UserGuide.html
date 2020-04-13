@@ -119,6 +119,7 @@ does <strong>not</strong> require administrator permission.</p>
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
 </div>
+<div class="title">Figure 1. A snapshot of the app</div>
 </div>
 </li>
 <li>
@@ -263,6 +264,21 @@ The only valid values are food OR sports, or in acronym f OR s.</p>
 <p>The field <code>DATE</code> should be entered in the format of <code>yyyy-mm-dd</code>, e.g. <code>2020-02-02</code>.</p>
 </li>
 <li>
+<p>Our time parser will auto-correct some invalid date/time entered. More specifically,
+as long as the month value is valid and the day value is between 1 and 31,
+the parser will auto-correct an invalid date to the last valid date of the year-month
+specified by the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: <code>2020-02-31-12:34</code> will be auto-corrected as <code>2020-02-29-12:34</code> since
+<code>2020-02-29</code> is the last valid date of Feb 2020.  <code>2020-22-31</code> and <code>2020-02-40</code>
+will not be auto-corrected since the month value is invalid or the day value is beyond 31.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
 <p>The field <code>INDEX</code> should be a positive integer representing a one-based index of an entry in an list.</p>
 </li>
 <li>
@@ -315,6 +331,7 @@ can directly access the Guide by pasting the url into the browser.</p>
 <div class="content">
 <img src="images/Help.png" alt="Help" width="790">
 </div>
+<div class="title">Figure 2. Help page</div>
 </div>
 </div>
 <div class="sect2">
@@ -355,9 +372,9 @@ list. But is you input <code>home</code> command, entries in all three lists wil
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Dashboard.png" alt="][width=&quot;790&quot;">
+<img src="images/Dashboard.png" alt="Dashboard">
 </div>
-<div class="title">Figure 1. Dashboard page in default display setting</div>
+<div class="title">Figure 3. Dashboard page in default display setting</div>
 </div>
 </div>
 <div class="sect3">
@@ -399,13 +416,13 @@ Calendar Page are even more constrained.</p>
 <div class="content">
 <img src="images/add.png" alt="add">
 </div>
-<div class="title">Figure 2. Add Command</div>
+<div class="title">Figure 4. Add Command</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/add2.png" alt="add2">
 </div>
-<div class="title">Figure 3. Add Command Result</div>
+<div class="title">Figure 5. Add Command Result</div>
 </div>
 </div>
 <div class="sect3">
@@ -487,13 +504,13 @@ Format: <code>edit x/TYPE i/INDEX s/Undone</code></p>
 <div class="content">
 <img src="images/edit.png" alt="edit">
 </div>
-<div class="title">Figure 4. Edit Command</div>
+<div class="title">Figure 6. Edit Command</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/edit2.png" alt="edit2">
 </div>
-<div class="title">Figure 5. Edit Command Result</div>
+<div class="title">Figure 7. Edit Command Result</div>
 </div>
 </div>
 </div>
@@ -582,13 +599,13 @@ Deletes the 2nd sports entry in the sports list from dashboard.</p>
 <div class="content">
 <img src="images/delete.png" alt="delete">
 </div>
-<div class="title">Figure 6. Delete Command</div>
+<div class="title">Figure 8. Delete Command</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/delete2.png" alt="delete2">
 </div>
-<div class="title">Figure 7. Delete Command Result</div>
+<div class="title">Figure 9. Delete Command Result</div>
 </div>
 </div>
 <div class="sect3">
@@ -622,6 +639,12 @@ in descending order of calorie value, i.e. entry with higher calorie intake/cons
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Sort.png" alt="Sort" width="790">
+</div>
+<div class="title">Figure 10. Dashboard page after all 3 lists are sorted by time in descending order (later entry comes at top)</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="check-calorie-intake-consumption-of-common-food-sports-code-check-code"><a class="link" href="#check-calorie-intake-consumption-of-common-food-sports-code-check-code">4.2.9. Check calorie intake/consumption of common food/sports: <code>check</code></a></h4>
@@ -632,7 +655,12 @@ Note that due to space constraint, at most 3 matching data will be shown
 at the left-bottom corner of the application. Each datum shows the name of
 the food/sports and its calorie intake/consumption information: for food, it will be
 in cal per serving (weight per serving in gram will also be shown); for sports, it will
-be in cal per hour. The searching works as follows:</p>
+be in cal per hour for a 70kg person.
+Please note after the command is executed, the application will
+automatically go to Dashboard page <strong>without resetting the display status</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The searching works as follows:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -640,14 +668,10 @@ be in cal per hour. The searching works as follows:</p>
 <p>Retrieves food/sports data based on check type specified by the user.</p>
 </li>
 <li>
-<p>Checks and adds food/sports datum whose name <strong>equals one of the keywords</strong>.</p>
-</li>
-<li>
-<p>If fewer than 3 food/sports data are added so far, checks and adds food/sports datum
-whose name <strong>contains the keywords as a whole</strong>.</p>
-</li>
-<li>
-<p>If still fewer than 3 food/sports data are added so far, checks and adds food/sports datum
+<p>Checks and adds food/sports datum whose name <strong>equals one of the keywords</strong>.
+If fewer than 3 food/sports data are added so far, checks and adds food/sports datum
+whose name <strong>contains the keywords as a whole</strong>.
+If still fewer than 3 food/sports data are added so far, checks and adds food/sports datum
 whose name <strong>contains one of the keywords</strong>.</p>
 </li>
 <li>
@@ -669,6 +693,12 @@ Otherwise, shows user the data.</p>
 whose name match/contain keyword "apple")</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Check.png" alt="Check" width="790">
+</div>
+<div class="title">Figure 11. Check command result (matching data found)</div>
 </div>
 </div>
 </div>
@@ -980,7 +1010,7 @@ On the bottom right corner, calorie status for existing entries will be displaye
 <div class="content">
 <img src="images/calendarls.png" alt="calendarls">
 </div>
-<div class="title">Figure 8. Calendar list mode</div>
+<div class="title">Figure 12. Calendar list mode</div>
 </div>
 </div>
 <div class="sect3">
@@ -1006,7 +1036,7 @@ Format for switching to timetable mode: <code>calendar m/tb [d/DATE]</code></p>
 <div class="content">
 <img src="images/calendartb.png" alt="calendartb">
 </div>
-<div class="title">Figure 9. Calendar timetable mode</div>
+<div class="title">Figure 13. Calendar timetable mode</div>
 </div>
 </div>
 <div class="sect3">
@@ -1626,4 +1656,4 @@ There is no need to save manually.<br></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 07:15:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 07:35:52 UTC</div></div></div></body></html>
