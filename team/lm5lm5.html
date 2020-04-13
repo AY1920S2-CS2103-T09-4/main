@@ -38,7 +38,7 @@ It also helps the user to view entry that he/she may deem more important first
 which facilitates editing.</p>
 </li>
 <li>
-<p>Highlights:</p>
+<p>Highlights: the user can specify which list to sort and in what order.</p>
 </li>
 </ul>
 </div>
@@ -55,7 +55,8 @@ which facilitates editing.</p>
 by eating/exercising, so that he/she can create food/sports entry without the need to search online for relevant information.</p>
 </li>
 <li>
-<p>Highlights: The application will perform up to 3 rounds of search, each round with different criteria,
+<p>Highlights: The application will perform up to 3 rounds of search, each round with different criteria
+(from most strict matching to less strict matching),
 to find matching data. This ensures that more relevant data are found and added first, and at the same time
 loosely-matching data can be shown when strictly-matching data are not found.</p>
 </li>
@@ -82,7 +83,17 @@ and the link to the user guide.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.2.1</code> (1 release) on GitHub</p>
+<p>Managed release <code>v1.2.1</code> on GitHub</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Team-Based tasks:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Frequently perform manual testing of the application, and report bugs/feature flaws promptly to other team members.</p>
 </li>
 </ul>
 </div>
@@ -93,9 +104,6 @@ and the link to the user guide.</p>
 <ul>
 <li>
 <p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
 </li>
 </ul>
 </div>
@@ -115,16 +123,7 @@ and the link to the user guide.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
 <p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
 </li>
 </ul>
 </div>
@@ -145,33 +144,25 @@ and the link to the user guide.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are sections I wrote in the User Guide.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">Deleting an entry : <code>delete</code></a></h4>
+<h4 id="sort-food-sports-entry-list-code-sort-code"><a class="link" href="#sort-food-sports-entry-list-code-sort-code">Sort food/sports entry list: <code>sort</code></a></h4>
 <div class="paragraph">
-<p>Deletes the entry at the specified <code>INDEX</code> from the fitness log book.<br>
-Format: <code>delete x/TYPE i/INDEX</code></p>
+<p>Sorts food or sports entry list, or both of them, based on starting time or
+calorie value or name of the entry (case insensitive), in either ascending or descending order.
+In addition, the reminders entry list will also be sorted in the same manner specified by the user.
+The user must specify the sorting criterion <code>cal/c OR time/t OR name/n</code>.
+If the user does not specify the type of entry list, both lists will be sorted.
+And if the user does not specify the sorting order <code>a OR d</code>,
+the default order is descending (i.e. entry that starts later
+or entry with higher calorie value or entry whose name starts with
+later alphabet comes first).</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>To obtain accurate indices, the user should first switch to the home page by calling <code>home</code> or <code>list</code> and refer to the displayed list in <code>food entry history</code> and <code>sport entry history</code> fields.</p>
-</li>
-<li>
-<p>Additionally, the user can first called a <code>find</code> and then refer to the resulting list&#8217;s indices to <code>delete</code> an entry. However, right after a <code>find</code>, the user can only refer to entries that are currently displayed.<br>
-i.e. If there are 5 food entries in total, and after <code>find</code> 2 food entries are displayed. If the user does not switch back to the home page, he can only refer to the displayed 2 entries (with indices 1 and 2).</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
+<div class="paragraph">
+<p>format: <code>sort [x/TYPE] by/SORT_BY [o/ORDER]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -179,10 +170,177 @@ i.e. If there are 5 food entries in total, and after <code>find</code> 2 food en
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete x/sports index/2</code>
-Deletes the 2nd sports entry in the sports list from dashboard.</p>
+<p><code>sort x/f by/time o/a</code> (sort food entry list and reminders list in ascending order of recording time,
+i.e. the older entry comes first)</p>
+</li>
+<li>
+<p><code>sort by/c</code> (sort both food and sports entry list, as well as reminders list,
+in descending order of calorie value, i.e. entry with higher calorie intake/consumption comes first)</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Sort.png" alt="Sort" width="790">
+</div>
+<div class="title">Figure 1. Dashboard page after all 3 lists are sorted by time in descending order (later entry comes at top)</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="check-calorie-intake-consumption-of-common-food-sports-code-check-code"><a class="link" href="#check-calorie-intake-consumption-of-common-food-sports-code-check-code">Check calorie intake/consumption of common food/sports: <code>check</code></a></h4>
+<div class="paragraph">
+<p>Searches through the pre-set database for calorie intake/consumption information
+about common food/sports (i.e. a datum) whose name matches/contains keywords specified by the user.
+Note that due to space constraint, at most 3 matching data will be shown
+at the left-bottom corner of the application. Each datum shows the name of
+the food/sports and its calorie intake/consumption information: for food, it will be
+in cal per serving (weight per serving in gram will also be shown); for sports, it will
+be in cal per hour for a 70kg person.
+Please note after the command is executed, the application will
+automatically go to Dashboard page <strong>without resetting the display status</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The searching works as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Retrieves food/sports data based on check type specified by the user.</p>
+</li>
+<li>
+<p>Checks and adds food/sports datum whose name <strong>equals one of the keywords</strong>.
+If fewer than 3 food/sports data are added so far, checks and adds food/sports datum
+whose name <strong>contains the keywords as a whole</strong>.
+If still fewer than 3 food/sports data are added so far, checks and adds food/sports datum
+whose name <strong>contains one of the keywords</strong>.</p>
+</li>
+<li>
+<p>If no datum is added after all the steps, replies user that search failed.
+Otherwise, shows user the data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>format: <code>check x/TYPE k/ONE_OR_MORE_KEYWORDS</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>check x/food k/apple</code> (searches for calorie intake of food
+whose name match/contain keyword "apple")</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Check.png" alt="Check" width="790">
+</div>
+<div class="title">Figure 2. Check command result (matching data found)</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are sections I reviewed and edited in the User Guide.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>General rules about command format</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A prefix followed by a word in <code>UPPER_CASE</code> form a parameter to be supplied by the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: in <code>add n/NAME</code>, <code>n/NAME</code> is a parameter which can be <code>n/running</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Parameters in square brackets are optional e.g <code>n/NAME [r/REMARK]</code>
+means both <code>n/swimming r/fun</code> and <code>n/swimming</code> are both valid user inputs.</p>
+</li>
+<li>
+<p>Parameters not in square brackets are compulsory e.g. <code>x/TYPE k/KEYWORDS</code>
+means you must input both <code>TYPE</code> and <code>KEYWORDS</code> parameters.</p>
+</li>
+<li>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[r/remark]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>r/really fun</code>, <code>r/really fun r/helps me lose weight</code> etc.</p>
+</li>
+<li>
+<p>Parameters can be in any order e.g. if a command format is <code>add n/NAME t/TIME</code>, then
+<code>add n/Bob t/2020-04-10-08:00</code> and <code>add t/2020-04-10-18:00 n/Bob</code> are both acceptable.</p>
+</li>
+<li>
+<p>The field <code>TYPE</code> in this document refers to type of entries.
+The only valid values are food OR sports, or in acronym f OR s.</p>
+</li>
+<li>
+<p>The field <code>TIME</code> needs to be in the format of yyyyy-mm-dd-hh:MM, e.g. <code>2020-04-10-03:00</code></p>
+</li>
+<li>
+<p>The field <code>DATE</code> should be entered in the format of <code>yyyy-mm-dd</code>, e.g. <code>2020-02-02</code>.</p>
+</li>
+<li>
+<p>Our time parser will auto-correct some invalid date/time entered. More specifically,
+as long as the month value is valid and the day value is between 1 and 31,
+the parser will auto-correct an invalid date to the last valid date of the year-month
+specified by the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: <code>2020-02-31-12:34</code> will be auto-corrected as <code>2020-02-29-12:34</code> since
+<code>2020-02-29</code> is the last valid date of Feb 2020.  <code>2020-22-31</code> and <code>2020-02-40</code>
+will not be auto-corrected since the month value is invalid or the day value is beyond 31.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The field <code>INDEX</code> should be a positive integer representing a one-based index of an entry in an list.</p>
+</li>
+<li>
+<p>The field <code>DURATION</code> should be a positive double number,
+representing duration in hours. e.g. <code>dr/1.5</code> for 1.5 hours.</p>
+</li>
+<li>
+<p>You may input multiple parameters of a same prefix, but only the last input value will be read.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: <code>add n/Alice n/Bob n/Charlie</code> is equivalent to <code>add c/Charlie</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Please do not input parameters not required by a particular command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: the format of sort command is <code>sort [x/TYPE] by/SORT_BY [o/ORDER]</code>,
+so you should not input other parameters like <code>n/NAME</code>, <code>k/KEYWORDS</code> or <code>v/VALUE</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The flag <code>-f</code> should be added <strong>just after the command word</strong>, e.g. <code>update -f</code>.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -196,163 +354,322 @@ Deletes the 2nd sports entry in the sports list from dashboard.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are sections I wrote in the Developer Guide.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">Check calorie intake/consumption of some common food/sports</a></h3>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedFitHelper</code>.
-It extends <code>FitHelper</code> with an undo/redo history, stored internally as an <code>fitHelperStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>The check function is achieved by calling the <code>FitHelper</code> inside the <code>ModelManager</code> to search
+through either <code>FoodCalorieTable</code> or <code>SportsCalorieTable</code> for <code>CalorieDatum</code> that contain the
+keywords specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>Given below are example usage scenario:</p>
+</div>
+<div class="paragraph">
+<p>Initialization: when the application is launched, <code>ModelManager</code> will initialize a <code>FitHelper</code>, which
+will in turn initialize both <code>FoodCalorieTable</code> and <code>SportsCalorieTable</code> to contain pre-set data
+which is a LinkedHashSet of one type of <code>CalorieDatum</code> (either <code>FoodCalorieDatum</code> or <code>SportsCalorieDatum</code>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/InitializationOfCalorieTables.png" alt="test" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Case 1: when the user enter the command <code>check x/sports k/swim</code>, the <code>LogicManager</code> will create
+a <code>CheckCommand</code>, which asks <code>ModelManager</code> to let <code>FitHelper</code> to search through <code>SportsCalorieTable</code>
+to add first 3 <code>CalorieDatum</code> whose name matches the keyword <code>swim</code> into a set, and return the
+set to <code>CheckCommand</code>. Since the set contains at least one <code>CalorieDatum</code> (meaning there is
+some matching data), the <code>CheckCommand</code> returns a <code>CommandResult</code> whose <code>feedbackToUser</code>
+contains a success message followed by the string representation of each matching datum.</p>
+</div>
+<div class="paragraph">
+<p>Case 2: when the user enter the command <code>check x/f k/swim</code>, the <code>LogicManager</code> will create
+a <code>CheckCommand</code>, which asks <code>ModelManager</code> to let ` FitHelper` to search through <code>FoodCalorieTable</code>
+to add first 3 <code>CalorieDatum`s whose name contains the keyword `swim</code> into a set, and return
+the set to <code>CheckCommand</code>. Since the set contains no <code>CalorieDatum</code> (meaning there is no
+matching data), the <code>CheckCommand</code> returns a <code>CommandResult</code> whose <code>feedbackToUser</code> contains
+a failure message followed by the string representation of the keyword.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SequenceDiagramForCheckCommand1.png" alt="test" width="150%">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SequenceDiagramForCheckCommand2.png" alt="test" width="150%">
+</div>
+</div>
+<div class="paragraph">
+<p>The detailed searching mechanism is illustrated in the following activity diagram:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/SearchMechanismofCheckCommand.png" alt="test" width="50%"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p>Aspect: Data structure to store entries</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedFitHelper#commit()</code>&#8201;&#8212;&#8201;Saves the current FitHelper state in its history.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use an <code>LinkedHashSet</code> as a field in CalorieTable
+to store the entries.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement partial-key search (compare the keyword with the name of each entry in the set).
+Ensure that the database contains no duplicate data since a Set does allow duplicate elements.</p>
 </li>
 <li>
-<p><code>VersionedFitHelper#undo()</code>&#8201;&#8212;&#8201;Restores the previous FitHelper state from its history.</p>
-</li>
-<li>
-<p><code>VersionedFitHelper#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone FitHelper state from its history.</p>
+<p>Cons: O(n) complexity for finding matching entries, where n is the number of entries in the set.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commit()</code>, <code>Model#undo()</code> and <code>Model#redo()</code> respectively.</p>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a <code>HashMap</code> as a field in CalorieTable to store the entries.
+The key is the name of the entry and the value is the entry.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: (theoretically) O(1) time complexity for finding an entry given a complete keyword,
+regardless of how many entries are in the HashMap.</p>
+</li>
+<li>
+<p>Cons: hard to implement partial-key search (i.e. the keyword is only part of the name of the entry).</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedFitHelper</code> will be initialized with the initial FitHelper state, and the <code>currentStatePointer</code> pointing to that single FitHelper state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState0.png" alt="UndoRedoState0" width="35%">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete x/f i/5</code> command to delete the 5th food entry in the FitHelper. The <code>delete</code> command calls <code>Model#commit()</code>, causing the modified state of the FitHelper after the <code>delete x/f i/5</code> command executes to be saved in the <code>fitHelperStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted FitHelper state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState1.png" alt="UndoRedoState1" width="35%">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add x/f n/apple &#8230;&#8203;</code> to add a new food entry. The <code>add</code> command also calls <code>Model#commit()</code>, causing another modified FitHelper state to be saved into the <code>fitHelperStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState2.png" alt="UndoRedoState2" width="35%">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commit()</code>, so the FitHelper state will not be saved into the <code>fitHelperStateList</code>.
-</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are sections I reviewed and edited in the Developer Guide.</p></td>
 </tr>
+</tbody>
 </table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the food entry was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undo()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous FitHelper state, and restores the FitHelper to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState3.png" alt="UndoRedoState3" width="35%">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial FitHelper state, then there are no previous FitHelper states to restore. The <code>undo</code> command uses <code>Model#canundo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redo()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the FitHelper to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.size() - 1</code>, pointing to the latest FitHelper state, then there are no undone FitHelper states to restore. The <code>redo</code> command uses <code>Model#canRedo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the FitHelper, such as <code>list</code>, will usually not call <code>Model#commit()</code>, <code>Model#undo()</code> or <code>Model#redo()</code>. Thus, the <code>fitHelperStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState4.png" alt="UndoRedoState4" width="35%">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commit()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>fitHelperStateList</code>, all FitHelper states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState5.png" alt="UndoRedoState5" width="35%">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/CommitActivityDiagram.png" alt="CommitActivityDiagram" width="30%">
-</div>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix A: User Stories</a></h2>
 <div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
 </div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 30%;">
+<col style="width: 30%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">record my basic information such as name and gender</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a more complete profile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who is concerned about body shape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">record and update my current height and weight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a clear view of my current body condition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to lose weight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">set my target weight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a clear target to work towards</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to set diet plans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a food entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can plan my diet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to control calorie intake</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the calorie in each food entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can keep track of my calorie intake</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to set sports plans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a sport entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can plan for my sport exercises</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to increase calorie consumption</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the calorie consumption for each sport entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can keep track of my calorie consumption</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to adjust my diet/sports plans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit a food/sports entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can have my plans and records updated</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to remove my diet/sports plans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete a food/sports entry</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to search for an entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search by keywords in the entry name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can find related entries without having to scan through all the entries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants see today&#8217;s plans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">switch to Today Page and view the daily food/sports plans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can have a general idea of the daily diet/sports arrangements</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who needs some suggestions for my daily plan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">switch to Today Page and view FitHelper feedback</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I know whether my daily food/sports plan is suitable</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to know my daily performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">switch to Today Page and view my performance report</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I know my food calorie intake distribution and my task completion</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who types wrongly sometimes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">undo my previous command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I do not need to delete explicitly using a long command</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who types wrongly sometimes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">redo my previous undo command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can re-executed a undone command</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to keep a diary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a diary log for a specific day</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">note down my schedules, feelings, goals and so on as a self-encouragement</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to append more content to a previous diary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">append new content to existing diaries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enrich my previous diaries' content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to replace the content of a previous diary with new content</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit existing diaries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modify the content to an updated version</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to remove some diary logs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete existing diaries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep abandon some diary logs that I do not want to keep</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to clear my diary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clear all existing diaries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can re-start my diary from a white paper</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants keep fit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">acknowledge my weight change trend according to time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of my weight change easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to lose weight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">compare between my current weight and target weight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know the gap clearly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update my basic information such as address and name if necessary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have an updated profile at any time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view pending tasks and status of daily calories goals in a calendar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have cleaner display of data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to have a clean user interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clear entries regularly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">do not need to see irrelevant information</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">leave the application when I need</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It does not occupy additional space in my computer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list all entries by certain criteria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can filter the tasks by what I am looking for</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get reminders for tasks not done</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can focused on these tasks and complete them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who do not know very well about dieting and exercising</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check calorie intake/consumption of common food and sports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can input calorie intake/consumption without
+having to search about these information online.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">first-time user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view help page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I can know the functions of the application quickly</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 09:59:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:58:43 UTC</div></div></div></body></html>
