@@ -464,6 +464,49 @@ regardless of how many entries are in the HashMap.</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="store-calorie-data-defined-by-the-user-proposed-in-v2-0"><a class="link" href="#store-calorie-data-defined-by-the-user-proposed-in-v2-0">Store calorie data defined by the user [proposed in v2.0]</a></h3>
+<div class="paragraph">
+<p>This proposed function allows the user to create his/her own calorie data and store them
+into the application database. These data can be later searched by and shown to the user
+via the existing <code>check</code> command. This function helps the user to record calorie data of
+food/sports not included in the pre-set database (or data more accurate than the ones
+stored in the pre-set database), so that he/she do not need to remember these data
+or search them online when he/she need to add same food/sports entry into the application
+in the future.</p>
+</div>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">proposed implementation</a></h4>
+<div class="paragraph">
+<p>To store user-defined calorie data internally, we need current FitHelper class in
+the Model component to associate 2 new classes <code>UserFoodCalorieTable</code>
+and <code>UserSportsCalorieTable</code>, which will store user-defined calorie
+intake of food and calorie consumption of sports respectively.</p>
+</div>
+<div class="paragraph">
+<p>To allow the application to access these user-defined data in the future, we need another class
+in the Storage component responsible for writing internally data into Json file
+and reading the Json file back to internally stored data when the user reopens the application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AdditionalModel.png" alt="test" width="50%">
+</div>
+<div class="title">Figure 3. Additional class associated with FitHelper for storing user-defined data (existing classes associated with FitHelper omitted)</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AdditionalStorage.png" alt="test" width="40%">
+</div>
+<div class="title">Figure 4. Additional Storage Class for writing and reading user-defined data (existing storage classes omitted)</div>
+</div>
+<div class="paragraph">
+<p>To allow the <code>check</code> command to search for user-defined data, the command will be modified to
+retrieve data from <code>UserFoodCalorieTable</code> or <code>UserSportsCalorieTable</code> as well, depending
+on the search type specified by the user.</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 100%;">
@@ -986,4 +1029,4 @@ correct command format and example command in the bottom left corner.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 12:37:53 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:16:12 UTC</div></div></div></body></html>
