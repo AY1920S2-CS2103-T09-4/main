@@ -17,14 +17,15 @@
 <li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
 <li><a href="#keep-food-and-sports-entries">4.2. Keep Food and Sports Entries</a>
 <ul class="sectlevel3">
-<li><a href="#adding-an-entry-code-add-code">4.2.1. Adding an entry: <code>add</code></a></li>
-<li><a href="#listing-all-entries-code-list-code">4.2.2. Listing all entries : <code>list</code></a></li>
-<li><a href="#view-reminder-code-reminder-code">4.2.3. View Reminder : <code>reminder</code></a></li>
-<li><a href="#editing-an-entry-code-edit-code">4.2.4. Editing an entry : <code>edit</code></a></li>
-<li><a href="#locating-entries-by-name-code-find-code">4.2.5. Locating entries by name: <code>find</code></a></li>
-<li><a href="#deleting-an-entry-code-delete-code">4.2.6. Deleting an entry : <code>delete</code></a></li>
-<li><a href="#sort-food-sports-entry-list-code-sort-code">4.2.7. Sort food/sports entry list: <code>sort</code></a></li>
-<li><a href="#check-calorie-intake-consumption-of-common-food-sports-code-check-code">4.2.8. Check calorie intake/consumption of common food/sports: <code>check</code></a></li>
+<li><a href="#go-to-dashboard-page-code-home-code">4.2.1. Go to dashboard page: <code>home</code></a></li>
+<li><a href="#adding-an-entry-code-add-code">4.2.2. Adding an entry: <code>add</code></a></li>
+<li><a href="#listing-all-entries-code-list-code">4.2.3. Listing all entries : <code>list</code></a></li>
+<li><a href="#view-reminder-code-reminder-code">4.2.4. View Reminder : <code>reminder</code></a></li>
+<li><a href="#editing-an-entry-code-edit-code">4.2.5. Editing an entry : <code>edit</code></a></li>
+<li><a href="#locating-entries-by-name-code-find-code">4.2.6. Locating entries by name: <code>find</code></a></li>
+<li><a href="#deleting-an-entry-code-delete-code">4.2.7. Deleting an entry : <code>delete</code></a></li>
+<li><a href="#sort-food-sports-entry-list-code-sort-code">4.2.8. Sort food/sports entry list: <code>sort</code></a></li>
+<li><a href="#check-calorie-intake-consumption-of-common-food-sports-code-check-code">4.2.9. Check calorie intake/consumption of common food/sports: <code>check</code></a></li>
 </ul>
 </li>
 <li><a href="#keep-diaries">4.3. Keep Diaries</a>
@@ -268,6 +269,27 @@ The only valid values are food OR sports, or in acronym f OR s.</p>
 representing duration in hours. e.g. <code>dr/1.5</code> for 1.5 hours.</p>
 </li>
 <li>
+<p>You may input multiple parameters of a same prefix, but only the last input value will be read.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: <code>add n/Alice n/Bob n/Charlie</code> is equivalent to <code>add c/Charlie</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Please do not input parameters not required by a particular command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: the format of sort command is <code>sort [x/TYPE] by/SORT_BY [o/ORDER]</code>,
+so you should not input other parameters like <code>n/NAME</code>, <code>k/KEYWORDS</code> or <code>v/VALUE</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
 <p>The flag <code>-f</code> should be added <strong>just after the command word</strong>, e.g. <code>update -f</code>.</p>
 </li>
 </ul>
@@ -283,14 +305,62 @@ is also provided after the list. The user can also go to the Help page by
 clicking the <strong>Help</strong> button on the left hand side of the application.
 Note that once the user types <code>help</code> or click the <strong>Help</strong> button,
 the url of the User Guide is copied to the clipboard, so the user
-can directly access the Guide by pasting the url into the browser.
-Format: <code>help</code></p>
+can directly access the Guide by pasting the url into the browser.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>help</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/HelpPage.png" alt="HelpPage" width="790">
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="keep-food-and-sports-entries"><a class="link" href="#keep-food-and-sports-entries">4.2. Keep Food and Sports Entries</a></h3>
 <div class="sect3">
-<h4 id="adding-an-entry-code-add-code"><a class="link" href="#adding-an-entry-code-add-code">4.2.1. Adding an entry: <code>add</code></a></h4>
+<h4 id="go-to-dashboard-page-code-home-code"><a class="link" href="#go-to-dashboard-page-code-home-code">4.2.1. Go to dashboard page: <code>home</code></a></h4>
+<div class="paragraph">
+<p>Go to the Dashboard page, which displays three entry lists:
+Food Entry History, Sports Entry History and Reminders.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Food Entry History</strong><br>
+Shows food entries.</p>
+</li>
+<li>
+<p><strong>Sports Entry History</strong><br>
+Shows sports entries.</p>
+</li>
+<li>
+<p><strong>Reminders</strong><br>
+Shows entries that are remarked as not done.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note that you can also go to the Dashboard page by clicking the <code>DashBoard</code> button on the
+left side of the application. However, using <code>home</code> command will further <strong>reset the display status</strong>
+of the Dashboard page to the default setting (showing all entries in all three lists).</p>
+</div>
+<div class="paragraph">
+<p>Example:<br>
+If you input <code>reminder</code> command, the DashBoard page will now only show entries in the reminders
+list (display status changed). If you switch to other page and then try to go back to the Dashboard
+page by clicking the <code>DashBoard</code> button, the Dashboard page will still only show the reminders
+list. But is you input <code>home</code> command, entries in all three lists will be shown.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Home.png" alt="Home">
+</div>
+<div class="title">Figure 1. Dashboard page in default display setting</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-an-entry-code-add-code"><a class="link" href="#adding-an-entry-code-add-code">4.2.2. Adding an entry: <code>add</code></a></h4>
 <div class="paragraph">
 <p>Adds an entry to the fitness log book. The entry added will be displayed in DashBoard, Calendar
 and possibly Today Page (if its date is today) immediately after the command is executed.<br>
@@ -328,24 +398,24 @@ Calendar Page are even more constrained.</p>
 <div class="content">
 <img src="images/add.png" alt="add">
 </div>
-<div class="title">Figure 1. Add Command</div>
+<div class="title">Figure 2. Add Command</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/add2.png" alt="add2">
 </div>
-<div class="title">Figure 2. Add Command Result</div>
+<div class="title">Figure 3. Add Command Result</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-all-entries-code-list-code"><a class="link" href="#listing-all-entries-code-list-code">4.2.2. Listing all entries : <code>list</code></a></h4>
+<h4 id="listing-all-entries-code-list-code"><a class="link" href="#listing-all-entries-code-list-code">4.2.3. Listing all entries : <code>list</code></a></h4>
 <div class="paragraph">
 <p>Shows a list of all entries in the fitness log book.<br>
 Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="view-reminder-code-reminder-code"><a class="link" href="#view-reminder-code-reminder-code">4.2.3. View Reminder : <code>reminder</code></a></h4>
+<h4 id="view-reminder-code-reminder-code"><a class="link" href="#view-reminder-code-reminder-code">4.2.4. View Reminder : <code>reminder</code></a></h4>
 <div class="paragraph">
 <p>Shows a list of all undone tasks on the specified date on the home page (Dashboard).<br>
 Format: <code>reminder [d/DATE]</code><br>
@@ -364,7 +434,7 @@ Switches to Home Page and shows all undone entries on <code>2020-03-31</code> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">4.2.4. Editing an entry : <code>edit</code></a></h4>
+<h4 id="editing-an-entry-code-edit-code"><a class="link" href="#editing-an-entry-code-edit-code">4.2.5. Editing an entry : <code>edit</code></a></h4>
 <div class="paragraph">
 <p>Edits an existing entry in the fitness log book with the specified values.<br>
 Format: <code>edit x/TYPE i/INDEX [s/STATUS] [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE][dr/DURATION]&#8230;&#8203;</code><br></p>
@@ -416,18 +486,18 @@ Format: <code>edit x/TYPE i/INDEX s/Undone</code></p>
 <div class="content">
 <img src="images/edit.png" alt="edit">
 </div>
-<div class="title">Figure 3. Edit Command</div>
+<div class="title">Figure 4. Edit Command</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/edit2.png" alt="edit2">
 </div>
-<div class="title">Figure 4. Edit Command Result</div>
+<div class="title">Figure 5. Edit Command Result</div>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">4.2.5. Locating entries by name: <code>find</code></a></h4>
+<h4 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">4.2.6. Locating entries by name: <code>find</code></a></h4>
 <div class="paragraph">
 <p>Finds entries whose names contain any of the given keywords.<br>
 Format: <code>find [x/TYPE] k/ONE_OR_MORE_KEYWORDS</code>
@@ -473,7 +543,7 @@ Returns any entry having names <code>Juice</code>,  or <code>Apple</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">4.2.6. Deleting an entry : <code>delete</code></a></h4>
+<h4 id="deleting-an-entry-code-delete-code"><a class="link" href="#deleting-an-entry-code-delete-code">4.2.7. Deleting an entry : <code>delete</code></a></h4>
 <div class="paragraph">
 <p>Deletes the entry at the specified <code>INDEX</code> from the fitness log book.<br>
 Format: <code>delete x/TYPE i/INDEX</code></p>
@@ -511,17 +581,17 @@ Deletes the 2nd sports entry in the sports list from dashboard.</p>
 <div class="content">
 <img src="images/delete.png" alt="delete">
 </div>
-<div class="title">Figure 5. Delete Command</div>
+<div class="title">Figure 6. Delete Command</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/delete2.png" alt="delete2">
 </div>
-<div class="title">Figure 6. Delete Command Result</div>
+<div class="title">Figure 7. Delete Command Result</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sort-food-sports-entry-list-code-sort-code"><a class="link" href="#sort-food-sports-entry-list-code-sort-code">4.2.7. Sort food/sports entry list: <code>sort</code></a></h4>
+<h4 id="sort-food-sports-entry-list-code-sort-code"><a class="link" href="#sort-food-sports-entry-list-code-sort-code">4.2.8. Sort food/sports entry list: <code>sort</code></a></h4>
 <div class="paragraph">
 <p>Sorts food or sports entry list, or both of them, based on starting time or
 calorie value or name of the entry (case insensitive), in either ascending or descending order.
@@ -553,7 +623,7 @@ in descending order of calorie value, i.e. entry with higher calorie intake/cons
 </div>
 </div>
 <div class="sect3">
-<h4 id="check-calorie-intake-consumption-of-common-food-sports-code-check-code"><a class="link" href="#check-calorie-intake-consumption-of-common-food-sports-code-check-code">4.2.8. Check calorie intake/consumption of common food/sports: <code>check</code></a></h4>
+<h4 id="check-calorie-intake-consumption-of-common-food-sports-code-check-code"><a class="link" href="#check-calorie-intake-consumption-of-common-food-sports-code-check-code">4.2.9. Check calorie intake/consumption of common food/sports: <code>check</code></a></h4>
 <div class="paragraph">
 <p>Searches through the pre-set database for calorie intake/consumption information
 about common food/sports (i.e. a datum) whose name matches/contains keywords specified by the user.
@@ -909,7 +979,7 @@ On the bottom right corner, calorie status for existing entries will be displaye
 <div class="content">
 <img src="images/calendarls.png" alt="calendarls">
 </div>
-<div class="title">Figure 7. Calendar list mode</div>
+<div class="title">Figure 8. Calendar list mode</div>
 </div>
 </div>
 <div class="sect3">
@@ -935,7 +1005,7 @@ Format for switching to timetable mode: <code>calendar m/tb [d/DATE]</code></p>
 <div class="content">
 <img src="images/calendartb.png" alt="calendartb">
 </div>
-<div class="title">Figure 8. Calendar timetable mode</div>
+<div class="title">Figure 9. Calendar timetable mode</div>
 </div>
 </div>
 <div class="sect3">
@@ -1546,4 +1616,4 @@ There is no need to save manually.<br></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 06:00:27 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 06:33:04 UTC</div></div></div></body></html>
