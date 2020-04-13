@@ -10,7 +10,14 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>FitHelper is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p><strong>FitHelper</strong> is a desktop diet-and-exercise-recording application made for Users who want to keep fit.
+It enables users to record their basic profile data, weight records, daily food intake and sports.
+Rather than just keeping the raw data, <strong>FitHelper</strong> also provided useful analysis and other customized services, such as calendar view and reminders.</p>
+</div>
+<div class="paragraph">
+<p>The application is mainly written in <strong>Java</strong> and built by a considerable <strong>19k Lines of Code</strong>.
+The codebase is well-maintained by reasonable amount of tests.
+A detailed and comprehensive set of guides are also provided for both application developers and users.</p>
 </div>
 </div>
 </div>
@@ -110,6 +117,16 @@
 </div>
 </li>
 <li>
+<p>Test</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote additional tests for existing features to increase coverage to 29% [<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/319">#319</a>][<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/320">#320</a>][<a href="https://github.com/AY1920S2-CS2103-T09-4/main/pull/321">#321</a>]</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p>Documentation</p>
 <div class="ulist">
 <ul>
@@ -177,7 +194,9 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Sections I contributed to the User Guide include <strong>4.2 Keep Food and Sports Entries</strong>: <code>add</code>, <code>list</code>, <code>reminder</code>, <code>edit</code>, <code>find</code>, <code>delete</code>;
+<strong>4.3 Keep Diaries</strong>, <strong>4.5 Undo</strong>, <strong>4.6 Redo</strong>, <strong>4.8 Daily Summary</strong>,  <strong>4.9 Weekly Summary</strong>, <strong>4.12 Exit</strong>.<br>
+They showcase my ability to write documentation targeting end-users.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -190,7 +209,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">[NOTE]</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Due to page limit, only selected sections are included. Refer to User Guide for more sections.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Due to page limit, only selected sections are included below. Please refer to User Guide for more sections.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -246,82 +265,6 @@ Format: <code>edit x/TYPE i/INDEX s/Undone</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="locating-entries-by-name-code-find-code"><a class="link" href="#locating-entries-by-name-code-find-code">Locating entries by name: <code>find</code></a></h4>
-<div class="paragraph">
-<p>Finds entries whose names contain any of the given keywords.<br>
-Format: <code>find [x/TYPE] k/ONE_OR_MORE_KEYWORDS</code>
-If the <code>TYPE</code> field is empty, FitHelper will search from the whole list.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>apples</code> will match <code>Apples</code>.</p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Apple Pie</code> will match <code>Pie Apple</code>.</p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Straw</code> will not match <code>Strawberries</code>.</p>
-</li>
-<li>
-<p>Entries matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Apple Banana</code> will return <code>Apple Pie</code>, <code>Banana Milkshake</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find x/s k/running</code><br>
-Returns <code>running</code> and <code>slow running</code></p>
-</li>
-<li>
-<p><code>find x/food k/Juice Apple</code><br>
-Returns any entry having names <code>Juice</code>,  or <code>Apple</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="keep-a-diary"><a class="link" href="#keep-a-diary">Keep a diary</a></h3>
-<div class="sect3">
-<h4 id="edit-a-diary-code-editdiary-code"><a class="link" href="#edit-a-diary-code-editdiary-code">Edit a diary: <code>editDiary</code></a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editDiary d/DATE dc/NEW DIARYCONTENT</code><br>
-edits the diary on the specified <code>DATE</code> with the new <code>DIARYCONTENT</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If the specified <code>DATE</code> does not have previously added diary log, this command will be discarded with a <code>DIARY_NOT_FOUND</code>
-reminder.
-If the existing diary with the specified <code>DATE</code> has the same content as the specified content, this command will be discarded with a <code>DUPLICATE_DIARY</code>
-reminder.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editDiary d/2020-03-31 dc/Happy birthday Alice!</code><br>
-This command edits the content of the diary log on the date <code>2020-03-31</code> with the content <code>Happy birthday Alice!</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
 <h4 id="find-a-diary-code-finddiary-code"><a class="link" href="#find-a-diary-code-finddiary-code">Find a diary: <code>findDiary</code></a></h4>
 <div class="ulist">
 <ul>
@@ -369,7 +312,6 @@ Displays diaries with their content containing the keyword <code>running</code>,
 Returns the diary on the date of <code>2020-03-31</code> regardless of the <code>KEYWORDS</code> field.</p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -459,16 +401,6 @@ The user&#8217;s daily task completion is shown in percentage (round to integer)
 <p><strong>FitHelper Feedback</strong><br>
 Based on the user&#8217;s intake food calorie and sport task completion, FitHelper provides suggestions and reminders
 in the <code>FitHelper Feedback</code> area.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>today</code></p>
 </li>
 </ul>
 </div>
@@ -697,7 +629,7 @@ Additionally, it implements the following operations:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState0.png" alt="UndoRedoState0">
+<img src="../images/UndoRedoState0.png" alt="UndoRedoState0" width="35%">
 </div>
 </div>
 <div class="paragraph">
@@ -705,7 +637,7 @@ Additionally, it implements the following operations:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState1.png" alt="UndoRedoState1">
+<img src="../images/UndoRedoState1.png" alt="UndoRedoState1" width="35%">
 </div>
 </div>
 <div class="paragraph">
@@ -713,7 +645,7 @@ Additionally, it implements the following operations:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState2.png" alt="UndoRedoState2">
+<img src="../images/UndoRedoState2.png" alt="UndoRedoState2" width="35%">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -733,7 +665,7 @@ If a command fails its execution, it will not call <code>Model#commit()</code>, 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState3.png" alt="UndoRedoState3">
+<img src="../images/UndoRedoState3.png" alt="UndoRedoState3" width="35%">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -788,7 +720,7 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState4.png" alt="UndoRedoState4">
+<img src="../images/UndoRedoState4.png" alt="UndoRedoState4" width="35%">
 </div>
 </div>
 <div class="paragraph">
@@ -796,10 +728,18 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoState5.png" alt="UndoRedoState5">
+<img src="../images/UndoRedoState5.png" alt="UndoRedoState5" width="35%">
+</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommitActivityDiagram.png" alt="CommitActivityDiagram" width="30%">
 </div>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 08:38:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 09:19:10 UTC</div></div></div></body></html>

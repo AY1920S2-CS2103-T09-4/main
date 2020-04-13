@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Wang Yuchen - UML Diagrams</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Wang Yuchen - UML Diagrams</h1></div><div id="content"><div class="imageblock">
+<div class="content">
+<img src="../images/UiClassDiagram.png" alt="UiClassDiagram" width="70%">
+</div>
+<div class="title">Figure 1. Structure of the UI Component</div>
+</div>
+<div class="paragraph">
+<p><strong>1. UiClassDiagram</strong> depicts FitHelper UI classes, their internal relationship, and the connection with Logic and Model components.<br>
+The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PagePane</code>, <code>ButtonList</code>, <code>CurrentPageTitle</code> etc.
+Moreover, it reserves a place for different pages that can be filled and displayed.<br>
+All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+</div>
+<hr>
+<div class="imageblock">
+<div class="content">
+<img src="../images/InitiateTodayPageSequenceDiagram.png" alt="InitiateTodayPageSequenceDiagram">
+</div>
+<div class="title">Figure 2. Sequence Diagram for Today Feature</div>
+</div>
+<div class="paragraph">
+<p><strong>2. InitialTodayPageSequenceDiagram</strong> illustrates how components interact with each other when <code>Today Page</code> is initialized.<br>
+The UI component passes through the Logic component to fetch <code>entryList</code> stored in FitHelper Model.
+<code>Today Page</code> is fed with the data of <code>todayEntryList</code> and displays it in the list view.</p>
+</div>
+<hr>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommitActivityDiagram.png" alt="CommitActivityDiagram" width="20%">
+</div>
+<div class="title">Figure 3. Activity Diagram for FitHelper Commit Feature</div>
+</div>
+<div class="paragraph">
+<p><strong>3. CommitActivityDiagram</strong> summarizes the activities happened when the user executes an <code>undo</code> command.<br>
+If user&#8217;s intended command is "undoable", the <code>currentStatePointer</code> is moved backward in the FitHelperStateList, and the redundant states are purged.
+Otherwise the command is discarded.</p>
+</div>
+<hr>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DiarySequenceDiagram.png" alt="DiarySequenceDiagram">
+</div>
+<div class="title">Figure 4. Sequence Diagram for Diary Feature</div>
+</div>
+<div class="paragraph">
+<p><strong>4. DiarySequenceDiagram</strong> illustrates how FitHelper adds a diary to the storage through the interaction of different components.<br>
+User input is taken in through UI, handles to LogicManager, converted to an <code>addDiary</code> command through the parsers, and finally added to the diary storage.</p>
+</div>
+<hr>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram">
+</div>
+<div class="title">Figure 5. Sequence Diagram for Undo Feature</div>
+</div>
+<div class="paragraph">
+<p><strong>5. UndoSequenceDiagram</strong> depicts the interaction between different components, Logic and Model, of FitHelper, when an <code>undo</code> command is executed.
+The LogicManager handles the command by converting it to an <code>UndoCommand</code> through the <code>UndoCommandParser</code>. In command execution, the Model takes
+in the <code>undoFitHelper</code> call from the Logic and rollbacks the current <code>VersionedFitHelper</code> to the previous state marked by the <code>currentStatePointer</code>.
+The command result is returned to Logic, and finally reflected by UI.</p>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 09:19:10 UTC</div></div></div></body></html>

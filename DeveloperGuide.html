@@ -173,10 +173,10 @@ The following class plays an important role at the architecture level:</p>
 <div class="title">Figure 4. Structure of the UI Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/java/fithelper/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>EntryListPanel</code>, <code>ReminderList</code> etc.
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PagePane</code>, <code>ButtonList</code>, <code>CurrentPageTitle</code> etc.
 Moreover, it reserves a place for different pages that can be filled and displayed.
 All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
@@ -207,7 +207,7 @@ All these, including the <code>MainWindow</code>, inherit from the abstract <cod
 </div>
 <div class="paragraph">
 <p><strong>API</strong> :
-<a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+<a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/java/fithelper/logic/Logic.java"><code>Logic.java</code></a></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -773,7 +773,7 @@ Additionally, it implements the following operations:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState0.png" alt="UndoRedoState0">
+<img src="images/UndoRedoState0.png" alt="UndoRedoState0" width="35%">
 </div>
 </div>
 <div class="paragraph">
@@ -781,7 +781,7 @@ Additionally, it implements the following operations:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState1.png" alt="UndoRedoState1">
+<img src="images/UndoRedoState1.png" alt="UndoRedoState1" width="35%">
 </div>
 </div>
 <div class="paragraph">
@@ -789,7 +789,7 @@ Additionally, it implements the following operations:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState2.png" alt="UndoRedoState2">
+<img src="images/UndoRedoState2.png" alt="UndoRedoState2" width="35%">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -809,7 +809,7 @@ If a command fails its execution, it will not call <code>Model#commit()</code>, 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState3.png" alt="UndoRedoState3">
+<img src="images/UndoRedoState3.png" alt="UndoRedoState3" width="35%">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -864,7 +864,7 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState4.png" alt="UndoRedoState4">
+<img src="images/UndoRedoState4.png" alt="UndoRedoState4" width="35%">
 </div>
 </div>
 <div class="paragraph">
@@ -872,7 +872,7 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState5.png" alt="UndoRedoState5">
+<img src="images/UndoRedoState5.png" alt="UndoRedoState5" width="35%">
 </div>
 </div>
 <div class="paragraph">
@@ -880,7 +880,7 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/CommitActivityDiagram.png" alt="][height = &quot;50&quot;">
+<img src="images/CommitActivityDiagram.png" alt="CommitActivityDiagram" width="30%">
 </div>
 </div>
 </div>
@@ -2081,4 +2081,4 @@ Expected:</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 08:38:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 09:19:10 UTC</div></div></div></body></html>
