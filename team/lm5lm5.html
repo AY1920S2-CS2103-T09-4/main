@@ -148,7 +148,7 @@ and gave feedback about bugs/feature flaws to team members promptly.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are sections I wrote in the User Guide.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are sections I contributed to the User Guide.</p></td>
 </tr>
 </tbody>
 </table>
@@ -358,12 +358,18 @@ so you should not input other parameters like <code>n/NAME</code>, <code>k/KEYWO
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are sections I wrote in the Developer Guide.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are sections I contributed to the Developer Guide.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect2">
 <h3 id="check-calorie-intake-consumption-of-some-common-food-sports"><a class="link" href="#check-calorie-intake-consumption-of-some-common-food-sports">Check calorie intake/consumption of some common food/sports</a></h3>
+<div class="paragraph">
+<p>This function allows the user to search for calorie intake/consumption of food/sports by keywords.
+It helps the user better estimate how much calorie he/she will gain/burn
+by eating/exercising, so that he/she can add food/sports entry into the application
+without the need to search online for relevant information.</p>
+</div>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
@@ -678,4 +684,306 @@ having to search about these information online.</p></td>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 11:04:05 UTC</div></div></div></body></html>
+</div>
+<div class="sect1">
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix B: Instructions for Manual Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Given below are instructions to test the app manually.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">Launch and Shutdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Initial launch</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Download the jar file and copy into an empty folder</p>
+</li>
+<li>
+<p>Double-click the jar file<br>
+Expected: Shows the welcome page of FitHelper. On the left hand side, the user can see a list of page name. Users are able to click on the button or using corresponding command to direct to that page.</p>
+</li>
+<li>
+<p>The window size is fixed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Shutdown</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Users are able to shutdown the application using CLI with following commands:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>exit</code></p>
+</li>
+<li>
+<p><code>quit</code></p>
+</li>
+<li>
+<p><code>bye</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Users can also choose to shutdown the application by clicking on X button on the right top side if the window.</p>
+</li>
+<li>
+<p>User data will be auto-saved if user choose to shutdown the application. Three local data file in json format can be find:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fithelper.json</code> : containg data related to entries and diaries.</p>
+</li>
+<li>
+<p><code>userprofile.json</code> : containing data related to user profile.</p>
+</li>
+<li>
+<p><code>weightrecords.json</code> : containing data related to all weight records.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-new-weight-record"><a class="link" href="#adding-a-new-weight-record">Adding A New Weight Record</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add <strong>first weight record</strong> while there is no previous weight record in the database.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: None. Users are able to use <code>addWeight</code> command at any page.</p>
+</li>
+<li>
+<p>Test case: <code>addWeight v/50.0</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A new <code>Weight</code> is added into <code>weightrecords</code> database, with <code>WeightValue</code> equals 50.0, <code>Date</code> with default value(today&#8217;s date) and <code>BMI</code> calculated by <code>Height</code>.</p>
+</li>
+<li>
+<p>The window is automatically directed to weight page. A new point is shown on both Weight Line Graph and BMI Line Graph. The top notification is also updated.</p>
+</li>
+<li>
+<p>In profile page, Current Weight and Current BMI change from "Not Available Now" to the newest value.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test case: <code>addWeight v/49.0 d/2050-01-01</code><br>
+Expected: No new weight record is added since the date is after current date. An error message is shown in the command result box.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Add new weight record when there is already <strong>some previous weight records existing</strong> in the database.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: None. Users are able to use <code>addWeight</code> command at any page.</p>
+</li>
+<li>
+<p>Test case: <code>addWeight v/48.0</code><br>
+Expected: No new weight record is added since there is existing weight record with the same date (by default is today&#8217;s date) in the data base. An error message is shown in the command result box.</p>
+</li>
+<li>
+<p>Test case : <code>addWeight v/47.0 d/2020-03-01</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A new <code>Weight</code> is added into <code>weightrecords</code> database, with <code>WeightValue</code> equals 47.0, <code>Date</code> with 2020-03-01 and <code>BMI</code> calculated by <code>Height</code>.</p>
+</li>
+<li>
+<p>The window is automatically directed to weight page. A new point is shown on both Weight Line Graph and BMI Line Graph, and form a new trend line with previous data points. The top notification is also updated.</p>
+</li>
+<li>
+<p>In profile page, Current Weight and Current BMI remain the same, since the newly added weight record is not the most recent record in the database.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-entry-lists"><a class="link" href="#sorting-entry-lists">Sorting entry lists</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>sort and display the entry lists stored in the sample FitHelper</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisite: The data stored in FitHelper are the sample data. To restore to sample data,
+delete all files stored in the data folder and launch the application.</p>
+</li>
+<li>
+<p>Test case: <code>sort by/time</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The application will go to or remain at the dashboard page.</p>
+</li>
+<li>
+<p>Entries in all three lists (Food Entry History, Sports Entry History and Reminders)
+are sorted by time in the descending order (entry with a later time comes first i.e. at top).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test case: <code>sort x/s by/cal o/a</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The application will go to or remain at the dashboard page.</p>
+</li>
+<li>
+<p>Entries in Sports Entry History and Reminders list are sorted by calorie value
+in the ascending order (entry with a lower calorie value comes first i.e. at top).</p>
+</li>
+<li>
+<p>Entries in Food Entry History list remain unchanged.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test case: <code>sort x/s o/a</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The application shows invalid command format error, followed by
+correct command format and example command in the bottom left corner.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checking-calorie-data"><a class="link" href="#checking-calorie-data">Checking calorie data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>search for calorie intake/consumption of common food/sports</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisite: None, as long as the application is launched properly.</p>
+</li>
+<li>
+<p>Test case: <code>check x/s k/swim</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The application will go to or remain at the dashboard page.</p>
+</li>
+<li>
+<p>The application shows calorie consumption per hour of common swimming styles
+in the bottom left corner.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test case: <code>check x/f k/swim</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The application will go to or remain at the dashboard page.</p>
+</li>
+<li>
+<p>The application shows no matching results message in the bottom left corner.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Test case: <code>check k/swim</code><br>
+Expected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The application shows invalid command format error, followed by
+correct command format and example command in the bottom left corner.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">Saving data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dealing with missing/corrupted data files</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If the application is launched and shut down at least once, there will be three local database in json format.</p>
+</li>
+<li>
+<p>Delete <code>fithelper.json</code>, and launch FitHelper again. All user manipulation on entries and diaries will be cleared. <code>Dashboard</code>, <code>Today</code>, <code>Calendar</code> and <code>Diary</code> Page will restart with sample data.</p>
+</li>
+<li>
+<p>Delete <code>userprofile.json</code>, and launch FitHelper again. All user manipulation on user profile will be clear. <code>Profile</code> page will restart with sample user data.</p>
+</li>
+<li>
+<p>Delete <code>weightrecords.json</code>, and launch FitHelper again. All user manipulation on weight records will be clear. <code>Profile</code> page will show Current Weight and Current BMI as "Not Available Now", and <code>Weight</code> Page will have no data point on the trend line graph.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 12:37:53 UTC</div></div></div></body></html>
