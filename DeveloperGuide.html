@@ -176,7 +176,9 @@ The following class plays an important role at the architecture level:</p>
 <p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>EntryListPanel</code>, <code>ReminderList</code> etc.
+Moreover, it reserves a place for different pages that can be filled and displayed.
+All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S2-CS2103-T09-4/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -216,7 +218,7 @@ The following class plays an important role at the architecture level:</p>
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
 </li>
 <li>
-<p>The command execution can affect the <code>Model</code> (e.g. adding a person).</p>
+<p>The command execution can affect the <code>Model</code> (e.g. adding an entry).</p>
 </li>
 <li>
 <p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
@@ -335,10 +337,37 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <div class="ulist">
 <ul>
 <li>
-<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+<p>saves a <code>UserPrefsStorage</code> object in json format and can read it back.</p>
 </li>
 <li>
-<p>can save the FitHelper data in json format and read it back.</p>
+<p>saves a <code>FitHelperStorage</code> object in json format (<strong><em>fithelper.json</em></strong>) and can read it back. This database includes all data related to entries and diaries.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>FitHelperStorage</code> consists of lists of <code>Entry</code> and <code>Diary</code>, and thus these two types of objects can be saved in json format and read back too.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>saves a <code>UserProfileStorage</code> object in json format (<strong><em>userprofile.json</em></strong>) and can read it back. This database includes all data related to user profile attributes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UserProfileStorage</code> consists of a list of <code>Profile</code>, and objects in type of <code>Profile</code> can be saved in json format and read back.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>saves a <code>WeightRecordsStorage</code> object in json format (<strong><em>weightrecords.json</em></strong>) and can read it back. This database includes all data related to weight records.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>WeightRecordsStorage</code> consists of a list of <code>Weight</code>, and objects in type of <code>Weight</code> can be saved in json format and read back.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -851,7 +880,7 @@ If the <code>currentStatePointer</code> is at index <code>fitHelperStateList.siz
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+<img src="images/CommitActivityDiagram.png" alt="][height = &quot;50&quot;">
 </div>
 </div>
 </div>
@@ -2041,4 +2070,4 @@ Expected:</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 17:13:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 05:29:38 UTC</div></div></div></body></html>

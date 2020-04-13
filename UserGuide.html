@@ -183,6 +183,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong>m/</strong> mode</p>
 </li>
 <li>
+<p><strong>sh/</strong> date in format of yyyy-MM-dd in calendar</p>
+</li>
+<li>
 <p><strong>dc/</strong> diary content</p>
 </li>
 <li>
@@ -243,6 +246,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p>The field <code>DURATION</code> should be a postive double number, representing duration in hours. e.g. <code>dr/1.5</code> for 1.5 hours.</p>
+</li>
+<li>
+<p>The flag <code>-f</code> should be added <strong>just after the command word</strong>, e.g. <code>update -f</code>.</p>
 </li>
 </ul>
 </div>
@@ -321,8 +327,20 @@ Format: <code>list</code></p>
 <div class="sect3">
 <h4 id="view-reminder-code-reminder-code"><a class="link" href="#view-reminder-code-reminder-code">4.2.3. View Reminder : <code>reminder</code></a></h4>
 <div class="paragraph">
-<p>Shows a list of all undone tasks which can be seen from a fixed field in the home page (Dashboard).<br>
-Format: <code>reminder</code></p>
+<p>Shows a list of all undone tasks on the specified date on the home page (Dashboard).<br>
+Format: <code>reminder [d/DATE]</code><br>
+If no <code>DATE</code> is specified, FitHelper displays all undone entries.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>reminder d/2020-03-31</code><br>
+Switches to Home Page and shows all undone entries on <code>2020-03-31</code> in the reminder field.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -358,7 +376,7 @@ i.e. If there are 5 food entries in total, and after <code>find</code> 2 food en
 <div class="paragraph">
 <p>Examples:
 (after switching to Home Page)
-* <code>edit x/s i/1 t/Friday 16:00 l/PGP gym</code><br>
+* <code>edit x/s i/1 t/2020-04-05-16:00 l/PGP gym</code><br>
 Edits the time and email location of the 1st entry to be <code>Friday 4pm</code> and <code>PGP gym</code> respectively.</p>
 </div>
 <div class="sect4">
@@ -661,13 +679,12 @@ This command edits the content of the diary log on the date <code>2020-03-31</co
 <ul>
 <li>
 <p><code>findDiary [d/DATE] [k/ONE OR MORE KEYWORDS]</code><br>
-finds diaries either on the specified <code>DATE</code> or contains the specified <code>KEYWORDS</code>.<br></p>
+finds diaries either on the specified <code>DATE</code> or contains the specified <code>KEYWORDS</code>.<br>
+Both <code>DATE</code> and <code>KEYWORDS</code> fields are optional. If neither appear, FitHelper will display all diaries.<br>
+If there is no diary under the specified <code>DATE</code>, this command will be discarded with the reminder of
+<code>DIARY_NOT_FOUND</code>.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>If there is no diary under the specified <code>DATE</code>, this command will be discarded with the reminder of
-<code>DIARY_NOT_FOUND</code>.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -684,19 +701,7 @@ no diary will be listed.</p>
 similar to the case of <code>find</code> command for food/sport entries.</p>
 </li>
 <li>
-<p>The search is case insensitive. e.g <code>apples</code> will match <code>Apples</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Apple Pie</code> will match <code>Pie Apple</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Straw</code> will not match <code>Strawberries</code></p>
-</li>
-<li>
-<p>Entries matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Apple Banana</code> will return <code>Apple Pie</code>, <code>Banana Milkshake</code></p>
+<p>The keyword searching rules are the same as in <code>Section 4.2.5 Locating entries by name : <strong>find</strong></code>.</p>
 </li>
 </ul>
 </div>
@@ -927,7 +932,7 @@ Format for switching to timetable mode: <code>calendar m/tb [d/DATE]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>calendar d/2020-04-15</code></p>
+<p><code>calendar m/tb d/2020-04-15</code></p>
 </li>
 <li>
 <p><code>calendar m/ls d/2020-04-20</code></p>
@@ -1126,7 +1131,8 @@ Every <code>update</code> command will lead to the profile page.<br></p>
 <p>Any updated value should follow its original data type.</p>
 </li>
 <li>
-<p>If the chosen updated attribute has already had original value, <strong>flag <code>-f</code></strong> need to be used to enable <strong>force overwrite</strong>.</p>
+<p>If the chosen updated attribute has already had original value, <strong>flag <code>-f</code></strong> need to be used to enable <strong>force overwrite</strong>.
+The flag should be added <strong>just after the command word</strong>, i.e. <code>update -f attr/ATTRIBUTE v/VALUE</code>.</p>
 </li>
 </ul>
 </div>
@@ -1520,4 +1526,4 @@ There is no need to save manually.<br></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 17:13:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 05:29:38 UTC</div></div></div></body></html>
