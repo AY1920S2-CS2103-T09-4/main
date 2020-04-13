@@ -107,7 +107,9 @@
 <p>Download the latest <code>FitHelper.jar</code> <a href="https://github.com/AY1920S2-CS2103-T09-4/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Fitness Helper.</p>
+<p>Copy the file to the folder you want to use as the home folder for your Fitness Helper.
+Please ensure that writing or reading data inside the home folder that you choose
+does <strong>not</strong> require administrator permission.</p>
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
@@ -219,33 +221,51 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>Command Format</strong></p>
+<p><strong>General rules about command format</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/running</code>.</p>
+<p>A prefix followed by a word in <code>UPPER_CASE</code> form a parameter to be supplied by the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: in <code>add n/NAME</code>, <code>n/NAME</code> is a parameter which can be <code>n/running</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Parameters in square brackets are optional e.g <code>n/NAME [r/REMARK]</code>
+means both <code>n/swimming r/fun</code> and <code>n/swimming</code> are both valid user inputs.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>n/NAME [r/REMARK]</code> can be used as <code>n/swimming r/energy consuming but fun</code> or as <code>n/running</code>.</p>
+<p>Parameters not in square brackets are compulsory e.g. <code>x/TYPE k/KEYWORDS</code>
+means you must input both <code>TYPE</code> and <code>KEYWORDS</code> parameters.</p>
 </li>
 <li>
 <p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[r/remark]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>r/really fun</code>, <code>r/really fun r/helps me lose weight</code> etc.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME t/2020-04-10-08:00</code>, <code>t/2020-04-10-18:00 n/NAME</code> is also acceptable.</p>
+<p>Parameters can be in any order e.g. if a command format is <code>add n/NAME t/TIME</code>, then
+<code>add n/Bob t/2020-04-10-08:00</code> and <code>add t/2020-04-10-18:00 n/Bob</code> are both acceptable.</p>
 </li>
 <li>
-<p>The field <code>TYPE</code> or <code>x/</code> in this document refers to type of entries: food/sport, it can also be write in short form: f/s.</p>
+<p>The field <code>TYPE</code> in this document refers to type of entries.
+The only valid values are food OR sports, or in acronym f OR s.</p>
 </li>
 <li>
-<p>The field <code>TIME</code> needs to be in the format of yyyyy-mm-dd-hh:MM, e.g. <code>t/2020-04-10-03:00</code></p>
+<p>The field <code>TIME</code> needs to be in the format of yyyyy-mm-dd-hh:MM, e.g. <code>2020-04-10-03:00</code></p>
 </li>
 <li>
-<p>The field <code>DATE</code> should be entered in the fixed format of <code>yyyy-mm-dd</code> in order to trace the corresponding daily file.</p>
+<p>The field <code>DATE</code> should be entered in the format of <code>yyyy-mm-dd</code>, e.g. <code>2020-02-02</code>.</p>
 </li>
 <li>
-<p>The field <code>DURATION</code> should be a postive double number, representing duration in hours. e.g. <code>dr/1.5</code> for 1.5 hours.</p>
+<p>The field <code>INDEX</code> should be a positive integer representing a one-based index of an entry in an list.</p>
+</li>
+<li>
+<p>The field <code>DURATION</code> should be a positive double number,
+representing duration in hours. e.g. <code>dr/1.5</code> for 1.5 hours.</p>
 </li>
 <li>
 <p>The flag <code>-f</code> should be added <strong>just after the command word</strong>, e.g. <code>update -f</code>.</p>
@@ -1403,28 +1423,28 @@ There is no need to save manually.<br></p>
 <p><strong>Entry - switch to DashBoard</strong> : <code>home</code></p>
 </li>
 <li>
-<p><strong>Entry - add an entry</strong> <code>add n/NAME t/TIME l/LOCATION c/CALORIE [r/remark]&#8230;&#8203;</code></p>
+<p><strong>Entry - add an entry</strong> <code>add x/TYPE n/NAME t/TIME l/LOCATION c/CALORIE &#8230;&#8203;</code></p>
 </li>
 <li>
-<p><strong>Entry - list all entries</strong> : <code>list</code></p>
+<p><strong>Entry - list all entries or entries of a given date</strong> : <code>list [d/DATE]</code></p>
 </li>
 <li>
-<p><strong>Entry - view reminders</strong> : <code>reminder</code></p>
+<p><strong>Entry - view reminders list only</strong> : <code>reminder</code></p>
 </li>
 <li>
-<p><strong>Entry - edit an entry</strong> : <code>edit INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] [r/remark]&#8230;&#8203;</code></p>
+<p><strong>Entry - edit an entry</strong> : <code>edit x/TYPE i/INDEX [n/NAME] [t/TIME] [l/LOCATION] [c/CALORIE] &#8230;&#8203;</code></p>
 </li>
 <li>
-<p><strong>Entry - find by name</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p><strong>Entry - find and list entries by keywords</strong> : <code>find k/KEYWORDS</code></p>
 </li>
 <li>
-<p><strong>Entry - delete an entry</strong> : <code>delete INDEX</code></p>
+<p><strong>Entry - delete an entry</strong> : <code>delete x/TYPE i/INDEX</code></p>
 </li>
 <li>
 <p><strong>Entry - sort entry list</strong> : <code>sort [x/TYPE] by/SORT_BY [o/ORDER]</code></p>
 </li>
 <li>
-<p><strong>Entry - check calorie reference</strong> : <code>check x/TYPE k/ONE_OR_MORE_KEYWORDS</code></p>
+<p><strong>Entry - check calorie reference</strong> : <code>check x/TYPE k/KEYWORDS</code></p>
 </li>
 </ul>
 </div>
@@ -1434,16 +1454,16 @@ There is no need to save manually.<br></p>
 <p><strong>Diary - switch to Diary Page</strong> : <code>diary</code></p>
 </li>
 <li>
-<p><strong>Diary - add a diary</strong> : <code>addDiary d/DATE dc/DIARYCONTENT</code></p>
+<p><strong>Diary - add a diary</strong> : <code>addDiary d/DATE dc/CONTENT</code></p>
 </li>
 <li>
-<p><strong>Diary - edit a diary</strong> : <code>editDiary d/DATE dc/DIARYCONTENT</code></p>
+<p><strong>Diary - edit a diary</strong> : <code>editDiary d/DATE dc/CONTENT</code></p>
 </li>
 <li>
 <p><strong>Diary - delete a diary</strong> : <code>deleteDiary d/DATE</code></p>
 </li>
 <li>
-<p><strong>Diary - find a diary</strong> : <code>findDiary [d/DATE] [dc/DIARYCONTENT]</code></p>
+<p><strong>Diary - find a diary</strong> : <code>findDiary [d/DATE] [k/KEYWORDS]</code></p>
 </li>
 <li>
 <p><strong>Diary - clear all diaries</strong> : <code>clearDiary</code></p>
@@ -1526,4 +1546,4 @@ There is no need to save manually.<br></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 05:29:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 05:48:14 UTC</div></div></div></body></html>
